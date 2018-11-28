@@ -1,18 +1,17 @@
 package com.natay.mareksan.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "`ORDERS`")
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    private long customerId;
+    private Long id;
     private String orderName;
     private Date orderDate;
     private Date deliveryDate;
@@ -22,13 +21,20 @@ public class Order {
     private double price;
     private double paid;
     private double remainder;
-    private String orderStatus;
     private String description;
 
-    public Order(){}
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
 
-    public Order(long customerId, String orderName, Date orderDate, Date deliveryDate, String orderType, int amount, String specificationsOrders, double price, double paid, double remainder, String orderStatus, String description) {
-        this.customerId = customerId;
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    @JsonIgnoreProperties("orders")
+    private Customer customer;
+
+    public Order() {
+    }
+
+    public Order(String orderName, Date orderDate, Date deliveryDate, String orderType, int amount, String specificationsOrders, double price, double paid, double remainder, String description, OrderStatus orderStatus, Customer customer) {
         this.orderName = orderName;
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
@@ -38,11 +44,12 @@ public class Order {
         this.price = price;
         this.paid = paid;
         this.remainder = remainder;
-        this.orderStatus = orderStatus;
         this.description = description;
+        this.orderStatus = orderStatus;
+        this.customer = customer;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -50,12 +57,12 @@ public class Order {
         this.id = id;
     }
 
-    public long getCustomerId() {
-        return customerId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(long customerId) {
-        this.customerId = customerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public String getOrderName() {
@@ -130,11 +137,11 @@ public class Order {
         this.remainder = remainder;
     }
 
-    public String getOrderStatus() {
+    public OrderStatus getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(String orderStatus) {
+    public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
     }
 

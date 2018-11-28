@@ -1,12 +1,18 @@
 package com.natay.mareksan.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@Table(name = "CUSTOMERS")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     private String companyName;
     private String companyPhone;
     private String companyAddress;
@@ -14,6 +20,12 @@ public class Customer {
     private String authorizedPhone;
     private String authorizedEMail;
     private String password;
+
+    @OneToMany(mappedBy = "customer")
+    @JsonIgnoreProperties("customer")
+    @JsonIgnore
+    private Set<Order> orders = new HashSet<>();
+
 
     public Customer() {
     }
@@ -28,7 +40,15 @@ public class Customer {
         this.password = password;
     }
 
-    public long getId() {
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
+
+    public Long getId() {
         return id;
     }
 
