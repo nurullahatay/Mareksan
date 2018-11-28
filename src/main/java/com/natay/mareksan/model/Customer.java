@@ -13,17 +13,19 @@ public class Customer {
     private String authorizedName;
     private String authorizedPhone;
     private String authorizedEMail;
+    private String password;
 
     public Customer() {
     }
 
-    public Customer(String companyName, String companyPhone, String companyAddress, String authorizedName, String authorizedPhone, String authorizedEMail) {
+    public Customer(String companyName, String companyPhone, String companyAddress, String authorizedName, String authorizedPhone, String authorizedEMail, String password) {
         this.companyName = companyName;
         this.companyPhone = companyPhone;
         this.companyAddress = companyAddress;
         this.authorizedName = authorizedName;
         this.authorizedPhone = authorizedPhone;
         this.authorizedEMail = authorizedEMail;
+        this.password = password;
     }
 
     public long getId() {
@@ -80,5 +82,13 @@ public class Customer {
 
     public void setAuthorizedEMail(String authorizedEMail) {
         this.authorizedEMail = authorizedEMail;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
