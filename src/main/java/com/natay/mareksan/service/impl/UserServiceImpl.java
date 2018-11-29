@@ -1,6 +1,5 @@
 package com.natay.mareksan.service.impl;
 
-import com.natay.mareksan.model.Order;
 import com.natay.mareksan.model.User;
 import com.natay.mareksan.repository.UserRepository;
 import com.natay.mareksan.service.UserService;
@@ -10,10 +9,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Set;
-
-/**
- * Created by Ramazan on 28.11.2018.
- */
 
 @Service
 @Transactional
@@ -32,6 +27,11 @@ public class UserServiceImpl implements UserService {
         Set<User> userSet = new HashSet<>();
         userRepository.findAll().iterator().forEachRemaining(userSet::add);
         return userSet;
+    }
+
+    @Override
+    public User getUserByEmailAndPassword(String email, String password) {
+        return userRepository.findUserByEmailAndPassword(email,password);
     }
 
     @Override

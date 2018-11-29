@@ -13,5 +13,6 @@ public interface UserService {
     Set<User> getUsers();
     User getUserById(Long userId);
     void deleteById(Long userId);
+    User getUserByEmailAndPassword(String email , String password);
     //void updateById(Long userId);
 }
