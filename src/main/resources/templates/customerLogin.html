@@ -37,7 +37,6 @@
 <div class="container d-flex justify-content-center align-items-center">
     <div class="jumbotron mt-5" style="max-width:600px">
 
-        <!--Usage of models we wrote in WepAppController th:text="'Welcome to basic Bootstrap with Spring Boot created by ' + ${username} -->
         <h3 class="text-center"> MAREKSAN MÜŞTERİ BİLGİ SİSTEMİNE HOŞ GELDİNİZ </h3>
         <h4 class="text-center" th:text="'TARİH:  ' + ${#dates.format(datetime, 'dd MMM yyyy HH:mm')}"></h4>
         <div  th:if="${errorMessage == false}" class="alert alert-warning text-center font-weight-bold" role="alert">
@@ -63,7 +62,7 @@
     </div>
 </div> <!-- /container -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="../vendor/jquery/jquery.js"></script>
 
 <script>
     $(document).ready(function () {

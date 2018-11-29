@@ -34,7 +34,6 @@ public class LoginController {
           if (user == null)
           {
               model.addAttribute("datetime", new Date());
-              model.addAttribute("username", "Ramazannnn");
               model.addAttribute("user", new User());
               model.addAttribute("errorMessage",true);
               return "userLogin";
