@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -30,9 +31,9 @@ public class UserController {
         return userService.getUsers();
     }
 
-    @GetMapping("/{userId}")
-    public User getUserById(@PathVariable Long userId){
-        return userService.getUserById(userId);
+    @GetMapping("/getUser/{userId}")
+    public Optional<User> getUserById(@PathVariable String userId){
+        return userService.getUserById(Long.valueOf(userId));
     }
 
     @DeleteMapping("/deleteUser/{userId}")
@@ -44,19 +45,19 @@ public class UserController {
     @PostMapping("/updateUser")
     public ResponseEntity<Object> updateUser(@RequestBody User user)
     {
-        User currentUser = userService.getUserById(user.getId());
+        Optional<User> currentUser = userService.getUserById(user.getId());
 
         if (currentUser==null) {
             return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
         }
 
-        currentUser.setName(user.getName());
-        currentUser.setSurname(user.getSurname());
-        currentUser.setEmail(user.getEmail());
-        currentUser.setPhone(user.getPhone());
-        currentUser.setPassword(user.getPassword());
+        currentUser.get().setName(user.getName());
+        currentUser.get().setSurname(user.getSurname());
+        currentUser.get().setEmail(user.getEmail());
+        currentUser.get().setPhone(user.getPhone());
+        currentUser.get().setPassword(user.getPassword());
 
-        userService.updateUser(currentUser);
+        userService.updateUser(currentUser.get());
         return new ResponseEntity<Object>(currentUser, HttpStatus.OK);
     }
 

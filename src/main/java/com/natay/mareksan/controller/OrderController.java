@@ -2,6 +2,7 @@ package com.natay.mareksan.controller;
 
 import com.natay.mareksan.model.Customer;
 import com.natay.mareksan.model.Order;
+import com.natay.mareksan.repository.OrderRepository;
 import com.natay.mareksan.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -18,6 +20,8 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private OrderRepository orderRepository;
 
     @PostMapping("/saveOrder")
     public ResponseEntity<Object> saveOrder(@Valid @RequestBody Order order)
@@ -31,9 +35,9 @@ public class OrderController {
         return orderService.getOrders();
     }
 
-    @GetMapping("/{orderId}")
-    public Order getOrderById(@PathVariable Long orderId){
-        return orderService.getOrderById(orderId);
+    @GetMapping("/getOrder/{orderId}")
+    public Optional<Order> getOrderById(@PathVariable String orderId){
+        return orderService.getOrderById(Long.valueOf(orderId));
     }
 
     @DeleteMapping("/deleteOrder/{orderId}")
@@ -45,26 +49,26 @@ public class OrderController {
     @PostMapping("/updateOrder")
     public ResponseEntity<Object> updateOrder(@RequestBody Order order)
     {
-        Order currentOder =  orderService.getOrderById(order.getId());
+        Optional<Order> currentOder =  orderRepository.findById(order.getId() );
 
         if (currentOder==null) {
             return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
         }
 
-        currentOder.setCustomer(order.getCustomer());
-        currentOder.setAmount(order.getAmount());
-        currentOder.setDeliveryDate(order.getDeliveryDate());
-        currentOder.setDescription(order.getDescription());
-        currentOder.setOrderDate(order.getOrderDate());
-        currentOder.setOrderName(order.getOrderName());
-        currentOder.setOrderStatus(order.getOrderStatus());
-        currentOder.setOrderType(order.getOrderType());
-        currentOder.setPaid(order.getPaid());
-        currentOder.setRemainder(order.getRemainder());
-        currentOder.setPrice(order.getPrice());
-        currentOder.setSpecificationsOrders(order.getSpecificationsOrders());
+        currentOder.get().setCustomer(order.getCustomer());
+        currentOder.get().setAmount(order.getAmount());
+        currentOder.get().setDeliveryDate(order.getDeliveryDate());
+        currentOder.get().setDescription(order.getDescription());
+        currentOder.get().setOrderDate(order.getOrderDate());
+        currentOder.get().setOrderName(order.getOrderName());
+        currentOder.get().setOrderStatus(order.getOrderStatus());
+        currentOder.get().setOrderType(order.getOrderType());
+        currentOder.get().setPaid(order.getPaid());
+        currentOder.get().setRemainder(order.getRemainder());
+        currentOder.get().setPrice(order.getPrice());
+        currentOder.get().setSpecificationsOrders(order.getSpecificationsOrders());
 
-        orderService.updateOrder(currentOder);
+        orderService.updateOrder(currentOder.get());
         return new ResponseEntity<Object>(currentOder, HttpStatus.OK);
     }
 

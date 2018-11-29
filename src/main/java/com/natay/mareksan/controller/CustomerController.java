@@ -37,7 +37,7 @@ public class CustomerController {
         return customerService.findByCompanyName(companyName);
     }
 
-    @GetMapping("/customerId/{customerId}")
+    @GetMapping("/getCustomer/{customerId}")
     public Optional<Customer> getCustomerById(@PathVariable String customerId){
         return customerService.getCustomerById(Long.valueOf(customerId));
     }

@@ -3,6 +3,7 @@ package com.natay.mareksan.service;
 import com.natay.mareksan.model.Customer;
 import com.natay.mareksan.model.Order;
 
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Set;
 public interface OrderService {
     void saveOrder(Order order);
     Set<Order> getOrders();
-    Order getOrderById(Long orderId);
+    Optional<Order> getOrderById(Long orderId);
     void deleteById(Long orderId);
     void updateOrder(Order order);
 }
