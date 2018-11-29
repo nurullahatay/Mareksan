@@ -1,8 +1,5 @@
 package com.natay.mareksan.model;
 
-/**
- * Created by Ramazan on 28.11.2018.
- */
 public enum OrderStatus {
     PREPAIRING("Hazırlanıyor"),
     IN_PROGRESS("İşlem Görüyor"),

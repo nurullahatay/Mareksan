@@ -21,29 +21,28 @@ public class CustomerController {
 
 
     @PostMapping("/saveCustomer")
-    public ResponseEntity<Object> saveCustomer(@Valid @RequestBody Customer customer)
-    {
+    public ResponseEntity<Object> saveCustomer(@Valid @RequestBody Customer customer) {
         customerService.saveCustomer(customer);
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
     @GetMapping("/all")
-    public Set<Customer> getCustomers(){
+    public Set<Customer> getCustomers() {
         return customerService.getCustomers();
     }
 
     @GetMapping("/companyName/{companyName}")
-    public Customer findByCompanyName(@PathVariable String companyName){
+    public Customer findByCompanyName(@PathVariable String companyName) {
         return customerService.findByCompanyName(companyName);
     }
 
     @GetMapping("/getCustomer/{customerId}")
-    public Optional<Customer> getCustomerById(@PathVariable String customerId){
+    public Optional<Customer> getCustomerById(@PathVariable String customerId) {
         return customerService.getCustomerById(Long.valueOf(customerId));
     }
 
     @DeleteMapping("/deleteCustomer/{customerId}")
-    public ResponseEntity<Object> deleteById(@PathVariable  Long customerId){
+    public ResponseEntity<Object> deleteById(@PathVariable Long customerId) {
         customerService.deleteById(customerId);
         return new ResponseEntity<>(HttpStatus.OK);
     }

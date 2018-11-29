@@ -19,34 +19,32 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/saveUser")
-    public ResponseEntity<Object> saveUser(@Valid @RequestBody User user)
-    {
+    public ResponseEntity<Object> saveUser(@Valid @RequestBody User user) {
         userService.saveUser(user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @GetMapping("/all")
-    public Set<User> getUsers(){
+    public Set<User> getUsers() {
         return userService.getUsers();
     }
 
     @GetMapping("/getUser/{userId}")
-    public Optional<User> getUserById(@PathVariable String userId){
+    public Optional<User> getUserById(@PathVariable String userId) {
         return userService.getUserById(Long.valueOf(userId));
     }
 
     @DeleteMapping("/deleteUser/{userId}")
-    public ResponseEntity<Object> deleteById(@PathVariable  Long userId){
+    public ResponseEntity<Object> deleteById(@PathVariable Long userId) {
         userService.deleteById(userId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/updateUser")
-    public ResponseEntity<Object> updateUser(@RequestBody User user)
-    {
+    public ResponseEntity<Object> updateUser(@RequestBody User user) {
         Optional<User> currentUser = userService.getUserById(user.getId());
 
-        if (currentUser==null) {
+        if (currentUser == null) {
             return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
         }
 

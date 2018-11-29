@@ -10,17 +10,17 @@ public enum OrderType {
 
     private String value;
 
-    OrderType(String text){
-        this.value=text;
+    OrderType(String text) {
+        this.value = text;
     }
 
-    public String getValue(){
+    public String getValue() {
         return this.value;
     }
 
-    public static OrderType getValue(String text){
-        for(OrderType orderType : OrderType.values()){
-            if(orderType.value.equalsIgnoreCase(text)){
+    public static OrderType getValue(String text) {
+        for (OrderType orderType : OrderType.values()) {
+            if (orderType.value.equalsIgnoreCase(text)) {
                 return orderType;
             }
         }

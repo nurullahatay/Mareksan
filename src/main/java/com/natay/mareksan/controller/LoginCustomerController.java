@@ -19,28 +19,27 @@ public class LoginCustomerController {
     private CustomerService customerService;
 
     @RequestMapping("/customer")
-    public String index(Model model){
+    public String login(Model model) {
         model.addAttribute("datetime", new Date());
         model.addAttribute("customer", new Customer());
-        model.addAttribute("errorMessage",false);
+        model.addAttribute("errorMessage", false);
 
         return "customerLogin";
     }
 
     @PostMapping("/loginCustomer")
-    public String greetingSubmit(@ModelAttribute Customer customer, Model model) {
+    public String loginCustomer(@ModelAttribute Customer customer, Model model) {
 
-        customer =  customerService.findCustomerByAuthorizedEMailAndPassword(customer.getAuthorizedEMail(),customer.getPassword());
+        customer = customerService.findCustomerByAuthorizedEMailAndPassword(customer.getAuthorizedEMail(), customer.getPassword());
 
-        if (customer == null)
-        {
+        if (customer == null) {
             model.addAttribute("datetime", new Date());
             model.addAttribute("customer", new Customer());
-            model.addAttribute("errorMessage",true);
+            model.addAttribute("errorMessage", true);
             return "customerLogin";
         }
 
-        model.addAttribute("customer",customer);
+        model.addAttribute("customer", customer);
         return "customerHome";
     }
 }

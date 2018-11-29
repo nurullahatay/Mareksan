@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserByEmailAndPassword(String email, String password) {
-        return userRepository.findUserByEmailAndPassword(email,password);
+        return userRepository.findUserByEmailAndPassword(email, password);
     }
 
     @Override

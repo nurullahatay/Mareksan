@@ -18,28 +18,26 @@ public class LoginController {
     private UserService userService;
 
     @RequestMapping("/")
-    public String index(Model model){
+    public String login(Model model) {
         model.addAttribute("datetime", new Date());
         model.addAttribute("user", new User());
-        model.addAttribute("errorMessage",false);
+        model.addAttribute("errorMessage", false);
 
         return "userLogin";
     }
 
     @PostMapping("/login")
-    public String greetingSubmit(@ModelAttribute User user,Model model) {
+    public String loginUser(@ModelAttribute User user, Model model) {
 
-          user =  userService.getUserByEmailAndPassword(user.getEmail(),user.getPassword());
+        user = userService.getUserByEmailAndPassword(user.getEmail(), user.getPassword());
+        if (user == null) {
+            model.addAttribute("datetime", new Date());
+            model.addAttribute("user", new User());
+            model.addAttribute("errorMessage", true);
+            return "userLogin";
+        }
 
-          if (user == null)
-          {
-              model.addAttribute("datetime", new Date());
-              model.addAttribute("user", new User());
-              model.addAttribute("errorMessage",true);
-              return "userLogin";
-          }
-
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         return "userHome";
     }
 }

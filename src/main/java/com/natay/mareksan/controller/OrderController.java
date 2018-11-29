@@ -23,34 +23,32 @@ public class OrderController {
     private OrderRepository orderRepository;
 
     @PostMapping("/saveOrder")
-    public ResponseEntity<Object> saveOrder(@Valid @RequestBody Order order)
-    {
+    public ResponseEntity<Object> saveOrder(@Valid @RequestBody Order order) {
         orderService.saveOrder(order);
         return new ResponseEntity<>(order, HttpStatus.OK);
     }
 
     @GetMapping("/all")
-    public Set<Order> getOrders(){
+    public Set<Order> getOrders() {
         return orderService.getOrders();
     }
 
     @GetMapping("/getOrder/{orderId}")
-    public Optional<Order> getOrderById(@PathVariable String orderId){
+    public Optional<Order> getOrderById(@PathVariable String orderId) {
         return orderService.getOrderById(Long.valueOf(orderId));
     }
 
     @DeleteMapping("/deleteOrder/{orderId}")
-    public ResponseEntity<Object> deleteById(@PathVariable  Long orderId){
+    public ResponseEntity<Object> deleteById(@PathVariable Long orderId) {
         orderService.deleteById(orderId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/updateOrder")
-    public ResponseEntity<Object> updateOrder(@RequestBody Order order)
-    {
-        Optional<Order> currentOder =  orderRepository.findById(order.getId() );
+    public ResponseEntity<Object> updateOrder(@RequestBody Order order) {
+        Optional<Order> currentOder = orderRepository.findById(order.getId());
 
-        if (currentOder==null) {
+        if (currentOder == null) {
             return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
         }
 

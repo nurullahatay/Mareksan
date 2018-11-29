@@ -46,7 +46,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer findCustomerByAuthorizedEMailAndPassword(String authorizedEMail, String password) {
-        return customerRepository.findCustomerByAuthorizedEMailAndPassword(authorizedEMail,password);
+        return customerRepository.findCustomerByAuthorizedEMailAndPassword(authorizedEMail, password);
     }
 
     @Override
