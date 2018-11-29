@@ -23,7 +23,7 @@ public class LoginController {
         model.addAttribute("user", new User());
         model.addAttribute("errorMessage",false);
 
-        return "index";
+        return "userLogin";
     }
 
     @PostMapping("/login")
@@ -37,10 +37,10 @@ public class LoginController {
               model.addAttribute("username", "Ramazannnn");
               model.addAttribute("user", new User());
               model.addAttribute("errorMessage",true);
-              return "index";
+              return "userLogin";
           }
 
         model.addAttribute("user",user);
-        return "home";
+        return "userHome";
     }
 }
