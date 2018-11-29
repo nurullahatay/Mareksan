@@ -1,6 +1,5 @@
 package com.natay.mareksan.controller;
 
-import com.natay.mareksan.model.Order;
 import com.natay.mareksan.model.User;
 import com.natay.mareksan.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +59,4 @@ public class UserController {
         userService.updateUser(currentUser.get());
         return new ResponseEntity<Object>(currentUser, HttpStatus.OK);
     }
-
-
-
 }

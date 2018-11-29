@@ -31,3 +31,6 @@ hs_err_pid*
 target
 target/classes/templates/index.html
 .idea/workspace.xml
+target/classes/templates/home.html
+target/classes/templates/index.html
+.idea/workspace.xml

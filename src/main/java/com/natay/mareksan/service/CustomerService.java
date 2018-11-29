@@ -13,7 +13,7 @@ public interface CustomerService {
     Set<Customer> getCustomers();
     Customer findByCompanyName(String companyName);
     Optional<Customer> getCustomerById(Long customerId);
-
+    Customer findCustomerByAuthorizedEMailAndPassword(String authorizedEMail, String password);
     void deleteById(Long customerId);
     void updateCustomer(Customer customer);
 }

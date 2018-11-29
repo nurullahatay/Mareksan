@@ -45,6 +45,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public Customer findCustomerByAuthorizedEMailAndPassword(String authorizedEMail, String password) {
+        return customerRepository.findCustomerByAuthorizedEMailAndPassword(authorizedEMail,password);
+    }
+
+    @Override
     public void deleteById(Long customerId) {
         customerRepository.deleteById(customerId);
     }

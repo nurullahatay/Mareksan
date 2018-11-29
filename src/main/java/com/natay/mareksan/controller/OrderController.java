@@ -1,6 +1,5 @@
 package com.natay.mareksan.controller;
 
-import com.natay.mareksan.model.Customer;
 import com.natay.mareksan.model.Order;
 import com.natay.mareksan.repository.OrderRepository;
 import com.natay.mareksan.service.OrderService;
