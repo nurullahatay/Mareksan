@@ -14,5 +14,5 @@ public interface CustomerService {
     Customer findByCompanyName(String companyName);
     Customer getCustomerById(Long customerId);
     void deleteById(Long customerId);
-   // void updateById(Long customerId);
+    void updateCustomer(Customer customer);
 }

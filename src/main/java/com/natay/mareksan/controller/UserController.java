@@ -41,5 +41,25 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PostMapping("/updateUser")
+    public ResponseEntity<Object> updateUser(@RequestBody User user)
+    {
+        User currentUser = userService.getUserById(user.getId());
+
+        if (currentUser==null) {
+            return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+        }
+
+        currentUser.setName(user.getName());
+        currentUser.setSurname(user.getSurname());
+        currentUser.setEmail(user.getEmail());
+        currentUser.setPhone(user.getPhone());
+        currentUser.setPassword(user.getPassword());
+
+        userService.updateUser(currentUser);
+        return new ResponseEntity<Object>(currentUser, HttpStatus.OK);
+    }
+
+
 
 }

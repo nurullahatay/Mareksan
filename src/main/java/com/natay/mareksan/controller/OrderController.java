@@ -42,4 +42,31 @@ public class OrderController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PostMapping("/updateOrder")
+    public ResponseEntity<Object> updateOrder(@RequestBody Order order)
+    {
+        Order currentOder =  orderService.getOrderById(order.getId());
+
+        if (currentOder==null) {
+            return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+        }
+
+        currentOder.setCustomer(order.getCustomer());
+        currentOder.setAmount(order.getAmount());
+        currentOder.setDeliveryDate(order.getDeliveryDate());
+        currentOder.setDescription(order.getDescription());
+        currentOder.setOrderDate(order.getOrderDate());
+        currentOder.setOrderName(order.getOrderName());
+        currentOder.setOrderStatus(order.getOrderStatus());
+        currentOder.setOrderType(order.getOrderType());
+        currentOder.setPaid(order.getPaid());
+        currentOder.setRemainder(order.getRemainder());
+        currentOder.setPrice(order.getPrice());
+        currentOder.setSpecificationsOrders(order.getSpecificationsOrders());
+
+        orderService.updateOrder(currentOder);
+        return new ResponseEntity<Object>(currentOder, HttpStatus.OK);
+    }
+
+
 }

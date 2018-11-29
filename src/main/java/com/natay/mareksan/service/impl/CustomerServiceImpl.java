@@ -48,8 +48,8 @@ public class CustomerServiceImpl implements CustomerService {
         customerRepository.deleteById(customerId);
     }
 
-  /*  @Override
-    public void updateById(Long customerId) {
-
-    }*/
+    @Override
+    public void updateCustomer(Customer customer) {
+        customerRepository.save(customer);
+    }
 }
