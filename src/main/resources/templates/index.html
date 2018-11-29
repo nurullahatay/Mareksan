@@ -32,7 +32,7 @@
             Email yada şifre yanlış. Bilgilerinizi kontrol edip tekrar deneyin!
         </div>
 
-        <form  action="#"  th:action="@{/login}" method="post" th:object="${user}">
+        <form  id="login" action="#"  th:action="@{/login}" method="post" th:object="${user}">
             <div class="form-group">
                 <label for="exampleInputEmail1">Email adresi:</label>
                 <input  th:field="*{email}" type="email" class="form-control" required id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Adresinizi Girin">
@@ -41,15 +41,26 @@
                 <label for="exampleInputPassword1">Şifre : </label>
                 <input th:field="*{password}" type="password" required class="form-control" id="exampleInputPassword1" placeholder="Şifrenizi Girin">
             </div>
-            <button type="submit" class="btn btn-primary btn-lg btn-block">Giriş</button>
+            <button id="gonderButon" type="submit" class="btn btn-primary btn-lg btn-block">Giriş</button>
         </form>
     </div>
 </div> <!-- /container -->
-<!-- Bootstrap core JavaScript
-================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+
+<script>
+    $(document).ready(function () {
+
+        $("#login").submit(function (e) {
+
+            //disable the submit button
+            $("#gonderButon").attr("disabled", true);
+            $("#gonderButon").removeClass('btn btn-primary btn-lg btn-block').addClass('btn btn-success btn-lg btn-block');
+            $("#gonderButon").html('Lütfen Bekleyiniz..');
+            return true;
+
+        });
+    });
+</script>
 </body>
 </html>

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -31,14 +32,14 @@ public class CustomerController {
         return customerService.getCustomers();
     }
 
-    @GetMapping("/{companyName}")
+    @GetMapping("/companyName/{companyName}")
     public Customer findByCompanyName(@PathVariable String companyName){
         return customerService.findByCompanyName(companyName);
     }
 
-    @GetMapping("/{customerId}")
-    public Customer getCustomerById(@PathVariable Long customerId){
-        return customerService.getCustomerById(customerId);
+    @GetMapping("/customerId/{customerId}")
+    public Optional<Customer> getCustomerById(@PathVariable String customerId){
+        return customerService.getCustomerById(Long.valueOf(customerId));
     }
 
     @DeleteMapping("/deleteCustomer/{customerId}")
