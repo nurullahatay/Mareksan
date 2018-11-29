@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Ramazan on 28.11.2018.
@@ -22,4 +25,31 @@ public class CustomerServiceImpl implements CustomerService {
     public void saveCustomer(Customer customer) {
         customerRepository.save(customer);
     }
+
+    @Override
+    public Set<Customer> getCustomers() {
+        Set<Customer> customerSet = new HashSet<>();
+        customerRepository.findAll().iterator().forEachRemaining(customerSet::add);
+        return customerSet;
+    }
+
+    @Override
+    public Customer findByCompanyName(String companyName) {
+        return customerRepository.findByCompanyName(companyName);
+    }
+
+    @Override
+    public Customer getCustomerById(Long customerId) {
+        return customerRepository.getOne(customerId);
+    }
+
+    @Override
+    public void deleteById(Long customerId) {
+        customerRepository.deleteById(customerId);
+    }
+
+  /*  @Override
+    public void updateById(Long customerId) {
+
+    }*/
 }

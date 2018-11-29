@@ -26,9 +26,7 @@ public class Customer {
     @JsonIgnore
     private Set<Order> orders = new HashSet<>();
 
-
-    public Customer() {
-    }
+    public Customer() {}
 
     public Customer(String companyName, String companyPhone, String companyAddress, String authorizedName, String authorizedPhone, String authorizedEMail, String password) {
         this.companyName = companyName;

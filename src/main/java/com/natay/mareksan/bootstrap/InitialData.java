@@ -1,9 +1,6 @@
 package com.natay.mareksan.bootstrap;
 
-import com.natay.mareksan.model.Customer;
-import com.natay.mareksan.model.Order;
-import com.natay.mareksan.model.OrderStatus;
-import com.natay.mareksan.model.User;
+import com.natay.mareksan.model.*;
 import com.natay.mareksan.service.CustomerService;
 import com.natay.mareksan.service.OrderService;
 import com.natay.mareksan.service.UserService;
@@ -19,7 +16,8 @@ import java.util.Date;
  * Created by Ramazan on 28.11.2018.
  */
 @Component
-public class InitialData implements ApplicationListener<ContextRefreshedEvent> {
+public class
+InitialData implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     private UserService userService;
@@ -51,12 +49,12 @@ public class InitialData implements ApplicationListener<ContextRefreshedEvent> {
         customerService.saveCustomer(customer1);
 
         Order order = new Order("Sipariş 1", new Date(),new Date(),
-                "",2,"ehe",230D,10D,5D,"", OrderStatus.PREPAIRING,customer);
+                OrderType.ADDITION,2,"ehe",230D,10D,5D,"", OrderStatus.PREPAIRING,customer);
         Order order1 = new Order("Sipariş 2", new Date(),new Date(),
-                "",2,"eh2e",230D,10D,5D,"", OrderStatus.DONE,customer);
+                OrderType.BROCHURE,2,"eh2e",230D,10D,5D,"", OrderStatus.DONE,customer);
 
         Order order2 = new Order("Sipariş 3", new Date(),new Date(),
-                "",2,"ehasdasdsad2e",230D,10D,5D,"", OrderStatus.IN_PROGRESS,customer1);
+                OrderType.BILL,2,"ehasdasdsad2e",230D,10D,5D,"", OrderStatus.IN_PROGRESS,customer1);
 
 
         orderService.saveOrder(order);

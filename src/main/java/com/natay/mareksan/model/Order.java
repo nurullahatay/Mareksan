@@ -15,7 +15,6 @@ public class Order {
     private String orderName;
     private Date orderDate;
     private Date deliveryDate;
-    private String orderType;
     private int amount;
     private String specificationsOrders;
     private double price;
@@ -26,6 +25,9 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
+    @Enumerated(EnumType.STRING)
+    private OrderType orderType;
+
     @ManyToOne
     @JoinColumn(name = "customer_id")
     @JsonIgnoreProperties("orders")
@@ -34,7 +36,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(String orderName, Date orderDate, Date deliveryDate, String orderType, int amount, String specificationsOrders, double price, double paid, double remainder, String description, OrderStatus orderStatus, Customer customer) {
+    public Order(String orderName, Date orderDate, Date deliveryDate, OrderType orderType, int amount, String specificationsOrders, double price, double paid, double remainder, String description, OrderStatus orderStatus, Customer customer) {
         this.orderName = orderName;
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
@@ -89,11 +91,11 @@ public class Order {
         this.deliveryDate = deliveryDate;
     }
 
-    public String getOrderType() {
+    public OrderType getOrderType() {
         return orderType;
     }
 
-    public void setOrderType(String orderType) {
+    public void setOrderType(OrderType orderType) {
         this.orderType = orderType;
     }
 
