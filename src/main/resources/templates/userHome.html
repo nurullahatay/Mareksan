@@ -58,14 +58,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">Mareksan Sipariş Takip Sistemi</a>
+            <a class="navbar-brand" id="navbar-home">Mareksan Sipariş Takip Sistemi</a>
         </div>
         <!-- /.navbar-header -->
 
         <ul class="nav navbar-top-links navbar-right">
 
             <li class="data-toggle">
-                <a class="data-toggle" data-toggle="data-toggle" href="/index.html">
+                <a class="data-toggle" data-toggle="data-toggle" id="home">
                     <i class="fa fa-home "></i>
                 </a>
             </li>
@@ -92,101 +92,40 @@
                 <ul class="nav" id="side-menu">
                     <li class="sidebar-search">
                         <div class="input-group custom-search-form">
-                            <input type="text" class="form-control" placeholder="Search...">
+                            <input type="text" class="form-control"  placeholder="Search...">
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
                         </div>
-                        <!-- /input-group -->
                     </li>
+
                     <li>
-                        <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Sipariş Yönetimi<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="flot.html">Flot Charts</a>
+                                <a id="siparisler">Siparişler</a>
                             </li>
                             <li>
-                                <a href="morris.html">Morris.js Charts</a>
+                                <a id="siparis_olustur">Siparis Oluştur</a>
                             </li>
                         </ul>
-                        <!-- /.nav-second-level -->
                     </li>
+
                     <li>
-                        <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
-                    </li>
-                    <li>
-                        <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Müşteri Yönetimi<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="panels-wells.html">Panels and Wells</a>
+                                <a id="müsteri_ekle">Müşteri Ekle</a>
                             </li>
                             <li>
-                                <a href="buttons.html">Buttons</a>
-                            </li>
-                            <li>
-                                <a href="notifications.html">Notifications</a>
-                            </li>
-                            <li>
-                                <a href="typography.html">Typography</a>
-                            </li>
-                            <li>
-                                <a href="icons.html"> Icons</a>
-                            </li>
-                            <li>
-                                <a href="grid.html">Grid</a>
+                                <a id="müsteriler">Müşteriler</a>
                             </li>
                         </ul>
-                        <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">Second Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Second Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-                                </ul>
-                                <!-- /.nav-third-level -->
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="../static/blank.html">Blank Page</a>
-                            </li>
-                            <li>
-                                <a href="login.html">Login Page</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
+                        <a ><i class="fa fa-bar-chart-o fa-fw"></i>Ayarlar<span class="fa arrow"></span></a>
                     </li>
                 </ul>
             </div>
@@ -196,11 +135,11 @@
     </nav>
 
     <div id="page-wrapper">
-        </br>
-        </br>
-        <div class="row">
+
+        <div id="giris" class="row">
+            <br><br>
             <div class="col-lg-3 col-md-6">
-                <a href="yeni-siparis.php">
+                <a id="yeni_siparis">
                     <div class="widget style1 navy-bg">
                         <div class="row">
                             <div class="col-xs-4">
@@ -214,7 +153,7 @@
                 </a>
             </div>
             <div class="col-lg-3 col-md-6">
-                <a href="yeni-musteri.php">
+                <a id="yeni_müsteri">
                     <div class="widget style1 lazur-bg">
                         <div class="row">
                             <div class="col-xs-4">
@@ -227,18 +166,15 @@
                     </div>
                 </a>
             </div>
+            <br><br>
         </div>
-        </br>
-        </br>
-
-
 
         <!-- /.yeniiii -->
-        <div class="row">
+        <div id="siparis_listesi" class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        DataTables Advanced Tables
+                        Siparis Listesi
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -269,42 +205,227 @@
         <!-- /.yeniii -->
 
 
-        <div id="siparis_listesi" class="row">
+
+        <div id="siparis_formu" class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Sipariş Formu</h1>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Default Panel
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="ibox-content">
+                                <form role="form" id="formSiparis" method="post" class="form-horizontal">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Sipariş Cinsi</label>
+                                                <div class="col-sm-8">
+                                                    <select data-placeholder="Sipariş Cinsi.." name="siparisCinsi" class="chosen-select form-control" required onchange="siparisRM(this.value)" id="siparisCinsi">
+                                                        <option value="">Sipariş cinsi seçin</option>
+                                                        <option value="37">Adisyon</option>
+                                                        <option value="4">Adisyon Tipi Perakende Satış Fişi</option>
+                                                        <option value="5">Ambar Tesellüm Fişi</option>
+                                                        <option value="45">brochure</option>
+                                                        <option value="8">Dipkoçanlı Giriş Bileti</option>
+                                                        <option value="9">Dipkoçanlı Perakende Satış Fişi</option>
+                                                        <option value="10">Dipkoçanlı Yolcu Taşıma Bileti</option>
+                                                        <option value="6">Döviz Alım Belgesi</option>
+                                                        <option value="7">Döviz Satım Belgesi</option>
+                                                        <option value="34">Döviz ve Kıymetli Maden Alım Belgesi</option>
+                                                        <option value="35">Döviz ve Kıymetli Maden Satım Belgesi</option>
+                                                        <option value="11">Ek Belgeler (Zeyilnameler)</option>
+                                                        <option value="12">Fatura</option>
+                                                        <option value="13">Fatura / Çek</option>
+                                                        <option value="15">Gider Pusulası</option>
+                                                        <option value="16">Giriş Bileti</option>
+                                                        <option value="14">Günlük Müşteri Listesi</option>
+                                                        <option value="31">İrsaliyeli Fatura</option>
+                                                        <option value="1">Kartvizit</option>
+                                                        <option value="38">Kaşe</option>
+                                                        <option value="32">Kıymetli Maden Alım Belgesi</option>
+                                                        <option value="33">Kıymetli Maden Satım Belgesi</option>
+                                                        <option value="17">Makinalı Kasaların Kayıt Ruloları</option>
+                                                        <option value="36">Maliye Bakanlığınca Belirlenecek Diğer Belgeler</option>
+                                                        <option value="18">Müstahsil Makbuzu</option>
+                                                        <option value="29">Ödünç Sözleşmesi</option>
+                                                        <option value="19">Orman Kooperatifleri Ödeme Cetveli</option>
+                                                        <option value="30">Özel Fatura</option>
+                                                        <option value="20">Perakende Satış Fişi</option>
+                                                        <option value="21">Reçete</option>
+                                                        <option value="3">Resmi Adisyon</option>
+                                                        <option value="22">Serbest Meslek Makbuzu</option>
+                                                        <option value="23">Sevk İrsaliyesi</option>
+                                                        <option value="24">Sigorta Komisyon Giderleri Belgesi</option>
+                                                        <option value="25">Sigorta Poliçeleri</option>
+                                                        <option value="2">Takvim</option>
+                                                        <option value="26">Taşıma İrsaliyesi</option>
+                                                        <option value="40">vinil afiş </option>
+                                                        <option value="27">Yolcu Listesi</option>
+                                                        <option value="28">Yolcu Taşıma Bileti</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Sipariş Adı</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" placeholder="Sipariş Adı" class="form-control required" name="orderName" id="orderName" value="" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Teslim Tarihi</label>
+                                                <div class="date-picker col-sm-8">
+                                                    <input required id="tarih" class="form-control" type="text">
+                                                    <!-- seçilen tarih GG-AA-YYYY şeklinde -->
+                                                    <input type="hidden" id="deliveryDate"
+                                                           name="izinbitistarihi">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Miktar</label>
+                                                <div class="col-sm-8">
+                                                    <input type="number" placeholder="Miktar" class="form-control" name="amount" id="amount" value="" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Sipariş Özellikleri</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" placeholder="Sipariş Özellikleri" class="form-control required" name="specificationsOrders" id="specificationsOrders" value="" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group" id="nushaDiv" >
+                                                <label class="col-sm-4 control-label">Tutar</label>
+                                                <div class="col-sm-8">
+                                                    <input type="number" placeholder="Tutar" class="form-control" name="price" id="price" value="">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Ödenen</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" placeholder="Ödenen" class="form-control" name="paid" id="paid" value="" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Açıklama</label>
+                                                <div class="col-sm-8">
+                                                    <textarea name="description" id="description" class="form-control" ></textarea>
+                                                    <!--input type="text" placeholder="Açıklama" class="form-control" name="aciklama" id="aciklama" value=""-->
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <input type="button" class="btn btn-sm btn-primary m-t-n-xs" style="float:right; margin:8px;" value="Ekle" id="orderAdd" onclick="addOrder()"/>
+                                                    <input type="button" class="btn btn-sm btn-danger m-t-n-xs" style="float:right; margin:8px;" value="İptal Et" id="orderCancel" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="form" value="orderForm" />
+                                    <input type="hidden" name="seId" value="0" />
+                                    <input type="hidden" name="musteri" id="musteri" value="" />
+                                    <input type="hidden" name="orderId" id="orderId" value="0" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- /.col-lg-4 -->
+            </div>
+
+        </div>
+
+
+
+        <div id="müsteri_ekleme" class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Müşteri Ekleme Formu</h1>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Default Panel
+                        </div>
+                        <div class="panel-body">
+                            <div class="wrapper wrapper-content  animated fadeInRight">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>Müşteri Formu</h5>
+
+                                    </div>
+                                    <div class="ibox-content">
+
+                                        <form role="form" id="addCustomerForm" method="post" class="wizard-big">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group"><label>Firma Adı</label><input type="text" placeholder="Firma Adı" class="form-control required" name="companyName" id="companyName" value=""></div>
+                                                    <div class="form-group"><label>Firma Tel</label><input type="text" placeholder="Firma Tel" class="form-control required" name="companyPhone" id="companyPhone" value=""></div>
+                                                    <div class="form-group"><label>Firma Adres</label><textarea type="text" placeholder="Firma Adres" class="form-control required" name="companyAddress" id="companyAddress" value=""></textarea></div>
+
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group"><label>Yetkili Ad</label><input type="text" placeholder="Yetkili Ad" class="form-control" name="authorizedName" id="authorizedName" value=""></div>
+                                                    <div class="form-group"><label>Yetkili Tel</label><input type="text" placeholder="Yetkili Tel" class="form-control" name="authorizedPhone" id="authorizedPhone" value=""></div>
+                                                    <div class="form-group"><label>Yetkili E-Posta</label><input type="email" placeholder="Yetkili E-Posta" class="form-control" name="authorizedEMail" id="authorizedEMail" value=""></div>
+                                                    <div class="form-group"><label>Şifre</label><input type="text" placeholder="Şifre" class="form-control" name="password" id="password" value=""></div>
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <input type="button" class="btn btn-sm btn-primary m-t-n-xs" style="float:right; margin:8px;" value="Kaydet" onclick="addCustomer()"/>
+                                                    <input type="reset" class="btn btn-sm btn-danger m-t-n-xs" style="float:right; margin:8px;" value="Vazgeç" id="cancelCustomer" />
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="form" value="addCustomerForm" />
+                                            <input type="hidden" name="customerId" value="0" />
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+        <div id="müsteri_listeleme" class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Sipariş Listesi
+                        DataTables Advanced Tables
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <table id="orders" class="display" style="width:100%">
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-Customer">
                             <thead>
                             <tr>
-                                <th>Şipariş No</th>
-                                <th>Müşteri</th>
-                                <th>Şipariş Tarihi</th>
-                                <th>Teslim Tarihi</th>
-                                <th>Toplam Tutar</th>
-                                <th>Alınan Tutar</th>
-                                <th>Durum</th>
-                                <th>Eylemler</th>
+                                <th>Şirket Adı</th>
+                                <th>Şirket Telefonu</th>
+                                <th>Yetkili</th>
+                                <th>Yetkili Telefonu</th>
+                                <td>Yetkili E-mail</td>
+                                <td>Sil/Düzenle</td>
                             </tr>
                             </thead>
                             <tbody>
 
                             </tbody>
-                            <tfoot>
-                            <tr>
-                                <th>Şipariş No</th>
-                                <th>Müşteri</th>
-                                <th>Şipariş Tarihi</th>
-                                <th>Teslim Tarihi</th>
-                                <th>Toplam Tutar</th>
-                                <th>Alınan Tutar</th>
-                                <th>Durum</th>
-                                <th>Eylemler</th>
-                            </tr>
-                            </tfoot>
                         </table>
 
                     </div>
@@ -315,177 +436,7 @@
             <!-- /.col-lg-12 -->
         </div>
 
-        <div id="siparis_formu" class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">Sipariş Formu</h1>
-                    </div>
 
-                </div>
-
-        <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Default Panel
-                            </div>
-                            <div class="panel-body">
-
-                                <div class="ibox-content">
-                                    <form role="form" id="formSiparis" method="post" class="form-horizontal">
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <!--div class="form-group" id="siparisMusteri">
-                                                    <label class="col-sm-4 control-label">Müşteri Seçin </label>
-                                                    <div class="col-sm-8">
-                                                        <select data-placeholder="Müşteri Seçin.." name="musteri" class="chosen-select form-control required" required id="musteri">
-                                                            <option value="">Müşteri seçin</option>
-                                                                                            <option value="16"  >WEBS35</option>
-                                                                                            <option value="17"  >Yılmaz Kasap</option>
-                                                                                            <option value="18"  >Şen Konfeksiyon</option>
-                                                                                            <option value="19"  >Tufan Market</option>
-                                                                                            <option value="20"  >Yıldırım Tasarım Ltd. Şti.</option>
-                                                                                            <option value="21"  >s & g</option>
-                                                                                            <option value="22"  >Şen Bakkal</option>
-                                                                                            <option value="23"  >asf</option>
-                                                                                    </select>
-                                                    </div>
-                                                </div-->
-                                                <div class="form-group">
-                                                    <label class="col-sm-4 control-label">Sipariş Cinsi</label>
-                                                    <div class="col-sm-8">
-                                                        <select data-placeholder="Sipariş Cinsi.." name="siparisCinsi" class="chosen-select form-control" required onchange="siparisRM(this.value)" id="siparisCinsi">
-                                                            <option value="">Sipariş cinsi seçin</option>
-                                                            <option value="37"  >Adisyon</option>
-                                                            <option value="4"  >Adisyon Tipi Perakende Satış Fişi</option>
-                                                            <option value="5"  >Ambar Tesellüm Fişi</option>
-                                                            <option value="45"  >brochure</option>
-                                                            <option value="8"  >Dipkoçanlı Giriş Bileti</option>
-                                                            <option value="9"  >Dipkoçanlı Perakende Satış Fişi</option>
-                                                            <option value="10"  >Dipkoçanlı Yolcu Taşıma Bileti</option>
-                                                            <option value="6"  >Döviz Alım Belgesi</option>
-                                                            <option value="7"  >Döviz Satım Belgesi</option>
-                                                            <option value="34"  >Döviz ve Kıymetli Maden Alım Belgesi</option>
-                                                            <option value="35"  >Döviz ve Kıymetli Maden Satım Belgesi</option>
-                                                            <option value="11"  >Ek Belgeler (Zeyilnameler)</option>
-                                                            <option value="12"  >Fatura</option>
-                                                            <option value="13"  >Fatura / Çek</option>
-                                                            <option value="15"  >Gider Pusulası</option>
-                                                            <option value="16"  >Giriş Bileti</option>
-                                                            <option value="14"  >Günlük Müşteri Listesi</option>
-                                                            <option value="31"  >İrsaliyeli Fatura</option>
-                                                            <option value="1"  >Kartvizit</option>
-                                                            <option value="38"  >Kaşe</option>
-                                                            <option value="32"  >Kıymetli Maden Alım Belgesi</option>
-                                                            <option value="33"  >Kıymetli Maden Satım Belgesi</option>
-                                                            <option value="17"  >Makinalı Kasaların Kayıt Ruloları</option>
-                                                            <option value="36"  >Maliye Bakanlığınca Belirlenecek Diğer Belgeler</option>
-                                                            <option value="18"  >Müstahsil Makbuzu</option>
-                                                            <option value="29"  >Ödünç Sözleşmesi</option>
-                                                            <option value="19"  >Orman Kooperatifleri Ödeme Cetveli</option>
-                                                            <option value="30"  >Özel Fatura</option>
-                                                            <option value="20"  >Perakende Satış Fişi</option>
-                                                            <option value="21"  >Reçete</option>
-                                                            <option value="3"  >Resmi Adisyon</option>
-                                                            <option value="22"  >Serbest Meslek Makbuzu</option>
-                                                            <option value="23"  >Sevk İrsaliyesi</option>
-                                                            <option value="24"  >Sigorta Komisyon Giderleri Belgesi</option>
-                                                            <option value="25"  >Sigorta Poliçeleri</option>
-                                                            <option value="2"  >Takvim</option>
-                                                            <option value="26"  >Taşıma İrsaliyesi</option>
-                                                            <option value="40"  >vinil afiş </option>
-                                                            <option value="27"  >Yolcu Listesi</option>
-                                                            <option value="28"  >Yolcu Taşıma Bileti</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label class="col-sm-4 control-label">Ebat</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" placeholder="Ebat" class="form-control required" name="ebat" id="ebat" value="" required>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-4 control-label">Kağıt Cinsi</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" placeholder="Kağıt Cinsi" class="form-control" name="kagitCinsi" id="kagitCinsi" value="" required>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-4 control-label">Miktar</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="number" placeholder="Miktar" class="form-control" name="miktar" id="miktar" value="" required>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-4 control-label">Miktar Cinsi</label>
-                                                    <div class="col-sm-8">
-                                                        <select class="form-control m-b" name="miktarCinsi" id="miktarCinsi" required>
-                                                            <option value="">Miktar cinsi seçin </option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group" id="nushaDiv" >
-                                                    <label class="col-sm-4 control-label">Nüsha</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="number" placeholder="Nüsha" class="form-control" name="nusha" id="nusha" value="">
-                                                    </div>
-                                                </div>
-
-                                                <!--div class="form-group" id="numaratorDiv" >
-                                                    <label class="col-sm-4 control-label">Numarator</label>
-                                                    <div class="col-sm-6">
-
-                                                    <input type="text" placeholder="Numaratör" class="form-control" name="numarator" id="numarator" value="" disabled>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                    <input type="button" class="btn btn-danger " value="Numara Al" id="getNumber" style="padding:2px;float:right;" />
-
-                                                    </div>
-                                                </div>
-                                                <input type="hidden" name="nmrtr" id ="nmrtr" value="" /-->
-                                                <div class="form-group">
-                                                    <label class="col-sm-4 control-label">Renk</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" placeholder="Renk" class="form-control" name="renk" id="renk" value="" required>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-4 control-label">Fiyat</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" placeholder="Fiyat" class="form-control" name="fiyat" id="fiyat" value="" required>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-4 control-label">Açıklama</label>
-                                                    <div class="col-sm-8">
-                                                        <textarea name="aciklama" id="aciklama" class="form-control" ></textarea>
-                                                        <!--input type="text" placeholder="Açıklama" class="form-control" name="aciklama" id="aciklama" value=""-->
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-12">
-                                                        <input type="button" class="btn btn-sm btn-primary m-t-n-xs" style="float:right; margin:8px;" value="Ekle" id="orderAdd" />
-                                                        <input type="button" class="btn btn-sm btn-danger m-t-n-xs" style="float:right; margin:8px;" value="İptal Et" id="orderCancel" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <input type="hidden" name="form" value="orderForm" />
-                                        <input type="hidden" name="seId" value="0" />
-                                        <input type="hidden" name="musteri" id="musteri" value="" />
-                                        <input type="hidden" name="orderId" id="orderId" value="0" />
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- /.col-lg-4 -->
-                </div>
 
     </div>
 
@@ -527,6 +478,95 @@
 
 <script>
 
+    $("#müsteri_ekleme").hide();
+    $("#müsteri_listeleme").hide();
+    $("#siparis_listesi").hide();
+    $("#siparis_formu").hide();
+    $("#giris").hide();
+
+
+    $(document).ready(function() {
+        $("#home").click(function() {
+            $("#giris").show();
+            $("#siparis_listesi").show();
+            $("#siparis_formu").hide();
+            $("#müsteri_listeleme").hide();
+            $("#müsteri_ekleme").hide();
+
+        });
+    });
+    $(document).ready(function() {
+        $("#navbar-home").click(function() {
+            $("#giris").show();
+            $("#siparis_listesi").show();
+            $("#siparis_formu").hide();
+            $("#müsteri_listeleme").hide();
+            $("#müsteri_ekleme").hide();
+
+        });
+    });
+
+   $(document).ready(function() {
+        $("#yeni_müsteri").click(function() {
+            $("#giris").hide();
+            $("#siparis_listesi").hide();
+            $("#siparis_formu").hide();
+            $("#müsteri_listeleme").hide();
+            $("#müsteri_ekleme").show();
+        });
+    });
+
+    $(document).ready(function() {
+        $("#müsteri_ekle").click(function() {
+            $("#giris").hide();
+            $("#siparis_listesi").hide();
+            $("#siparis_formu").hide();
+            $("#müsteri_listeleme").hide();
+            $("#müsteri_ekleme").show();
+        });
+    });
+
+
+    $(document).ready(function() {
+        $("#yeni_siparis").click(function() {
+            $("#giris").hide();
+            $("#siparis_listesi").hide();
+            $("#siparis_formu").show();
+            $("#müsteri_listeleme").hide();
+            $("#müsteri_ekleme").hide();
+        });
+    });
+
+    $(document).ready(function() {
+        $("#siparis_olustur").click(function() {
+            $("#giris").hide();
+            $("#siparis_listesi").hide();
+            $("#siparis_formu").show();
+            $("#müsteri_listeleme").hide();
+            $("#müsteri_ekleme").hide();
+        });
+    });
+
+    $(document).ready(function() {
+        $("#siparisler").click(function() {
+            $("#giris").hide();
+            $("#siparis_listesi").show();
+            $("#siparis_formu").hide();
+            $("#müsteri_listeleme").hide();
+            $("#müsteri_ekleme").hide();
+        });
+    });
+
+    $(document).ready(function() {
+        $("#müsteriler").click(function() {
+            $("#giris").hide();
+            $("#siparis_listesi").hide();
+            $("#siparis_formu").hide();
+            $("#müsteri_listeleme").show();
+            $("#müsteri_ekleme").hide();
+        });
+    });
+
 
     $(document).ready(function(){
         $('#dataTables-example').DataTable({
@@ -545,24 +585,107 @@
                 { data: 'orderStatus' }
             ]
         });
-//        $.getJSON("/orders/all", function(data){
-//            var order_data = '';
-//            $.each(data, function(key, value){
-//                order_data += '<tr>';
-//                order_data += '<td>'+value.id+ '</td>';
-//                order_data += '<td>'+value.customer_id+ '</td>';
-//                order_data += '<td>'+value.orderDate+ '</td>';
-//                order_data += '<td>'+value.deliveryDate+ '</td>';
-//                order_data += '<td>'+value.price+ '</td>';
-//                order_data += '<td>'+value.paid+ '</td>';
-//                order_data += '<td>'+value.status+ '</td>';
-//                order_data += '</tr>';
-//            });
-//            $("#tbody").append(order_data);
-
-//        });
     });
+
+    $(document).ready(function(){
+        $('#dataTables-Customer').DataTable({
+            responsive: true,
+            ajax: {
+                url: '/customers/all',
+                dataSrc: ''
+            },
+            columns: [
+                { data: 'companyName' },
+                { data: 'companyPhone' },
+                { data: 'authorizedName' },
+                { data: 'authorizedPhone' },
+                { data: 'authorizedEMail' }
+            ]
+        });
+    });
+
+    function addOrder() {
+        var order = {};
+        order["orderName"] = $("#orderName").val();
+        order["amount"] = $("#amount").val();
+        order["specificationsOrders"] = $("#specificationsOrders").val();
+        order["price"] = $("#price").val();
+        order["paid"] = $("#paid").val();
+        order["description"] = $("#description").val();
+
+        $.ajax({
+            type : "POST",
+            contentType : "application/json",
+            url : "/orders/saveOrder",
+            data : JSON.stringify(order),
+            dataType : 'json',
+            cache : false,
+            timeout : 100000,
+            success : function(data) {
+                alert("SUCCESS : ",data);
+            },
+            error : function(e) {
+                alert("ERROR : ",e);
+            }
+        });
+    }
+
+    function addCustomer() {
+        var customer = {};
+        customer["companyName"] = $("#companyName").val();
+        customer["companyPhone"] = $("#companyPhone").val();
+        customer["companyAddress"] = $("#companyAddress").val();
+        customer["authorizedName"] = $("#authorizedName").val();
+        customer["authorizedPhone"] = $("#authorizedPhone").val();
+        customer["authorizedEMail"] = $("#authorizedEMail").val();
+        customer["password"] = $("#password").val();
+
+        $.ajax({
+            type : "POST",
+            contentType : "application/json",
+            url : "/customers/saveCustomer",
+            data : JSON.stringify(customer),
+            dataType : 'json',
+            cache : false,
+            timeout : 100000,
+            success : function(data) {
+                alert("SUCCESS : ",data);
+            },
+            error : function(e) {
+                alert("ERROR : ",e);
+            }
+        });
+    }
+
+    // Şuanki tarihi gösteren script -->
+    var d=new Date();
+    var monthname=new Array("Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık");
+    var TODAY = monthname[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+
+
+    $(document).ready(function(){
+        $(function() {
+            $("#deliveryDate").datepicker(
+                {
+                    beforeShowDay : $.datepicker.noWeekends,
+                    dateFormat : "dd-mm-yy",
+                    altFormat : "yy-mm-dd",
+                    altField : "#tarih",
+                    monthNames : [ "Ocak", "Şubat", "Mart",
+                        "Nisan", "Mayıs", "Haziran", "Temmuz",
+                        "Ağustos", "Eylül", "Ekim", "Kasım",
+                        "Aralık" ],
+                    dayNamesMin : [ "Pa", "Pt", "Sl", "Ça", "Pe",
+                        "Cu", "Ct" ],
+                    firstDay : 1,
+                });
+        });
+    });
+
+
 </script>
+
+
 </body>
 
 </html>
