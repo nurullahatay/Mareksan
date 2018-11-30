@@ -8,13 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.ContextStartedEvent;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 
 @Component
-public class Initializer implements ApplicationListener<ContextRefreshedEvent> {
+public class Initializer implements ApplicationListener<ContextStartedEvent> {
 
     @Autowired
     private UserService userService;
@@ -28,7 +29,7 @@ public class Initializer implements ApplicationListener<ContextRefreshedEvent> {
     // Implemente edilen ApplicationListener interface'i , spring context ayaga kalktıgında cagrılan bir arayüzdür.
     // alttaki onApplicationEvent methodunu data eklemek için kullanıyoruz.
     @Override
-    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+    public void onApplicationEvent(ContextStartedEvent ContextStartedEvent) {
 
         User user = new User("Nurullah", "Atay", "123", "5355422108", "nataymachine@gmail.com");
         User user1 = new User("Ramazan", "Demir", "123", "5308711257", "rdemir057@gmail.com");
