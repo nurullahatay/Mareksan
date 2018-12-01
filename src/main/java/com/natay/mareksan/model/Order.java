@@ -13,8 +13,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String orderName;
-    private Date orderDate;
-    private Date deliveryDate;
+    private String orderDate;
+    private String deliveryDate;
     private int amount;
     private String specificationsOrders;
     private double price;
@@ -22,11 +22,11 @@ public class Order {
     private double remainder;
     private String description;
 
-    @Enumerated(EnumType.STRING)
-    private OrderStatus orderStatus;
+    //@Enumerated(EnumType.STRING)
+    private String orderStatus;
 
-    @Enumerated(EnumType.STRING)
-    private OrderType orderType;
+    //@Enumerated(EnumType.STRING)
+    private String orderType;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
@@ -36,11 +36,11 @@ public class Order {
     public Order() {
     }
 
-    public Order(String orderName, Date orderDate, Date deliveryDate, OrderType orderType, int amount, String specificationsOrders, double price, double paid, double remainder, String description, OrderStatus orderStatus, Customer customer) {
+
+    public Order(String orderName, String orderDate, String deliveryDate, int amount, String specificationsOrders, double price, double paid, double remainder, String description, String orderStatus, String orderType, Customer customer) {
         this.orderName = orderName;
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
-        this.orderType = orderType;
         this.amount = amount;
         this.specificationsOrders = specificationsOrders;
         this.price = price;
@@ -48,6 +48,7 @@ public class Order {
         this.remainder = remainder;
         this.description = description;
         this.orderStatus = orderStatus;
+        this.orderType = orderType;
         this.customer = customer;
     }
 
@@ -73,30 +74,6 @@ public class Order {
 
     public void setOrderName(String orderName) {
         this.orderName = orderName;
-    }
-
-    public Date getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public Date getDeliveryDate() {
-        return deliveryDate;
-    }
-
-    public void setDeliveryDate(Date deliveryDate) {
-        this.deliveryDate = deliveryDate;
-    }
-
-    public OrderType getOrderType() {
-        return orderType;
-    }
-
-    public void setOrderType(OrderType orderType) {
-        this.orderType = orderType;
     }
 
     public int getAmount() {
@@ -139,19 +116,43 @@ public class Order {
         this.remainder = remainder;
     }
 
-    public OrderStatus getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(OrderStatus orderStatus) {
-        this.orderStatus = orderStatus;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public String getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(String orderType) {
+        this.orderType = orderType;
+    }
+
+    public String getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(String orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public String getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public void setDeliveryDate(String deliveryDate) {
+        this.deliveryDate = deliveryDate;
     }
 }

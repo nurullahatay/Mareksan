@@ -186,11 +186,17 @@
                             <tr>
                                 <th>Şipariş No</th>
                                 <th>Müşteri</th>
+                                <th>Şipariş Adı</th>
                                 <th>Şipariş Tarihi</th>
                                 <th>Teslim Tarihi</th>
+                                <th>Miktar</th>
                                 <th>Toplam Tutar</th>
                                 <th>Alınan Tutar</th>
+                                <th>Kalan Tutar</th>
                                 <th>Durum</th>
+                                <th>Sipariş Tipi</th>
+                                <th>Açıklama</th>
+                                <th>Sipariş ozellikleri</th>
                                 <th>Eylemler</th>
                             </tr>
                             </thead>
@@ -848,11 +854,17 @@
             columns: [
                 {data: 'id'},
                 {data: 'customer.companyName'},
+                {data: 'orderName'},
                 {data: 'orderDate'},
                 {data: 'deliveryDate'},
+                {data: 'amount'},
                 {data: 'price'},
                 {data: 'paid'},
+                {data: 'remainder'},
                 {data: 'orderStatus'},
+                {data: 'orderType'},
+                {data: 'description'},
+                {data: 'specificationsOrders'},
                 {
                     render: function (data, type, row) {
                         return ' <a data-toggle="modal" href="#modal-order" alt="Göster" title="Göster" onclick="orderView(' + row["id"] + ')"> <i class="fa fa-eye "></i> </a>' + ' <a class="data-toggle" data-toggle="data-toggle"  > <i class="fa fa-trash-o" onclick="deleteOrder(' + row["id"] + ')"></i> </a>' + ' <a data-toggle="modal" href="#modal-order-edit" alt="Düzenle" title="Düzenle" onclick="orderEdit(' + row["id"] + ')"> <i class="fa fa-edit" ></i></a>';

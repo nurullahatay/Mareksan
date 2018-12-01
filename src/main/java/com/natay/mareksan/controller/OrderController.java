@@ -1,6 +1,8 @@
 package com.natay.mareksan.controller;
 
 import com.natay.mareksan.model.Order;
+import com.natay.mareksan.model.OrderStatus;
+import com.natay.mareksan.model.OrderType;
 import com.natay.mareksan.repository.OrderRepository;
 import com.natay.mareksan.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/orders")
@@ -69,5 +74,27 @@ public class OrderController {
         return new ResponseEntity<Object>(currentOder, HttpStatus.OK);
     }
 
+    @GetMapping("/orderStatus")
+    public Set<String> getOrderStatuses() {
+        Set<String> orderStatusSet = new HashSet<>();
+
+        // tüm degerleri tek tek değerlerini getir ve set'e ekle
+        for (OrderStatus orderStatus: OrderStatus.values()) {
+           orderStatusSet.add(orderStatus.getValue());
+        }
+
+        return orderStatusSet;
+    }
+
+    @GetMapping("/orderType")
+    public Set<String> getOrderTypes() {
+        Set<String> orderTypeSet = new HashSet<>();
+
+        for (OrderType orderType: OrderType.values()) {
+            orderTypeSet.add(orderType.getValue());
+        }
+
+        return orderTypeSet;
+    }
 
 }

@@ -45,18 +45,25 @@ public class InitialData implements ApplicationListener<ContextRefreshedEvent> {
         customerService.saveCustomer(customer);
         customerService.saveCustomer(customer1);
 
-        Order order = new Order("Sipariş 1", new Date(),new Date(),
-                OrderType.ADDITION,2,"ehe",230D,10D,5D,"", OrderStatus.PREPAIRING,customer);
-        Order order1 = new Order("Sipariş 2", new Date(),new Date(),
-                OrderType.BROCHURE,2,"eh2e",230D,10D,5D,"", OrderStatus.DONE,customer);
+        Order order = new Order("Sipariş 3","28/11/2018","30/11/2018",4,"acil iş",130,100,
+                50,"iş çok acil ",OrderStatus.IN_PROGRESS.getValue(),OrderType.ADDITION.getValue(),customer);
 
-        Order order2 = new Order("Sipariş 3", new Date(),new Date(),
-                OrderType.BILL,2,"ehasdasdsad2e",230D,10D,5D,"", OrderStatus.IN_PROGRESS,customer1);
+        Order order1 =new Order("Sipariş 3","22/11/2018","30/11/2018",12,"acil iş",350,100,
+                10,"iş iş tanımı",OrderStatus.PREPAIRING.getValue(),OrderType.BILL.getValue(),customer1);
+
+
+        Order order2 = new Order("Sipariş 3","15/10/2018","30/11/2018",7,"acil iş",2000,100,
+                22,"iş çok acil , iş tanımı",OrderStatus.DONE.getValue(),OrderType.BROCHURE.getValue(),customer);
+
+
+        Order order3 = new Order("Sipariş 3","28/11/2018","30/11/2018",2,"acil iş",1350,100,
+                150,"iş çok acil , iş tanımı",OrderStatus.IN_PROGRESS.getValue(),OrderType.BUSINESS_CARD.getValue(),customer1);
 
 
         orderService.saveOrder(order);
         orderService.saveOrder(order1);
         orderService.saveOrder(order2);
+        orderService.saveOrder(order3);
 
     }
 }
