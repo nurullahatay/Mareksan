@@ -22,6 +22,7 @@
 
     <!-- Morris Charts CSS -->
     <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
+    <link href="../vendor/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -481,8 +482,18 @@
                                                            value="" required>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group date">
+                                                <label class="col-sm-4 control-label">Sipariş Tarihi</label>
+                                                <div class="col-sm-8">
+                                                <input id="orderDate" type="text" class="form-control">
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group date">
                                                 <label class="col-sm-4 control-label">Teslim Tarihi</label>
+                                                <div class="col-sm-8">
+                                                    <input id="deliveryDate" type="text" class="form-control">
+                                                </div>
 
                                             </div>
                                             <div class="form-group">
@@ -707,6 +718,9 @@
 
 <!-- Metis Menu Plugin JavaScript -->
 <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+<script src="../vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+<script src="../vendor/bootstrap-datepicker/locales/bootstrap-datepicker.tr.min.js"></script>
 
 <!-- Morris Charts JavaScript -->
 <script src="../vendor/raphael/raphael.min.js"></script>
@@ -714,14 +728,6 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="../dist/js/sb-admin-2.js"></script>
-<!-- jQuery -->
-<script src="../vendor/jquery/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
-
-<!-- Metis Menu Plugin JavaScript -->
-<script src="../vendor/metisMenu/metisMenu.min.js"></script>
 
 <!-- DataTables JavaScript -->
 <script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
@@ -734,6 +740,8 @@
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 
 <script>
+
+
 
     $("#müsteri_ekleme").hide();
     $("#müsteri_listeleme").hide();
@@ -786,6 +794,24 @@
             $.each(result, function(i, customer){
                 $("#siparis_veren").append('<option id="siparis_veren_id" value="'+customer.id+'">'+customer.companyName+'</option');
             });
+        });
+
+
+        $('#deliveryDate').datepicker({
+            format: "dd/mm/yyyy",
+            todayBtn: "linked",
+            clearBtn: true,
+            language: "tr",
+            autoclose: true,
+            todayHighlight: true
+        });
+        $('#orderDate').datepicker({
+            format: "dd/mm/yyyy",
+            todayBtn: "linked",
+            clearBtn: true,
+            language: "tr",
+            autoclose: true,
+            todayHighlight: true
         });
 
 
@@ -909,6 +935,8 @@
         order["price"] = $("#price").val();
         order["paid"] = $("#paid").val();
         order["description"] = $("#description").val();
+        order["orderDate"] = $("#orderDate").val()
+        order["deliveryDate"] = $("#deliveryDate").val();
 
         $.ajax({
             type: "POST",

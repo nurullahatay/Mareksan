@@ -79,8 +79,8 @@ public class OrderController {
         Set<String> orderStatusSet = new HashSet<>();
 
         // tüm degerleri tek tek değerlerini getir ve set'e ekle
-        for (OrderStatus orderStatus: OrderStatus.values()) {
-           orderStatusSet.add(orderStatus.getValue());
+        for (OrderStatus orderStatus : OrderStatus.values()) {
+            orderStatusSet.add(orderStatus.getValue());
         }
 
         return orderStatusSet;
@@ -90,7 +90,7 @@ public class OrderController {
     public Set<String> getOrderTypes() {
         Set<String> orderTypeSet = new HashSet<>();
 
-        for (OrderType orderType: OrderType.values()) {
+        for (OrderType orderType : OrderType.values()) {
             orderTypeSet.add(orderType.getValue());
         }
 
