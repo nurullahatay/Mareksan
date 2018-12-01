@@ -209,7 +209,8 @@
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content  animated" id="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                            <button type="button" class="close" data-dismiss="modal"><span
+                                    aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                             <h4 class="modal-title">Sipariş Detayı</h4>
                         </div>
                         <div class="modal-body" id="modal-body">
@@ -220,29 +221,35 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div style="padding:5px; float:left;"><b>Müşteri:</b></div>
-                                                    <label id="modal-order-customer"  style="padding:5px; float:left;"></label>
+                                                    <label id="modal-order-customer"
+                                                           style="padding:5px; float:left;"></label>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div style="padding:5px; float:left;"><b>Toplam Tutar:</b></div>
-                                                    <label id="modal-order-price" style="padding:5px; float:left;"></label>
+                                                    <label id="modal-order-price"
+                                                           style="padding:5px; float:left;"></label>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div style="padding:5px; float:left;"><b>Sipariş Tarihi:</b></div>
-                                                    <label id="modal-order-orderDate" style="padding:5px; float:left;"></label>
+                                                    <label id="modal-order-orderDate"
+                                                           style="padding:5px; float:left;"></label>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div style="padding:5px; float:left;"><b>Telefon No:</b></div>
-                                                    <label id="modal-order-companyTel" style="padding:5px; float:left;"></label>
+                                                    <label id="modal-order-companyTel"
+                                                           style="padding:5px; float:left;"></label>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div style="padding:5px; float:left;"><b>Ödenen Tutar:</b></div>
-                                                    <label id="modal-order-paid" style="padding:5px; float:left;"></label>
+                                                    <label id="modal-order-paid"
+                                                           style="padding:5px; float:left;"></label>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div style="padding:5px; float: left"><b>Teslim Tarihi:</b></div>
-                                                    <label id="modal-order-deliveryDate" style="padding:5px; float:left;"></label>
+                                                    <label id="modal-order-deliveryDate"
+                                                           style="padding:5px; float:left;"></label>
                                                 </div>
                                             </div>
                                         </div>
@@ -261,19 +268,19 @@
                                                 <tbody>
                                                 <tr class="gradeX">
                                                     <td>
-                                                    <label id="modal-order-oderType" ></label>
+                                                        <label id="modal-order-oderType"></label>
                                                     </td>
                                                     <td>
                                                         <label id="modal-order-orderName"></label>
                                                     </td>
                                                     <td>
-                                                        <label id="modal-order-amount" ></label>
+                                                        <label id="modal-order-amount"></label>
                                                     </td>
                                                     <td>
-                                                        <label id="modal-order-price1" ></label>
+                                                        <label id="modal-order-price1"></label>
                                                     </td>
                                                     <td>
-                                                        <label id="modal-order-specificationsOrders" ></label>
+                                                        <label id="modal-order-specificationsOrders"></label>
                                                     </td>
 
                                                 </tr>
@@ -285,10 +292,81 @@
                             </div>
                         </div>
                         <div class="modal-header">
-                        </div></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
+            <div id="modal-order-edit" class="modal inmodal fade" aria-hidden="true" >
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title"><h5>Sipariş Formu</h5></div>
+                                <div class="ibox-content">
+                                    <form role="form" id="formSiparisFinish" method="post" class="wizard-big">
+                                        <div class="form-group">
+                                            <label>Müşteri</label>
+                                            <input id="modal-order-edit-customer" type="text">
+                                        </div>
+                                        <div class="form-group" id="data_1"><label>Teslim Tarihi</label>
+                                            <div class="input-group date">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input id="modal-order-edit-deliveryDate" type="text"
+                                                       class="form-control" name="teslimTarihi" value=""
+                                                       required="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group"><label>Toplam Tutar</label><input type="text"
+                                                                                                  placeholder=""
+                                                                                                  class="form-control required"
+                                                                                                  name="_tutar"
+                                                                                                  id="modal-order-edit-price"
+                                                                                                  value=""
+                                                                                                  disabled="">
+                                        </div>
+                                        <div class="form-group"><label>Alınan Kapora</label><input type="text"
+                                                                                                   placeholder="Kapora"
+                                                                                                   class="form-control required"
+                                                                                                   name="kapora"
+                                                                                                   id="modal-order-edit-paid"
+                                                                                                   value="0.00">
+                                        </div>
+                                        <div class="form-group"><label>Durum</label>
+                                            <select id="modal-order-edit-status" class="form-control m-b"
+                                                    name="durum" required="">
+                                                <option value="">Sipariş Durumu</option>
+                                                <option value="1" selected="">Beklemede</option>
+                                                <option value="2">Baskıda</option>
+                                                <option value="3">Tamamlandı</option>
+                                                <option value="4">Teslim Edildi</option>
+                                            </select></div>
+                                        <div class="form-group"><label>Açıklama</label><input type="text"
+                                                                                              placeholder="Açıklama"
+                                                                                              class="form-control"
+                                                                                              name="aciklama"
+                                                                                              id="modal-order-edit-description"
+                                                                                              value="">
+                                        </div>
+                                        <div><input type="button" class="btn btn-sm btn-primary m-t-n-xs"
+                                                    value="Siparişi Kaydet" id="orderFinish"
+                                                    onclick="orderFinished();">
+                                            <input type="button" class="btn btn-sm btn-danger m-t-n-xs"
+                                                   value="Siparişi İptal Et" id="orderCancel2"
+                                                   onclick="orderCancel('117');"></div>
+                                        <input type="hidden" name="form" value="siparisFinishForm"> <input
+                                            type="hidden"
+                                            name="orderId"
+                                            value="117">
+                                        <input type="hidden" name="tutar" value="1200"></form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
         <!-- /.yeniii -->
@@ -314,20 +392,26 @@
                                             <div class="form-group">
                                                 <label class="col-sm-4 control-label">Sipariş Cinsi</label>
                                                 <div class="col-sm-8">
-                                                    <select data-placeholder="Sipariş Cinsi.." name="siparisCinsi"
+                                                    <select data-placeholder="Sipariş Cinsi.."
+                                                            name="siparisCinsi"
                                                             class="chosen-select form-control" required
                                                             onchange="siparisRM(this.value)" id="siparisCinsi">
                                                         <option value="">Sipariş cinsi seçin</option>
                                                         <option value="37">Adisyon</option>
-                                                        <option value="4">Adisyon Tipi Perakende Satış Fişi</option>
+                                                        <option value="4">Adisyon Tipi Perakende Satış Fişi
+                                                        </option>
                                                         <option value="5">Ambar Tesellüm Fişi</option>
                                                         <option value="45">brochure</option>
                                                         <option value="8">Dipkoçanlı Giriş Bileti</option>
-                                                        <option value="9">Dipkoçanlı Perakende Satış Fişi</option>
-                                                        <option value="10">Dipkoçanlı Yolcu Taşıma Bileti</option>
+                                                        <option value="9">Dipkoçanlı Perakende Satış Fişi
+                                                        </option>
+                                                        <option value="10">Dipkoçanlı Yolcu Taşıma Bileti
+                                                        </option>
                                                         <option value="6">Döviz Alım Belgesi</option>
                                                         <option value="7">Döviz Satım Belgesi</option>
-                                                        <option value="34">Döviz ve Kıymetli Maden Alım Belgesi</option>
+                                                        <option value="34">Döviz ve Kıymetli Maden Alım
+                                                            Belgesi
+                                                        </option>
                                                         <option value="35">Döviz ve Kıymetli Maden Satım Belgesi
                                                         </option>
                                                         <option value="11">Ek Belgeler (Zeyilnameler)</option>
@@ -341,20 +425,24 @@
                                                         <option value="38">Kaşe</option>
                                                         <option value="32">Kıymetli Maden Alım Belgesi</option>
                                                         <option value="33">Kıymetli Maden Satım Belgesi</option>
-                                                        <option value="17">Makinalı Kasaların Kayıt Ruloları</option>
-                                                        <option value="36">Maliye Bakanlığınca Belirlenecek Diğer
+                                                        <option value="17">Makinalı Kasaların Kayıt Ruloları
+                                                        </option>
+                                                        <option value="36">Maliye Bakanlığınca Belirlenecek
+                                                            Diğer
                                                             Belgeler
                                                         </option>
                                                         <option value="18">Müstahsil Makbuzu</option>
                                                         <option value="29">Ödünç Sözleşmesi</option>
-                                                        <option value="19">Orman Kooperatifleri Ödeme Cetveli</option>
+                                                        <option value="19">Orman Kooperatifleri Ödeme Cetveli
+                                                        </option>
                                                         <option value="30">Özel Fatura</option>
                                                         <option value="20">Perakende Satış Fişi</option>
                                                         <option value="21">Reçete</option>
                                                         <option value="3">Resmi Adisyon</option>
                                                         <option value="22">Serbest Meslek Makbuzu</option>
                                                         <option value="23">Sevk İrsaliyesi</option>
-                                                        <option value="24">Sigorta Komisyon Giderleri Belgesi</option>
+                                                        <option value="24">Sigorta Komisyon Giderleri Belgesi
+                                                        </option>
                                                         <option value="25">Sigorta Poliçeleri</option>
                                                         <option value="2">Takvim</option>
                                                         <option value="26">Taşıma İrsaliyesi</option>
@@ -369,7 +457,8 @@
                                                 <label class="col-sm-4 control-label">Sipariş Adı</label>
                                                 <div class="col-sm-8">
                                                     <input type="text" placeholder="Sipariş Adı"
-                                                           class="form-control required" name="orderName" id="orderName"
+                                                           class="form-control required" name="orderName"
+                                                           id="orderName"
                                                            value="" required>
                                                 </div>
                                             </div>
@@ -380,15 +469,18 @@
                                             <div class="form-group">
                                                 <label class="col-sm-4 control-label">Miktar</label>
                                                 <div class="col-sm-8">
-                                                    <input type="number" placeholder="Miktar" class="form-control"
+                                                    <input type="number" placeholder="Miktar"
+                                                           class="form-control"
                                                            name="amount" id="amount" value="" required>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-4 control-label">Sipariş Özellikleri</label>
+                                                <label class="col-sm-4 control-label">Sipariş
+                                                    Özellikleri</label>
                                                 <div class="col-sm-8">
                                                     <input type="text" placeholder="Sipariş Özellikleri"
-                                                           class="form-control required" name="specificationsOrders"
+                                                           class="form-control required"
+                                                           name="specificationsOrders"
                                                            id="specificationsOrders" value="" required>
                                                 </div>
                                             </div>
@@ -397,7 +489,8 @@
                                             <div class="form-group" id="nushaDiv">
                                                 <label class="col-sm-4 control-label">Tutar</label>
                                                 <div class="col-sm-8">
-                                                    <input type="number" placeholder="Tutar" class="form-control"
+                                                    <input type="number" placeholder="Tutar"
+                                                           class="form-control"
                                                            name="price" id="price" value="">
                                                 </div>
                                             </div>
@@ -420,7 +513,8 @@
                                             <div class="form-group">
                                                 <div class="col-sm-12">
                                                     <input type="button" class="btn btn-sm btn-primary m-t-n-xs"
-                                                           style="float:right; margin:8px;" value="Ekle" id="orderAdd"
+                                                           style="float:right; margin:8px;" value="Ekle"
+                                                           id="orderAdd"
                                                            onclick="addOrder()"/>
                                                     <input type="button" class="btn btn-sm btn-danger m-t-n-xs"
                                                            style="float:right; margin:8px;" value="İptal Et"
@@ -468,19 +562,21 @@
                                         <form role="form" id="addCustomerForm" method="post" class="wizard-big">
                                             <div class="row">
                                                 <div class="col-lg-6">
-                                                    <div class="form-group"><label>Firma Adı</label><input type="text"
-                                                                                                           placeholder="Firma Adı"
-                                                                                                           class="form-control required"
-                                                                                                           name="companyName"
-                                                                                                           id="companyName"
-                                                                                                           value="">
+                                                    <div class="form-group"><label>Firma Adı</label><input
+                                                            type="text"
+                                                            placeholder="Firma Adı"
+                                                            class="form-control required"
+                                                            name="companyName"
+                                                            id="companyName"
+                                                            value="">
                                                     </div>
-                                                    <div class="form-group"><label>Firma Tel</label><input type="text"
-                                                                                                           placeholder="Firma Tel"
-                                                                                                           class="form-control required"
-                                                                                                           name="companyPhone"
-                                                                                                           id="companyPhone"
-                                                                                                           value="">
+                                                    <div class="form-group"><label>Firma Tel</label><input
+                                                            type="text"
+                                                            placeholder="Firma Tel"
+                                                            class="form-control required"
+                                                            name="companyPhone"
+                                                            id="companyPhone"
+                                                            value="">
                                                     </div>
                                                     <div class="form-group"><label>Firma Adres</label><textarea
                                                             type="text" placeholder="Firma Adres"
@@ -489,30 +585,33 @@
 
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <div class="form-group"><label>Yetkili Ad</label><input type="text"
-                                                                                                            placeholder="Yetkili Ad"
-                                                                                                            class="form-control"
-                                                                                                            name="authorizedName"
-                                                                                                            id="authorizedName"
-                                                                                                            value="">
+                                                    <div class="form-group"><label>Yetkili Ad</label><input
+                                                            type="text"
+                                                            placeholder="Yetkili Ad"
+                                                            class="form-control"
+                                                            name="authorizedName"
+                                                            id="authorizedName"
+                                                            value="">
                                                     </div>
-                                                    <div class="form-group"><label>Yetkili Tel</label><input type="text"
-                                                                                                             placeholder="Yetkili Tel"
-                                                                                                             class="form-control"
-                                                                                                             name="authorizedPhone"
-                                                                                                             id="authorizedPhone"
-                                                                                                             value="">
+                                                    <div class="form-group"><label>Yetkili Tel</label><input
+                                                            type="text"
+                                                            placeholder="Yetkili Tel"
+                                                            class="form-control"
+                                                            name="authorizedPhone"
+                                                            id="authorizedPhone"
+                                                            value="">
                                                     </div>
                                                     <div class="form-group"><label>Yetkili E-Posta</label><input
                                                             type="email" placeholder="Yetkili E-Posta"
                                                             class="form-control" name="authorizedEMail"
                                                             id="authorizedEMail" value=""></div>
-                                                    <div class="form-group"><label>Şifre</label><input type="text"
-                                                                                                       placeholder="Şifre"
-                                                                                                       class="form-control"
-                                                                                                       name="password"
-                                                                                                       id="password"
-                                                                                                       value=""></div>
+                                                    <div class="form-group"><label>Şifre</label><input
+                                                            type="text"
+                                                            placeholder="Şifre"
+                                                            class="form-control"
+                                                            name="password"
+                                                            id="password"
+                                                            value=""></div>
 
                                                 </div>
                                             </div>
@@ -631,7 +730,6 @@
             $("#siparis_formu").hide();
             $("#müsteri_listeleme").hide();
             $("#müsteri_ekleme").hide();
-
         });
 
         $("#navbar-home").click(function () {
@@ -703,7 +801,12 @@
         });
 
     }
+
     $(document).ready(function () {
+
+        $("#giris").show();
+        $("#siparis_listesi").show();
+
         homeButtonClick();
         yeniMusteriEkleClick();
         yeniSiparisOlustur();
@@ -711,10 +814,12 @@
         musterilerClick();
         getOrders();
         getCustomers();
+
+
     });
 
     function getOrders() {
-       table = $('#dataTables-example').DataTable({
+        table = $('#dataTables-example').DataTable({
             responsive: true,
             ajax: {
                 url: '/orders/all',
@@ -730,7 +835,7 @@
                 {data: 'orderStatus'},
                 {
                     render: function (data, type, row) {
-                        return ' <a data-toggle="modal" href="#modal-order" alt="Göster" title="Göster" onclick="orderView('+row["id"]+')"> <i class="fa fa-eye "></i> </a>'+ ' <a class="data-toggle" data-toggle="data-toggle"  > <i class="fa fa-trash-o" onclick="deleteOrder('+row["id"]+')"></i> </a>' + ' <a class="data-toggle" data-toggle="data-toggle"> <i class="fa fa-edit" ></i></a>';
+                        return ' <a data-toggle="modal" href="#modal-order" alt="Göster" title="Göster" onclick="orderView(' + row["id"] + ')"> <i class="fa fa-eye "></i> </a>' + ' <a class="data-toggle" data-toggle="data-toggle"  > <i class="fa fa-trash-o" onclick="deleteOrder(' + row["id"] + ')"></i> </a>' + ' <a data-toggle="modal" href="#modal-order-edit" alt="Düzenle" title="Düzenle" onclick="orderEdit(' + row["id"] + ')"> <i class="fa fa-edit" ></i></a>';
                     }
                 }
             ]
@@ -752,7 +857,7 @@
                 {data: 'authorizedEMail'},
                 {
                     render: function (data, type, row) {
-                        return '<a class="data-toggle" data-toggle="data-toggle"> <i class="fa fa-trash-o" onclick="deleteCustomer('+row["id"]+')"></i></a>'+ ' <a class="data-toggle" data-toggle="data-toggle"> <i class="fa fa-edit" ></i></a>';
+                        return '<a class="data-toggle" data-toggle="data-toggle"> <i class="fa fa-trash-o" onclick="deleteCustomer(' + row["id"] + ')"></i></a>' + ' <a class="data-toggle" data-toggle="data-toggle"> <i class="fa fa-edit" ></i></a>';
                     }
                 }
             ]
@@ -837,7 +942,7 @@
 
         $.ajax({
             type: "DELETE",
-            url: '/customers/deleteCustomer/'+url_id,
+            url: '/customers/deleteCustomer/' + url_id,
             cache: false,
             timeout: 100000,
             success: function (data) {
@@ -851,11 +956,11 @@
 
     }
 
-    function orderView(id){
+    function orderView(id) {
         $.ajax({
             type: "GET",
-            url:  "/orders/getOrder/"+id,
-            success: function(result){
+            url: "/orders/getOrder/" + id,
+            success: function (result) {
                 $("#modal-order-amount").text(result.amount);
                 $("#modal-order-companyTel").text(result.customer.companyPhone);
                 $("#modal-order-customer").text(result.customer.companyName);
@@ -872,6 +977,22 @@
         });
     }
 
+    function orderEdit(id) {
+        $.ajax({
+            type: "GET",
+            url: "/orders/getOrder/" + id,
+            success: function (result) {
+                $("#modal-order-edit-customer").val(result.customer.companyName);
+                $("#modal-order-edit-deliveryDate").val(result.deliveryDate);
+                $("#modal-order-edit-oderType").val(result.orderType);
+                $("#modal-order-edit-paid").val(result.paid);
+                $("#modal-order-edit-price").val(result.price);
+                $("#modal-order-edit-status").val(result.price);
+                $("#modal-order-edit-description").val(result.description);
+            }
+        });
+
+    }
 
 </script>
 
