@@ -196,7 +196,6 @@
                                 <th>Kalan Tutar</th>
                                 <th>Durum</th>
                                 <th>Sipariş Tipi</th>
-                                <th>Açıklama</th>
                                 <th>Sipariş ozellikleri</th>
                                 <th>Eylemler</th>
                             </tr>
@@ -343,12 +342,8 @@
                                         </div>
                                         <div class="form-group"><label>Durum</label>
                                             <select id="modal-order-edit-status" class="form-control m-b"
-                                                    name="durum" required="">
-                                                <option value="">Sipariş Durumu</option>
-                                                <option value="1" selected="">Beklemede</option>
-                                                <option value="2">Baskıda</option>
-                                                <option value="3">Tamamlandı</option>
-                                                <option value="4">Teslim Edildi</option>
+                                                    name="modal-order-edit-status" required="">
+
                                             </select></div>
                                         <div class="form-group"><label>Açıklama</label><input type="text"
                                                                                               placeholder="Açıklama"
@@ -403,8 +398,6 @@
                                                             name="siparisCinsi"
                                                             class="chosen-select form-control" required
                                                             id="siparis_veren">
-
-
                                                     </select>
                                                 </div>
                                             </div>
@@ -416,59 +409,7 @@
                                                             name="siparisCinsi"
                                                             class="chosen-select form-control" required
                                                              id="siparisCinsi">
-                                                        <option value="">Sipariş cinsi seçin</option>
-                                                        <option value="37">Adisyon</option>
-                                                        <option value="4">Adisyon Tipi Perakende Satış Fişi
-                                                        </option>
-                                                        <option value="5">Ambar Tesellüm Fişi</option>
-                                                        <option value="45">brochure</option>
-                                                        <option value="8">Dipkoçanlı Giriş Bileti</option>
-                                                        <option value="9">Dipkoçanlı Perakende Satış Fişi
-                                                        </option>
-                                                        <option value="10">Dipkoçanlı Yolcu Taşıma Bileti
-                                                        </option>
-                                                        <option value="6">Döviz Alım Belgesi</option>
-                                                        <option value="7">Döviz Satım Belgesi</option>
-                                                        <option value="34">Döviz ve Kıymetli Maden Alım
-                                                            Belgesi
-                                                        </option>
-                                                        <option value="35">Döviz ve Kıymetli Maden Satım Belgesi
-                                                        </option>
-                                                        <option value="11">Ek Belgeler (Zeyilnameler)</option>
-                                                        <option value="12">Fatura</option>
-                                                        <option value="13">Fatura / Çek</option>
-                                                        <option value="15">Gider Pusulası</option>
-                                                        <option value="16">Giriş Bileti</option>
-                                                        <option value="14">Günlük Müşteri Listesi</option>
-                                                        <option value="31">İrsaliyeli Fatura</option>
-                                                        <option value="1">Kartvizit</option>
-                                                        <option value="38">Kaşe</option>
-                                                        <option value="32">Kıymetli Maden Alım Belgesi</option>
-                                                        <option value="33">Kıymetli Maden Satım Belgesi</option>
-                                                        <option value="17">Makinalı Kasaların Kayıt Ruloları
-                                                        </option>
-                                                        <option value="36">Maliye Bakanlığınca Belirlenecek
-                                                            Diğer
-                                                            Belgeler
-                                                        </option>
-                                                        <option value="18">Müstahsil Makbuzu</option>
-                                                        <option value="29">Ödünç Sözleşmesi</option>
-                                                        <option value="19">Orman Kooperatifleri Ödeme Cetveli
-                                                        </option>
-                                                        <option value="30">Özel Fatura</option>
-                                                        <option value="20">Perakende Satış Fişi</option>
-                                                        <option value="21">Reçete</option>
-                                                        <option value="3">Resmi Adisyon</option>
-                                                        <option value="22">Serbest Meslek Makbuzu</option>
-                                                        <option value="23">Sevk İrsaliyesi</option>
-                                                        <option value="24">Sigorta Komisyon Giderleri Belgesi
-                                                        </option>
-                                                        <option value="25">Sigorta Poliçeleri</option>
-                                                        <option value="2">Takvim</option>
-                                                        <option value="26">Taşıma İrsaliyesi</option>
-                                                        <option value="40">vinil afiş</option>
-                                                        <option value="27">Yolcu Listesi</option>
-                                                        <option value="28">Yolcu Taşıma Bileti</option>
+
                                                     </select>
                                                 </div>
                                             </div>
@@ -796,6 +737,11 @@
             });
         });
 
+        $.getJSON("/orders/orderType", function(result){
+            $.each(result, function(i, orderType){
+                $("#siparisCinsi").append('<option id="siparis_cinsi" value="'+orderType+'">'+orderType+'</option');
+            });
+        });
 
         $('#deliveryDate').datepicker({
             format: "dd/mm/yyyy",
@@ -833,6 +779,11 @@
     }
 
     function siparislerClick() {
+        $.getJSON("/orders/orderStatus", function(result){
+            $.each(result, function(i, orderStatus){
+                $("#modal-order-edit-status").append('<option id="siparis_durumu" value="'+orderStatus+'">'+orderStatus+'</option');
+            });
+        });
         $("#siparisler").click(function () {
             $("#giris").hide();
             $("#siparis_listesi").show();
@@ -889,7 +840,6 @@
                 {data: 'remainder'},
                 {data: 'orderStatus'},
                 {data: 'orderType'},
-                {data: 'description'},
                 {data: 'specificationsOrders'},
                 {
                     render: function (data, type, row) {
@@ -937,6 +887,8 @@
         order["description"] = $("#description").val();
         order["orderDate"] = $("#orderDate").val()
         order["deliveryDate"] = $("#deliveryDate").val();
+        order["orderType"]=$("#siparisCinsi").val();
+        order["orderStatus"]="Beklemede";
 
         $.ajax({
             type: "POST",
@@ -1001,7 +953,6 @@
 
     }
 
-
     function deleteCustomer(url_id) {
 
         $.ajax({
@@ -1051,7 +1002,7 @@
                 $("#modal-order-edit-oderType").val(result.orderType);
                 $("#modal-order-edit-paid").val(result.paid);
                 $("#modal-order-edit-price").val(result.price);
-                $("#modal-order-edit-status").val(result.price);
+                $("#modal-order-edit-status").select(result.oderStatus);
                 $("#modal-order-edit-description").val(result.description);
             }
         });
