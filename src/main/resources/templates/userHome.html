@@ -395,7 +395,20 @@
                                                     <select data-placeholder="Sipariş Cinsi.."
                                                             name="siparisCinsi"
                                                             class="chosen-select form-control" required
-                                                            onchange="siparisRM(this.value)" id="siparisCinsi">
+                                                            id="siparis_veren">
+
+
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Sipariş Cinsi</label>
+                                                <div class="col-sm-8">
+                                                    <select data-placeholder="Sipariş Cinsi.."
+                                                            name="siparisCinsi"
+                                                            class="chosen-select form-control" required
+                                                             id="siparisCinsi">
                                                         <option value="">Sipariş cinsi seçin</option>
                                                         <option value="37">Adisyon</option>
                                                         <option value="4">Adisyon Tipi Perakende Satış Fişi
@@ -763,6 +776,13 @@
 
     function yeniSiparisOlustur() {
 
+        $.getJSON("/customers/all", function(result){
+            $.each(result, function(i, customer){
+                $("#siparis_veren").append('<option id="siparis_veren_id" value="'+customer.id+'">'+customer.companyName+'</option');
+            });
+        });
+
+
         $("#yeni_siparis").click(function () {
             $("#giris").hide();
             $("#siparis_listesi").hide();
@@ -866,7 +886,11 @@
 
 
     function addOrder() {
+
         var order = {};
+        var customer={};
+        customer["id"] = $("#siparis_veren").val();
+        order["customer"] =customer;
         order["orderName"] = $("#orderName").val();
         order["amount"] = $("#amount").val();
         order["specificationsOrders"] = $("#specificationsOrders").val();
@@ -993,6 +1017,7 @@
         });
 
     }
+
 
 </script>
 
