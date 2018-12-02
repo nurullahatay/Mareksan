@@ -59,10 +59,12 @@ public class OrderController {
 
        // farkli yada null alanları sadece değiştir eklenecek
 
-        //if(currentOder.get().getCustomer().equals(order.getCustomer())&& order.getCustomer().equals("") ){
+        if(!currentOder.get().getCustomer().equals(order.getCustomer()) || order.getCustomer().equals(null) ){
             currentOder.get().setCustomer(order.getCustomer());
-        //}
-        currentOder.get().setCustomer(order.getCustomer());
+        }
+        /*if (currentOder.get().getAmount()==order.getAmount() || (order.getAmount()== Integer.) ){
+
+        }*/
         currentOder.get().setAmount(order.getAmount());
         currentOder.get().setDeliveryDate(order.getDeliveryDate());
         currentOder.get().setDescription(order.getDescription());

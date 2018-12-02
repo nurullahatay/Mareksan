@@ -511,15 +511,11 @@
                                                            onclick="addOrder()"/>
                                                     <input type="button" class="btn btn-sm btn-danger m-t-n-xs"
                                                            style="float:right; margin:8px;" value="İptal Et"
-                                                           id="orderCancel"/>
+                                                           id="orderCancel" onclick="deleteOrderAddAreas()"/>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="form" value="orderForm"/>
-                                    <input type="hidden" name="seId" value="0"/>
-                                    <input type="hidden" name="musteri" id="musteri" value=""/>
-                                    <input type="hidden" name="orderId" id="orderId" value="0"/>
                                 </form>
                             </div>
                         </div>
@@ -615,7 +611,7 @@
                                                            onclick="addCustomer()"/>
                                                     <input type="reset" class="btn btn-sm btn-danger m-t-n-xs"
                                                            style="float:right; margin:8px;" value="Vazgeç"
-                                                           id="cancelCustomer"/>
+                                                           id="cancelCustomer" onclick="deleteCustomerAddAreas()"/>
                                                 </div>
                                             </div>
                                             <input type="hidden" name="form" value="addCustomerForm"/>
@@ -750,20 +746,29 @@
         });
     }
 
-    function yeniSiparisOlustur() {
-
+    function getCustomerDropDownList() {
+        $("#siparis_veren").empty();
+        $("#modal-order-edit-customer").empty();
         $.getJSON("/customers/all", function (result) {
             $.each(result, function (i, customer) {
                 $("#siparis_veren").append('<option id="siparis_veren_id" value="' + customer.id + '">' + customer.companyName + '</option');
                 $("#modal-order-edit-customer").append('<option id="siparis_veren_edit_id" value="' + customer.id + '">' + customer.companyName + '</option');
             });
         });
+    }
 
+    function getOrderTypeDropDownList() {
+        $("#siparisCinsi").empty();
         $.getJSON("/orders/orderType", function (result) {
             $.each(result, function (i, orderType) {
                 $("#siparisCinsi").append('<option id="siparis_cinsi" value="' + orderType + '">' + orderType + '</option');
             });
         });
+    }
+
+    function yeniSiparisOlustur() {
+        getCustomerDropDownList();
+        getOrderTypeDropDownList();
 
         $('#deliveryDate').datepicker({
             format: "dd/mm/yyyy",
@@ -932,7 +937,6 @@
         });
     }
 
-
     function addOrder() {
 
         var order = {};
@@ -961,8 +965,8 @@
             timeout: 100000,
             success: function (data) {
                 alert("SİPARİŞ KAYIT EDİLDİ.");
-
                 $('#dataTables-example').DataTable().ajax.reload();
+                deleteOrderAddAreas();
             },
             error: function (e) {
                 alert("ERROR : ", e);
@@ -990,13 +994,41 @@
             timeout: 100000,
             success: function (data) {
                 alert("MÜŞTERİ KAYIT EDİLDİ.");
+                deleteCustomerAddAreas();
                 $('#dataTables-Customer').DataTable().ajax.reload();
+                getCustomerDropDownList();
 
             },
             error: function (e) {
                 alert("ERROR : ", e);
             }
         });
+    }
+
+    function deleteOrderAddAreas() {
+        $("#siparis_veren").empty();
+        $("#orderName").val("");
+        $("#amount").val("");
+        $("#specificationsOrders").val("");
+        $("#price").val("");
+        $("#paid").val("");
+        $("#remainder").val("");
+        $("#description").val("");
+        $("#orderDate").val("");
+        $("#deliveryDate").val("");
+        $("#siparisCinsi").val("");
+        getCustomerDropDownList();
+        getOrderTypeDropDownList();
+    }
+
+    function deleteCustomerAddAreas() {
+        $("#companyName").val("");
+        $("#companyPhone").val("");
+        $("#companyAddress").val("");
+        $("#authorizedName").val("");
+        $("#authorizedPhone").val("");
+        $("#authorizedEMail").val("");
+        $("#password").val("");
     }
 
     function deleteOrder(url_id) {
@@ -1110,7 +1142,5 @@
     }
 </script>
 
-
 </body>
-
 </html>
