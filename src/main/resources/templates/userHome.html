@@ -173,7 +173,7 @@
         </div>
 
         <!-- /.yeniiii -->
-        <div id="siparis_listesi" class="row">
+        <div id="siparis_listesi" class="row" style="padding-top: 30px;">
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -398,7 +398,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Default Panel
+                            Sipariş Formu
                         </div>
                         <div class="panel-body">
 
@@ -489,6 +489,13 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
+                                                <label class="col-sm-4 control-label">Kalan</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" placeholder="Kalan" class="form-control"
+                                                           name="remainder" id="remainder" value="" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
                                                 <label class="col-sm-4 control-label">Açıklama</label>
                                                 <div class="col-sm-8">
                                                     <textarea name="description" id="description"
@@ -534,7 +541,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Default Panel
+                            Müşteri Ekleme Formu
                         </div>
                         <div class="panel-body">
                             <div class="wrapper wrapper-content  animated fadeInRight">
@@ -627,11 +634,11 @@
         </div>
         <!-- /.row -->
 
-        <div id="müsteri_listeleme" class="row">
+        <div id="müsteri_listeleme" class="row" style="padding-top:30px;">
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        DataTables Advanced Tables
+                       MÜŞTERİLER
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -846,8 +853,22 @@
     });
 
     function getOrders() {
-        table = $('#dataTables-example').DataTable({
+        $('#dataTables-example').DataTable({
             responsive: true,
+            "bJQueryUI": false,
+            "bAutoWidth": false,
+            "search": {
+                "caseInsensitive": true
+            },
+            "oLanguage": {
+                "sSearch": "<span style='color:red;font-weight: bold'>Arama: </span> _INPUT_", //search
+                "sLengthMenu": "<span>Kaç Kayıt Gösterilsin : </span>_MENU_  ", //label
+                "sZeroRecords": "Eşleşen Kayıt Bulunmadı",
+                "sEmptyTable": "Bu Tabloda Hiç Veri Yok.",
+                "oPaginate": { "sFirst": "İlk", "sLast": "Son", "sNext": "Sonraki", "sPrevious": "Önceki" }, //pagination
+                "sLoadingRecords": "Lütfen Bekleyiniz.. Yükleniyor..",
+                "sInfo": "<span style='color:red;font-weight: bold'>Toplam _TOTAL_ adet kayıttan , (_START_ ile _END_) arası gösteriliyor.</span>"
+            },
             ajax: {
                 url: '/orders/all',
                 dataSrc: ''
@@ -876,8 +897,22 @@
     }
 
     function getCustomers() {
-        table = $('#dataTables-Customer').DataTable({
+        $('#dataTables-Customer').DataTable({
             responsive: true,
+            "bJQueryUI": false,
+            "bAutoWidth": false,
+            "search": {
+                "caseInsensitive": true
+            },
+            "oLanguage": {
+                "sSearch": "<span style='color:red;font-weight: bold'>Arama: </span> _INPUT_", //search
+                "sLengthMenu": "<span>Kaç Kayıt Gösterilsin : </span>_MENU_  ", //label
+                "sZeroRecords": "Eşleşen Kayıt Bulunmadı",
+                "sEmptyTable": "Bu Tabloda Hiç Veri Yok.",
+                "oPaginate": { "sFirst": "İlk", "sLast": "Son", "sNext": "Sonraki", "sPrevious": "Önceki" }, //pagination
+                "sLoadingRecords": "Lütfen Bekleyiniz.. Yükleniyor..",
+                "sInfo": "<span style='color:red;font-weight: bold'>Toplam _TOTAL_ adet kayıttan , (_START_ ile _END_) arası gösteriliyor.</span>"
+            },
             ajax: {
                 url: '/customers/all',
                 dataSrc: ''
@@ -909,6 +944,7 @@
         order["specificationsOrders"] = $("#specificationsOrders").val();
         order["price"] = $("#price").val();
         order["paid"] = $("#paid").val();
+        order["remainder"] = $("#remainder").val();
         order["description"] = $("#description").val();
         order["orderDate"] = $("#orderDate").val()
         order["deliveryDate"] = $("#deliveryDate").val();
@@ -924,6 +960,8 @@
             cache: false,
             timeout: 100000,
             success: function (data) {
+                alert("SİPARİŞ KAYIT EDİLDİ.");
+
                 $('#dataTables-example').DataTable().ajax.reload();
             },
             error: function (e) {
@@ -951,8 +989,9 @@
             cache: false,
             timeout: 100000,
             success: function (data) {
-                alert("SUCCESS : ", data);
-                getCustomers();
+                alert("MÜŞTERİ KAYIT EDİLDİ.");
+                $('#dataTables-Customer').DataTable().ajax.reload();
+
             },
             error: function (e) {
                 alert("ERROR : ", e);
