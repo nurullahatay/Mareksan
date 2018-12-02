@@ -267,7 +267,7 @@
                                                     <th>Sipariş Adı</th>
                                                     <th>Miktar</th>
                                                     <th>Fiyat</th>
-                                                    <td>Kalan</td>
+                                                    <th>Kalan</th>
                                                     <th>Sipariş Özellikleri</th>
                                                 </tr>
                                                 </thead>
@@ -284,6 +284,9 @@
                                                     </td>
                                                     <td>
                                                         <label id="modal-order-price1"></label>
+                                                    </td>
+                                                    <td>
+                                                        <label id="modal-order-remainder"></label>
                                                     </td>
                                                     <td>
                                                         <label id="modal-order-specificationsOrders"></label>
@@ -303,7 +306,7 @@
                 </div>
             </div>
 
-            <div id="modal-order-edit" class="modal inmodal fade" aria-hidden="true" >
+            <div id="modal-order-edit" class="modal inmodal fade" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-body">
@@ -311,11 +314,18 @@
                                 <div class="ibox-title"><h5>Sipariş Formu</h5></div>
                                 <div class="ibox-content">
                                     <form role="form" id="formSiparisFinish" method="post" class="wizard-big">
+
                                         <div class="form-group">
                                             <label>Müşteri</label>
-                                            <input id="modal-order-edit-customer" type="text">
+                                            <select data-placeholder="Müşteri"
+                                                    name="müsteri"
+                                                    class="chosen-select form-control" required
+                                                    id="modal-order-edit-customer">
+                                            </select>
                                         </div>
-                                        <div class="form-group" id="data_1"><label>Teslim Tarihi</label>
+
+                                        <div class="form-group" id="data_1">
+                                            <label>Teslim Tarihi</label>
                                             <div class="input-group date">
                                                 <span class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
@@ -352,17 +362,22 @@
                                                                                               id="modal-order-edit-description"
                                                                                               value="">
                                         </div>
-                                        <div><input type="button" class="btn btn-sm btn-primary m-t-n-xs"
-                                                    value="Siparişi Kaydet" id="orderFinish"
+                                        <div>
+
+                                            <input type="button" class="btn btn-sm btn-primary m-t-n-xs"
+                                                   style="float:right; margin:8px;" value="Siparişi Kaydet"
+                                                   onclick="orderUpdate()"/>
+
+                                            <input type="button" class="btn btn-sm btn-primary m-t-n-xs"
+                                                    value="Siparişi Bitir" id="orderFinish"
                                                     onclick="orderFinished();">
+
+
                                             <input type="button" class="btn btn-sm btn-danger m-t-n-xs"
                                                    value="Siparişi İptal Et" id="orderCancel2"
-                                                   onclick="orderCancel('117');"></div>
-                                        <input type="hidden" name="form" value="siparisFinishForm"> <input
-                                            type="hidden"
-                                            name="orderId"
-                                            value="117">
-                                        <input type="hidden" name="tutar" value="1200"></form>
+                                                   onclick="orderCancel();">
+                                        </div>
+                                        </form>
                                 </div>
                             </div>
                         </div>
@@ -392,10 +407,10 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label class="col-sm-4 control-label">Sipariş Cinsi</label>
+                                                <label class="col-sm-4 control-label">Müşteri</label>
                                                 <div class="col-sm-8">
-                                                    <select data-placeholder="Sipariş Cinsi.."
-                                                            name="siparisCinsi"
+                                                    <select data-placeholder="Müşteri"
+                                                            name="müsteri"
                                                             class="chosen-select form-control" required
                                                             id="siparis_veren">
                                                     </select>
@@ -408,7 +423,7 @@
                                                     <select data-placeholder="Sipariş Cinsi.."
                                                             name="siparisCinsi"
                                                             class="chosen-select form-control" required
-                                                             id="siparisCinsi">
+                                                            id="siparisCinsi">
 
                                                     </select>
                                                 </div>
@@ -426,7 +441,7 @@
                                             <div class="form-group date">
                                                 <label class="col-sm-4 control-label">Sipariş Tarihi</label>
                                                 <div class="col-sm-8">
-                                                <input id="orderDate" type="text" class="form-control">
+                                                    <input id="orderDate" type="text" class="form-control">
                                                 </div>
 
                                             </div>
@@ -683,7 +698,6 @@
 <script>
 
 
-
     $("#müsteri_ekleme").hide();
     $("#müsteri_listeleme").hide();
     $("#siparis_listesi").hide();
@@ -731,15 +745,16 @@
 
     function yeniSiparisOlustur() {
 
-        $.getJSON("/customers/all", function(result){
-            $.each(result, function(i, customer){
-                $("#siparis_veren").append('<option id="siparis_veren_id" value="'+customer.id+'">'+customer.companyName+'</option');
+        $.getJSON("/customers/all", function (result) {
+            $.each(result, function (i, customer) {
+                $("#siparis_veren").append('<option id="siparis_veren_id" value="' + customer.id + '">' + customer.companyName + '</option');
+                $("#modal-order-edit-customer").append('<option id="siparis_veren_edit_id" value="' + customer.id + '">' + customer.companyName + '</option');
             });
         });
 
-        $.getJSON("/orders/orderType", function(result){
-            $.each(result, function(i, orderType){
-                $("#siparisCinsi").append('<option id="siparis_cinsi" value="'+orderType+'">'+orderType+'</option');
+        $.getJSON("/orders/orderType", function (result) {
+            $.each(result, function (i, orderType) {
+                $("#siparisCinsi").append('<option id="siparis_cinsi" value="' + orderType + '">' + orderType + '</option');
             });
         });
 
@@ -752,6 +767,15 @@
             todayHighlight: true
         });
         $('#orderDate').datepicker({
+            format: "dd/mm/yyyy",
+            todayBtn: "linked",
+            clearBtn: true,
+            language: "tr",
+            autoclose: true,
+            todayHighlight: true
+        });
+
+        $('#modal-order-edit-deliveryDate').datepicker({
             format: "dd/mm/yyyy",
             todayBtn: "linked",
             clearBtn: true,
@@ -779,9 +803,9 @@
     }
 
     function siparislerClick() {
-        $.getJSON("/orders/orderStatus", function(result){
-            $.each(result, function(i, orderStatus){
-                $("#modal-order-edit-status").append('<option id="siparis_durumu" value="'+orderStatus+'">'+orderStatus+'</option');
+        $.getJSON("/orders/orderStatus", function (result) {
+            $.each(result, function (i, orderStatus) {
+                $("#modal-order-edit-status").append('<option id="siparis_durumu" value="' + orderStatus + '">' + orderStatus + '</option');
             });
         });
         $("#siparisler").click(function () {
@@ -848,6 +872,7 @@
                 }
             ]
         });
+
     }
 
     function getCustomers() {
@@ -876,9 +901,9 @@
     function addOrder() {
 
         var order = {};
-        var customer={};
+        var customer = {};
         customer["id"] = $("#siparis_veren").val();
-        order["customer"] =customer;
+        order["customer"] = customer;
         order["orderName"] = $("#orderName").val();
         order["amount"] = $("#amount").val();
         order["specificationsOrders"] = $("#specificationsOrders").val();
@@ -887,8 +912,8 @@
         order["description"] = $("#description").val();
         order["orderDate"] = $("#orderDate").val()
         order["deliveryDate"] = $("#deliveryDate").val();
-        order["orderType"]=$("#siparisCinsi").val();
-        order["orderStatus"]="Beklemede";
+        order["orderType"] = $("#siparisCinsi").val();
+        order["orderStatus"] = "Beklemede";
 
         $.ajax({
             type: "POST",
@@ -899,8 +924,7 @@
             cache: false,
             timeout: 100000,
             success: function (data) {
-                alert("SUCCESS : ", data);
-                getOrders();
+                $('#dataTables-example').DataTable().ajax.reload();
             },
             error: function (e) {
                 alert("ERROR : ", e);
@@ -943,8 +967,7 @@
             cache: false,
             timeout: 100000,
             success: function (data) {
-                alert("SUCCESS : ", data);
-                getOrders();
+                $('#dataTables-example').DataTable().ajax.reload();
             },
             error: function (e) {
                 alert("ERROR : ", e);
@@ -987,29 +1010,65 @@
                 $("#modal-order-price1").text(result.price);
                 $("#modal-order-specificationsOrders").text(result.specificationsOrders);
                 $("#modal-order-orderName").text(result.orderName);
+                $("#modal-order-remainder").text(result.remainder);
 
             }
         });
     }
+    var orderEditId=-1;
 
     function orderEdit(id) {
         $.ajax({
             type: "GET",
             url: "/orders/getOrder/" + id,
             success: function (result) {
-                $("#modal-order-edit-customer").val(result.customer.companyName);
+                orderEditId=id;
+                $("#modal-order-edit-customer").val(result.customer.id);
                 $("#modal-order-edit-deliveryDate").val(result.deliveryDate);
                 $("#modal-order-edit-oderType").val(result.orderType);
                 $("#modal-order-edit-paid").val(result.paid);
                 $("#modal-order-edit-price").val(result.price);
-                $("#modal-order-edit-status").select(result.oderStatus);
+                $("#modal-order-edit-status").val(result.orderStatus);
                 $("#modal-order-edit-description").val(result.description);
             }
         });
 
     }
 
+    function orderUpdate() {
+        var order = {};
+        var customer = {};
+        customer["id"] = $("#modal-order-edit-customer").val();
+        order["customer"] = customer;
+        order["id"] =orderEditId;
+        //order["orderName"] = $("#modal-order-edit-orderName").val();
+        //order["amount"] = $("#modal-order-edit-amount").val();
+        //order["specificationsOrders"] = $("#modal-order-edit-specificationsOrders").val();
+        order["price"] = $("#modal-order-edit-price").val();
+        order["paid"] = $("#modal-order-edit-paid").val();
+        order["description"] = $("#modal-order-edit-description").val();
+        //order["orderDate"] = $("#modal-order-edit-orderDate").val()
+        order["deliveryDate"] = $("#modal-order-edit-deliveryDate").val();
+        //order["orderType"] = $("#modal-order-edit-siparisCinsi").val();
+        order["orderStatus"] = $("#modal-order-edit-status").val();
 
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "/orders/updateOrder",
+            data: JSON.stringify(order),
+            dataType: 'json',
+            cache: false,
+            timeout: 100000,
+            success: function (data) {
+                $('#dataTables-example').DataTable().ajax.reload();
+            },
+            error: function (e) {
+                alert("ERROR : ", e);
+            }
+        });
+
+    }
 </script>
 
 

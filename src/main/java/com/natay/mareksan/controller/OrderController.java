@@ -57,6 +57,11 @@ public class OrderController {
             return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
         }
 
+       // farkli yada null alanları sadece değiştir eklenecek
+
+        //if(currentOder.get().getCustomer().equals(order.getCustomer())&& order.getCustomer().equals("") ){
+            currentOder.get().setCustomer(order.getCustomer());
+        //}
         currentOder.get().setCustomer(order.getCustomer());
         currentOder.get().setAmount(order.getAmount());
         currentOder.get().setDeliveryDate(order.getDeliveryDate());
