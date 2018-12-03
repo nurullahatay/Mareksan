@@ -2,6 +2,7 @@ package com.natay.mareksan.service.impl;
 
 import com.natay.mareksan.model.Customer;
 import com.natay.mareksan.model.Order;
+import com.natay.mareksan.model.OrderStatus;
 import com.natay.mareksan.repository.OrderRepository;
 import com.natay.mareksan.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,4 +50,19 @@ public class OrderServiceImpl implements OrderService {
     public void updateOrder(Order order) {
         orderRepository.save(order);
     }
+
+    @Override
+    public void cancelOrder(Long orderId) {
+        Optional<Order> order = orderRepository.findById(orderId);
+        order.get().setVisibility(false);
+        order.get().setOrderStatus("İptal Edildi");
+        orderRepository.save(order.get());
+    }
+
+    @Override
+    public void deleteOrdersByCustomerId(Long customerId) {
+        orderRepository.deleteOrdersByCustomerId(customerId);
+    }
+
+
 }

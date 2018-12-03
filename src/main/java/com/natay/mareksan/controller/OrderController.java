@@ -5,6 +5,7 @@ import com.natay.mareksan.model.OrderStatus;
 import com.natay.mareksan.model.OrderType;
 import com.natay.mareksan.repository.OrderRepository;
 import com.natay.mareksan.service.OrderService;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +36,14 @@ public class OrderController {
 
     @GetMapping("/all")
     public Set<Order> getOrders() {
-        return orderService.getOrders();
+        Set<Order> orders= new HashSet<>();
+
+        for (Order order : orderService.getOrders()){
+            if (order.isVisibility()){
+                orders.add(order);
+            }
+        }
+        return orders;
     }
 
     @GetMapping("/getOrder/{orderId}")
@@ -59,23 +67,53 @@ public class OrderController {
 
        // farkli yada null alanları sadece değiştir eklenecek
 
-        if(!currentOder.get().getCustomer().equals(order.getCustomer()) || order.getCustomer().equals(null) ){
+        if(!(currentOder.get().getCustomer().equals(order.getCustomer()) || order.getCustomer()==null) ){
             currentOder.get().setCustomer(order.getCustomer());
         }
-        /*if (currentOder.get().getAmount()==order.getAmount() || (order.getAmount()== Integer.) ){
+        if (!(currentOder.get().getAmount()==order.getAmount() || (order.getAmount()== 0)) ){
+            currentOder.get().setAmount(order.getAmount());
+        }
 
-        }*/
-        currentOder.get().setAmount(order.getAmount());
-        currentOder.get().setDeliveryDate(order.getDeliveryDate());
-        currentOder.get().setDescription(order.getDescription());
-        currentOder.get().setOrderDate(order.getOrderDate());
-        currentOder.get().setOrderName(order.getOrderName());
-        currentOder.get().setOrderStatus(order.getOrderStatus());
-        currentOder.get().setOrderType(order.getOrderType());
-        currentOder.get().setPaid(order.getPaid());
-        currentOder.get().setRemainder(order.getRemainder());
-        currentOder.get().setPrice(order.getPrice());
-        currentOder.get().setSpecificationsOrders(order.getSpecificationsOrders());
+        if (!(currentOder.get().getDeliveryDate().equals(order.getDeliveryDate()) || order.getDeliveryDate()==null)){
+            currentOder.get().setDeliveryDate(order.getDeliveryDate());
+        }
+
+        if (!( currentOder.get().getDescription().equals(order.getDescription())|| order.getDescription()==null)){
+            currentOder.get().setDescription(order.getDescription());
+        }
+
+        if (!( currentOder.get().getOrderDate().equals(order.getOrderDate())|| order.getOrderDate()==null)){
+            currentOder.get().setOrderDate(order.getOrderDate());
+        }
+
+        if (!(currentOder.get().getOrderName().equals(order.getOrderName()) || order.getOrderName()==null)){
+            currentOder.get().setOrderName(order.getOrderName());
+        }
+
+        if (!(currentOder.get().getOrderStatus().equals(order.getOrderStatus()) || order.getOrderStatus()==null)){
+            currentOder.get().setOrderStatus(order.getOrderStatus());
+        }
+
+        if (!(currentOder.get().getOrderType().equals(order.getOrderType())|| order.getOrderType()==null)){
+            currentOder.get().setOrderType(order.getOrderType());
+        }
+
+        if (!(currentOder.get().getPaid()==order.getPaid() || order.getPaid()==0)){
+            currentOder.get().setPaid(order.getPaid());
+        }
+
+        if (!(currentOder.get().getRemainder()==order.getRemainder() || order.getRemainder()==0 )){
+            currentOder.get().setRemainder(order.getRemainder());
+
+        }
+
+        if (!(currentOder.get().getPrice()==order.getPrice() || order.getPrice()==0 )){
+            currentOder.get().setPrice(order.getPrice());
+
+        }
+        if (!(currentOder.get().getSpecificationsOrders().equals(order.getSpecificationsOrders()) || order.getSpecificationsOrders()==null)){
+            currentOder.get().setSpecificationsOrders(order.getSpecificationsOrders());
+        }
 
         orderService.updateOrder(currentOder.get());
         return new ResponseEntity<Object>(currentOder, HttpStatus.OK);
@@ -102,6 +140,12 @@ public class OrderController {
         }
 
         return orderTypeSet;
+    }
+
+    @GetMapping("/cancelOrder/{orderId}")
+    public ResponseEntity<Object> cancelOrder(@PathVariable Long orderId){
+        orderService.cancelOrder(orderId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

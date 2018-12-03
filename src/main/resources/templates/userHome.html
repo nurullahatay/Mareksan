@@ -366,18 +366,13 @@
 
                                             <input type="button" class="btn btn-sm btn-primary m-t-n-xs"
                                                    style="float:right; margin:8px;" value="Siparişi Kaydet"
-                                                   onclick="orderUpdate()"/>
-
-                                            <input type="button" class="btn btn-sm btn-primary m-t-n-xs"
-                                                    value="Siparişi Bitir" id="orderFinish"
-                                                    onclick="orderFinished();">
-
+                                                   onclick="updateOrder()"/>
 
                                             <input type="button" class="btn btn-sm btn-danger m-t-n-xs"
                                                    value="Siparişi İptal Et" id="orderCancel2"
-                                                   onclick="orderCancel();">
+                                                   onclick="cancelOrder();">
                                         </div>
-                                        </form>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -634,7 +629,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                       MÜŞTERİLER
+                        MÜŞTERİLER
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -661,6 +656,92 @@
                 <!-- /.panel -->
             </div>
             <!-- /.col-lg-12 -->
+            <div id="modal-customer-edit" class="modal inmodal fade" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>Müşteri Formu</h5>
+
+                                    </div>
+                                    <div class="ibox-content">
+
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group"><label>Firma Adı</label><input
+                                                            type="text"
+                                                            placeholder="Firma Adı"
+                                                            class="form-control required"
+                                                            name="companyName"
+                                                            id="modal-customer-edit-companyName"
+                                                            value="">
+                                                    </div>
+                                                    <div class="form-group"><label>Firma Tel</label><input
+                                                            type="text"
+                                                            placeholder="Firma Tel"
+                                                            class="form-control required"
+                                                            name="companyPhone"
+                                                            id="modal-customer-edit-companyPhone"
+                                                            value="">
+                                                    </div>
+                                                    <div class="form-group"><label>Firma Adres</label><textarea
+                                                            type="text" placeholder="Firma Adres"
+                                                            class="form-control required" name="companyAddress"
+                                                            id="modal-customer-edit-companyAddress" value=""></textarea>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group"><label>Yetkili Ad</label><input
+                                                            type="text"
+                                                            placeholder="Yetkili Ad"
+                                                            class="form-control"
+                                                            name="authorizedName"
+                                                            id="modal-customer-edit-authorizedName"
+                                                            value="">
+                                                    </div>
+                                                    <div class="form-group"><label>Yetkili Tel</label><input
+                                                            type="text"
+                                                            placeholder="Yetkili Tel"
+                                                            class="form-control"
+                                                            name="authorizedPhone"
+                                                            id="modal-customer-edit-authorizedPhone"
+                                                            value="">
+                                                    </div>
+                                                    <div class="form-group"><label>Yetkili E-Posta</label><input
+                                                            type="email" placeholder="Yetkili E-Posta"
+                                                            class="form-control" name="authorizedEMail"
+                                                            id="modal-customer-edit-authorizedEMail" value=""></div>
+                                                    <div class="form-group"><label>Şifre</label><input
+                                                            type="text"
+                                                            placeholder="Şifre"
+                                                            class="form-control"
+                                                            name="password"
+                                                            id="modal-customer-edit-password"
+                                                            value=""></div>
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <input type="button" class="btn btn-sm btn-primary m-t-n-xs"
+                                                           style="float:right; margin:8px;" value="Kaydet"
+                                                           onclick="updateCustomer()"/>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
 
 
@@ -870,7 +951,7 @@
                 "sLengthMenu": "<span>Kaç Kayıt Gösterilsin : </span>_MENU_  ", //label
                 "sZeroRecords": "Eşleşen Kayıt Bulunmadı",
                 "sEmptyTable": "Bu Tabloda Hiç Veri Yok.",
-                "oPaginate": { "sFirst": "İlk", "sLast": "Son", "sNext": "Sonraki", "sPrevious": "Önceki" }, //pagination
+                "oPaginate": {"sFirst": "İlk", "sLast": "Son", "sNext": "Sonraki", "sPrevious": "Önceki"}, //pagination
                 "sLoadingRecords": "Lütfen Bekleyiniz.. Yükleniyor..",
                 "sInfo": "<span style='color:red;font-weight: bold'>Toplam _TOTAL_ adet kayıttan , (_START_ ile _END_) arası gösteriliyor.</span>"
             },
@@ -914,7 +995,7 @@
                 "sLengthMenu": "<span>Kaç Kayıt Gösterilsin : </span>_MENU_  ", //label
                 "sZeroRecords": "Eşleşen Kayıt Bulunmadı",
                 "sEmptyTable": "Bu Tabloda Hiç Veri Yok.",
-                "oPaginate": { "sFirst": "İlk", "sLast": "Son", "sNext": "Sonraki", "sPrevious": "Önceki" }, //pagination
+                "oPaginate": {"sFirst": "İlk", "sLast": "Son", "sNext": "Sonraki", "sPrevious": "Önceki"}, //pagination
                 "sLoadingRecords": "Lütfen Bekleyiniz.. Yükleniyor..",
                 "sInfo": "<span style='color:red;font-weight: bold'>Toplam _TOTAL_ adet kayıttan , (_START_ ile _END_) arası gösteriliyor.</span>"
             },
@@ -930,7 +1011,7 @@
                 {data: 'authorizedEMail'},
                 {
                     render: function (data, type, row) {
-                        return '<a class="data-toggle" data-toggle="data-toggle"> <i class="fa fa-trash-o" onclick="deleteCustomer(' + row["id"] + ')"></i></a>' + ' <a class="data-toggle" data-toggle="data-toggle"> <i class="fa fa-edit" ></i></a>';
+                        return '<a class="data-toggle" data-toggle="data-toggle"> <i class="fa fa-trash-o" onclick="deleteCustomer(' + row["id"] + ')"></i></a>' + '<a data-toggle="modal" href="#modal-customer-edit" alt="Düzenle" title="Düzenle" onclick="customerEdit('+ row["id"] +')"> <i class="fa fa-edit" ></i></a>';
                     }
                 }
             ]
@@ -1048,15 +1129,15 @@
     }
 
     function deleteCustomer(url_id) {
-
         $.ajax({
             type: "DELETE",
             url: '/customers/deleteCustomer/' + url_id,
             cache: false,
             timeout: 100000,
             success: function (data) {
-                alert('SUCCESS : ', data);
-                getCustomers();
+                $('#dataTables-Customer').DataTable().ajax.reload();
+                $('#dataTables-example').DataTable().ajax.reload();
+
             },
             error: function (e) {
                 alert('ERROR : orders and customer foreingkey');
@@ -1086,14 +1167,15 @@
             }
         });
     }
-    var orderEditId=-1;
+
+    var orderEditId = -1;
 
     function orderEdit(id) {
         $.ajax({
             type: "GET",
             url: "/orders/getOrder/" + id,
             success: function (result) {
-                orderEditId=id;
+                orderEditId = id;
                 $("#modal-order-edit-customer").val(result.customer.id);
                 $("#modal-order-edit-deliveryDate").val(result.deliveryDate);
                 $("#modal-order-edit-oderType").val(result.orderType);
@@ -1106,12 +1188,12 @@
 
     }
 
-    function orderUpdate() {
+    function updateOrder() {
         var order = {};
         var customer = {};
         customer["id"] = $("#modal-order-edit-customer").val();
         order["customer"] = customer;
-        order["id"] =orderEditId;
+        order["id"] = orderEditId;
         //order["orderName"] = $("#modal-order-edit-orderName").val();
         //order["amount"] = $("#modal-order-edit-amount").val();
         //order["specificationsOrders"] = $("#modal-order-edit-specificationsOrders").val();
@@ -1133,6 +1215,7 @@
             timeout: 100000,
             success: function (data) {
                 $('#dataTables-example').DataTable().ajax.reload();
+                $("#modal-order-edit").modal('hide');
             },
             error: function (e) {
                 alert("ERROR : ", e);
@@ -1140,6 +1223,78 @@
         });
 
     }
+
+    function cancelOrder() {
+        var id = orderEditId;
+        $.ajax({
+            type: "GET",
+            url: "/orders/cancelOrder/" + id,
+            cache: false,
+            timeout: 100000,
+            success: function (data) {
+                $('#dataTables-example').DataTable().ajax.reload();
+                $("#modal-order-edit").modal('hide');
+            },
+            error: function (e) {
+                alert("ERROR : ", e);
+            }
+        });
+
+    }
+
+    var customerEditId = -1;
+
+    function customerEdit(id) {
+        customerEditId=id;
+        $.ajax({
+            type: "GET",
+            url: "/customers/getCustomer/" + id,
+            success: function (result) {
+                $("#modal-customer-edit-companyName").val(result.companyName);
+                $("#modal-customer-edit-companyPhone").val(result.companyPhone);
+                $("#modal-customer-edit-companyAddress").val(result.companyAddress);
+                $("#modal-customer-edit-authorizedName").val(result.authorizedName);
+                $("#modal-customer-edit-authorizedPhone").val(result.authorizedPhone);
+                $("#modal-customer-edit-authorizedEMail").val(result.authorizedEMail);
+                $("#modal-customer-edit-password").val(result.password);
+
+            }
+        });
+    }
+
+
+    function updateCustomer() {
+        var customer = {};
+        customer["id"] = customerEditId;
+        customer["companyName"] = $("#modal-customer-edit-companyName").val();
+        customer["companyPhone"] = $("#modal-customer-edit-companyPhone").val();
+        customer["companyAddress"] = $("#modal-customer-edit-companyAddress").val();
+        customer["authorizedName"] = $("#modal-customer-edit-authorizedName").val();
+        customer["authorizedPhone"] = $("#modal-customer-edit-authorizedPhone").val();
+        customer["authorizedEMail"] = $("#modal-customer-edit-authorizedEMail").val();
+        customer["password"] = $("#modal-customer-edit-password").val();
+
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "/customers/updateCustomer",
+            data: JSON.stringify(customer),
+            dataType: 'json',
+            cache: false,
+            timeout: 100000,
+            success: function (data) {
+                $('#dataTables-Customer').DataTable().ajax.reload();
+                $('#dataTables-example').DataTable().ajax.reload();
+                $("#modal-customer-edit").modal('hide');
+            },
+            error: function (e) {
+                alert("ERROR : ", e);
+            }
+        });
+
+
+    }
+
 </script>
 
 </body>

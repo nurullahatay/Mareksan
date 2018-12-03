@@ -2,6 +2,7 @@ package com.natay.mareksan.service.impl;
 
 import com.natay.mareksan.model.Customer;
 import com.natay.mareksan.repository.CustomerRepository;
+import com.natay.mareksan.repository.OrderRepository;
 import com.natay.mareksan.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
+
 
     @Override
     public void saveCustomer(Customer customer) {
@@ -51,6 +53,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void deleteById(Long customerId) {
+
         customerRepository.deleteById(customerId);
     }
 

@@ -21,6 +21,7 @@ public class Order {
     private double paid;
     private double remainder;
     private String description;
+    private boolean visibility;
 
     //@Enumerated(EnumType.STRING)
     private String orderStatus;
@@ -37,7 +38,7 @@ public class Order {
     }
 
 
-    public Order(String orderName, String orderDate, String deliveryDate, int amount, String specificationsOrders, double price, double paid, double remainder, String description, String orderStatus, String orderType, Customer customer) {
+    public Order(String orderName, String orderDate, String deliveryDate, int amount, String specificationsOrders, double price, double paid, double remainder, String description, String orderStatus, String orderType, Customer customer , boolean visibility) {
         this.orderName = orderName;
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
@@ -50,6 +51,7 @@ public class Order {
         this.orderStatus = orderStatus;
         this.orderType = orderType;
         this.customer = customer;
+        this.visibility = visibility;
     }
 
     public Long getId() {
@@ -154,5 +156,13 @@ public class Order {
 
     public void setDeliveryDate(String deliveryDate) {
         this.deliveryDate = deliveryDate;
+    }
+
+    public boolean isVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(boolean visibility) {
+        this.visibility = visibility;
     }
 }
