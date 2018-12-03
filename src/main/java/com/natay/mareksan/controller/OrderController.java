@@ -25,9 +25,6 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @Autowired
-    private OrderRepository orderRepository;
-
     @PostMapping("/saveOrder")
     public ResponseEntity<Object> saveOrder(@Valid @RequestBody Order order) {
         orderService.saveOrder(order);
@@ -59,7 +56,7 @@ public class OrderController {
 
     @PostMapping("/updateOrder")
     public ResponseEntity<Object> updateOrder(@RequestBody Order order) {
-        Optional<Order> currentOder = orderRepository.findById(order.getId());
+        Optional<Order> currentOder = orderService.getOrderById(order.getId());
 
         if (currentOder == null) {
             return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
