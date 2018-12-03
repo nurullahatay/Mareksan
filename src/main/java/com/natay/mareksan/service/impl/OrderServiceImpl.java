@@ -25,6 +25,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void saveOrder(Order order) {
+        order.setVisibility(true);
         orderRepository.save(order);
         System.out.println("ORDER SAVING");
     }
@@ -49,14 +50,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void updateOrder(Order order) {
         orderRepository.save(order);
-    }
-
-    @Override
-    public void cancelOrder(Long orderId) {
-        Optional<Order> order = orderRepository.findById(orderId);
-        order.get().setVisibility(false);
-        order.get().setOrderStatus("İptal Edildi");
-        orderRepository.save(order.get());
     }
 
     @Override

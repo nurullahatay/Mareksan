@@ -138,11 +138,4 @@ public class OrderController {
 
         return orderTypeSet;
     }
-
-    @GetMapping("/cancelOrder/{orderId}")
-    public ResponseEntity<Object> cancelOrder(@PathVariable Long orderId){
-        orderService.cancelOrder(orderId);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
 }

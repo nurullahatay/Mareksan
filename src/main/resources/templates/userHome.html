@@ -43,7 +43,6 @@
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <![endif]-->
-
 </head>
 
 <body>
@@ -367,10 +366,6 @@
                                             <input type="button" class="btn btn-sm btn-primary m-t-n-xs"
                                                    style="float:right; margin:8px;" value="Siparişi Kaydet"
                                                    onclick="updateOrder()"/>
-
-                                            <input type="button" class="btn btn-sm btn-danger m-t-n-xs"
-                                                   value="Siparişi İptal Et" id="orderCancel2"
-                                                   onclick="cancelOrder();">
                                         </div>
                                     </form>
                                 </div>
@@ -776,6 +771,8 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="../dist/js/sb-admin-2.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 
@@ -1011,7 +1008,7 @@
                 {data: 'authorizedEMail'},
                 {
                     render: function (data, type, row) {
-                        return '<a class="data-toggle" data-toggle="data-toggle"> <i class="fa fa-trash-o" onclick="deleteCustomer(' + row["id"] + ')"></i></a>' + '<a data-toggle="modal" href="#modal-customer-edit" alt="Düzenle" title="Düzenle" onclick="customerEdit('+ row["id"] +')"> <i class="fa fa-edit" ></i></a>';
+                        return '<a class="data-toggle" data-toggle="data-toggle"> <i class="fa fa-trash-o" onclick="deleteCustomer(' + row["id"] + ')"></i></a>' + '<a data-toggle="modal" href="#modal-customer-edit" alt="Düzenle" title="Düzenle" onclick="customerEdit(' + row["id"] + ')"> <i class="fa fa-edit" ></i></a>';
                     }
                 }
             ]
@@ -1031,7 +1028,7 @@
         order["paid"] = $("#paid").val();
         order["remainder"] = $("#remainder").val();
         order["description"] = $("#description").val();
-        order["orderDate"] = $("#orderDate").val()
+        order["orderDate"] = $("#orderDate").val();
         order["deliveryDate"] = $("#deliveryDate").val();
         order["orderType"] = $("#siparisCinsi").val();
         order["orderStatus"] = "Beklemede";
@@ -1045,12 +1042,23 @@
             cache: false,
             timeout: 100000,
             success: function (data) {
-                alert("SİPARİŞ KAYIT EDİLDİ.");
+                swal({
+                    position: 'top-end',
+                    type: 'success',
+                    title: 'Sipariş kaydedildi.',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
                 $('#dataTables-example').DataTable().ajax.reload();
                 deleteOrderAddAreas();
             },
             error: function (e) {
-                alert("ERROR : ", e);
+                swal({
+                    type: 'error',
+                    title: 'Oops...',
+                    text: 'Sipariş kaydedilmedi!',
+                    footer: e,
+                })
             }
         });
     }
@@ -1074,15 +1082,25 @@
             cache: false,
             timeout: 100000,
             success: function (data) {
-                alert("MÜŞTERİ KAYIT EDİLDİ.");
+                swal({
+                    position: 'top-end',
+                    type: 'success',
+                    title: 'Müşteri kaydedildi.',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
                 deleteCustomerAddAreas();
                 $('#dataTables-Customer').DataTable().ajax.reload();
                 getCustomerDropDownList();
 
             },
             error: function (e) {
-                alert("ERROR : ", e);
-            }
+                swal({
+                    type: 'error',
+                    title: 'Oops...',
+                    text: 'Müşteri kaydedilmedi!',
+                    footer: e,
+                })            }
         });
     }
 
@@ -1113,37 +1131,78 @@
     }
 
     function deleteOrder(url_id) {
-        $.ajax({
-            type: "DELETE",
-            url: '/orders/deleteOrder/' + url_id,
-            cache: false,
-            timeout: 100000,
-            success: function (data) {
-                $('#dataTables-example').DataTable().ajax.reload();
-            },
-            error: function (e) {
-                alert("ERROR : ", e);
-            }
-        });
+        swal({
+            title: 'Siparişi silmek istediğinizden emin misiniz?',
+            text: "Bunu geri alamayacaksınız!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+            $.ajax({
+                type: "DELETE",
+                url: '/orders/deleteOrder/' + url_id,
+                cache: false,
+                timeout: 100000,
+                success: function (data) {
+                    $('#dataTables-example').DataTable().ajax.reload();
+                    swal(
+                        'Silindi!',
+                        'Sipariş silindi.',
+                        'success'
+                    )
+                },
+                error: function (e) {
+                    swal({
+                        type: 'error',
+                        title: 'Oops...',
+                        text: 'Sipariş silinemedi!'
+                    })
+                }
+            });
 
+
+        }
+    })
     }
 
     function deleteCustomer(url_id) {
-        $.ajax({
-            type: "DELETE",
-            url: '/customers/deleteCustomer/' + url_id,
-            cache: false,
-            timeout: 100000,
-            success: function (data) {
-                $('#dataTables-Customer').DataTable().ajax.reload();
-                $('#dataTables-example').DataTable().ajax.reload();
 
-            },
-            error: function (e) {
-                alert('ERROR : orders and customer foreingkey');
-            }
-        });
-
+        swal({
+            title: 'Siparişi silmek istediğinizden emin misiniz?',
+            text: "Bunu geri alamayacaksınız!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+            $.ajax({
+                type: "DELETE",
+                url: '/customers/deleteCustomer/' + url_id,
+                cache: false,
+                timeout: 100000,
+                success: function (data) {
+                    $('#dataTables-Customer').DataTable().ajax.reload();
+                    $('#dataTables-example').DataTable().ajax.reload();
+                    swal(
+                        'Silindi!',
+                        'Sipariş silindi.',
+                        'success'
+                    )
+                },
+                error: function (e) {
+                    swal({
+                        type: 'error',
+                        title: 'Oops...',
+                        text: 'Müşteri silinmedi!'
+                    })                }
+            });
+        }
+    })
     }
 
     function orderView(id) {
@@ -1216,28 +1275,21 @@
             success: function (data) {
                 $('#dataTables-example').DataTable().ajax.reload();
                 $("#modal-order-edit").modal('hide');
+                swal({
+                    position: 'top-end',
+                    type: 'success',
+                    title: 'Sipariş kaydedildi.',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             },
             error: function (e) {
-                alert("ERROR : ", e);
-            }
-        });
-
-    }
-
-    function cancelOrder() {
-        var id = orderEditId;
-        $.ajax({
-            type: "GET",
-            url: "/orders/cancelOrder/" + id,
-            cache: false,
-            timeout: 100000,
-            success: function (data) {
-                $('#dataTables-example').DataTable().ajax.reload();
-                $("#modal-order-edit").modal('hide');
-            },
-            error: function (e) {
-                alert("ERROR : ", e);
-            }
+                swal({
+                    type: 'error',
+                    title: 'Oops...',
+                    text: 'Sipariş kaydedilmedi!',
+                    footer: e,
+                })             }
         });
 
     }
@@ -1245,7 +1297,7 @@
     var customerEditId = -1;
 
     function customerEdit(id) {
-        customerEditId=id;
+        customerEditId = id;
         $.ajax({
             type: "GET",
             url: "/customers/getCustomer/" + id,
@@ -1261,7 +1313,6 @@
             }
         });
     }
-
 
     function updateCustomer() {
         var customer = {};
@@ -1286,10 +1337,21 @@
                 $('#dataTables-Customer').DataTable().ajax.reload();
                 $('#dataTables-example').DataTable().ajax.reload();
                 $("#modal-customer-edit").modal('hide');
+                swal({
+                    position: 'top-end',
+                    type: 'success',
+                    title: 'Müşteri kaydedildi.',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             },
             error: function (e) {
-                alert("ERROR : ", e);
-            }
+                swal({
+                    type: 'error',
+                    title: 'Oops...',
+                    text: 'Müşteri kaydedilmedi!',
+                    footer: e,
+                })             }
         });
 
 
