@@ -26,6 +26,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void saveOrder(Order order) {
         order.setVisibility(true);
+        order.setRemainder(order.getPrice()-order.getPaid());
         orderRepository.save(order);
         System.out.println("ORDER SAVING");
     }

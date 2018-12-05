@@ -99,11 +99,6 @@ public class OrderController {
             currentOder.get().setPaid(order.getPaid());
         }
 
-        if (!(currentOder.get().getRemainder()==order.getRemainder() || order.getRemainder()==0 )){
-            currentOder.get().setRemainder(order.getRemainder());
-
-        }
-
         if (!(currentOder.get().getPrice()==order.getPrice() || order.getPrice()==0 )){
             currentOder.get().setPrice(order.getPrice());
 
@@ -112,6 +107,7 @@ public class OrderController {
             currentOder.get().setSpecificationsOrders(order.getSpecificationsOrders());
         }
 
+        currentOder.get().setRemainder(currentOder.get().getPrice()-currentOder.get().getPaid());
         orderService.updateOrder(currentOder.get());
         return new ResponseEntity<Object>(currentOder, HttpStatus.OK);
     }
