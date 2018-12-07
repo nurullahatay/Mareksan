@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Mareksan">
+    <meta name="author" content="Nurullah Atay">
+    <link rel="icon" href="../../favicon.ico"/>
+
+    <title>Mareksan Yönetim Paneli</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
+    <link href="../vendor/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <![endif]-->
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" id="navbar-home">Mareksan Sipariş Takip Sistemi</a>
+        </div>
+        <!-- /.navbar-header -->
+
+        <ul class="nav navbar-top-links navbar-right">
+
+            <li class="data-toggle">
+                <a class="data-toggle" data-toggle="data-toggle" id="home">
+                    <i class="fa fa-home "></i>
+                </a>
+            </li>
+
+
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="/"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="sidebar-search">
+                        <div class="input-group custom-search-form">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Sipariş Yönetimi<span
+                                class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a id="siparisler">Siparişler</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a><i class="fa fa-bar-chart-o fa-fw"></i>Ayarlar<span class="fa arrow"></span></a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+    </nav>
+    <div id="page-wrapper">
+        <div id="siparis_listesi" class="row" style="padding-top: 30px;">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Siparis Listesi
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <table width="100%" class="table table-striped table-bordered table-hover"
+                               id="dataTables-example">
+                            <thead>
+                            <tr>
+                                <th>Şipariş No</th>
+                                <th>Şipariş Adı</th>
+                                <th>Şipariş Tarihi</th>
+                                <th>Teslim Tarihi</th>
+                                <th>Miktar</th>
+                                <th>Toplam Tutar</th>
+                                <th>Alınan Tutar</th>
+                                <th>Kalan Tutar</th>
+                                <th>Sipariş Tipi</th>
+                                <th>Sipariş ozellikleri</th>
+                                <th>Durum</th>
+                                <th>Eylemler</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+
+            <div id="modal-order" class="modal inmodal fade" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content  animated" id="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span
+                                    aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title">Sipariş Detayı</h4>
+                        </div>
+                        <div class="modal-body" id="modal-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="ibox float-e-margins">
+                                        <div class="ibox-title">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div style="padding:5px; float:left;"><b>Müşteri:</b></div>
+                                                    <label id="modal-order-customer"
+                                                           style="padding:5px; float:left;"></label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div style="padding:5px; float:left;"><b>Toplam Tutar:</b></div>
+                                                    <label id="modal-order-price"
+                                                           style="padding:5px; float:left;"></label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div style="padding:5px; float:left;"><b>Sipariş Tarihi:</b></div>
+                                                    <label id="modal-order-orderDate"
+                                                           style="padding:5px; float:left;"></label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div style="padding:5px; float:left;"><b>Telefon No:</b></div>
+                                                    <label id="modal-order-companyTel"
+                                                           style="padding:5px; float:left;"></label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div style="padding:5px; float:left;"><b>Ödenen Tutar:</b></div>
+                                                    <label id="modal-order-paid"
+                                                           style="padding:5px; float:left;"></label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div style="padding:5px; float: left"><b>Teslim Tarihi:</b></div>
+                                                    <label id="modal-order-deliveryDate"
+                                                           style="padding:5px; float:left;"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ibox-content">
+                                            <table class="table table-hover no-margins">
+                                                <thead>
+                                                <tr>
+                                                    <th>Sipariş Cinsi</th>
+                                                    <th>Sipariş Adı</th>
+                                                    <th>Miktar</th>
+                                                    <th>Fiyat</th>
+                                                    <th>Kalan</th>
+                                                    <th>Sipariş Özellikleri</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr class="gradeX">
+                                                    <td>
+                                                        <label id="modal-order-oderType"></label>
+                                                    </td>
+                                                    <td>
+                                                        <label id="modal-order-orderName"></label>
+                                                    </td>
+                                                    <td>
+                                                        <label id="modal-order-amount"></label>
+                                                    </td>
+                                                    <td>
+                                                        <label id="modal-order-price1"></label>
+                                                    </td>
+                                                    <td>
+                                                        <label id="modal-order-remainder"></label>
+                                                    </td>
+                                                    <td>
+                                                        <label id="modal-order-specificationsOrders"></label>
+                                                    </td>
+
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-header">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div hidden>
+                <p id="customerId" th:text="${customer.id}"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="../vendor/metisMenu/metisMenu.min.js"></script>
+<script src="../vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+<script src="../vendor/bootstrap-datepicker/locales/bootstrap-datepicker.tr.min.js"></script>
+
+<!-- Morris Charts JavaScript -->
+<script src="../vendor/raphael/raphael.min.js"></script>
+<script src="../vendor/morrisjs/morris.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="../dist/js/sb-admin-2.js"></script>
+
+<!-- DataTables JavaScript -->
+<script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
+<script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+<script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="../dist/js/sb-admin-2.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+
+<script>
+
+
+    $("#siparis_listesi").hide();
+
+
+    function homeButtonClick() {
+        $("#home").click(function () {
+            $("#siparis_listesi").show();
+        });
+
+        $("#navbar-home").click(function () {
+            $("#siparis_listesi").show();
+        });
+    }
+
+
+    function siparislerClick() {
+        $.getJSON("/orders/orderStatus", function (result) {
+            $.each(result, function (i, orderStatus) {
+                $("#modal-order-edit-status").append('<option id="siparis_durumu" value="' + orderStatus + '">' + orderStatus + '</option');
+            });
+        });
+        $("#siparisler").click(function () {
+            $("#giris").hide();
+            $("#siparis_listesi").show();
+            $("#siparis_formu").hide();
+            $("#müsteri_listeleme").hide();
+            $("#müsteri_ekleme").hide();
+        });
+
+    }
+
+
+    $(document).ready(function () {
+
+        $("#giris").show();
+        $("#siparis_listesi").show();
+
+        homeButtonClick();
+        siparislerClick();
+        getOrders();
+    });
+
+    function getOrders() {
+        var id = $("#customerId").text();
+        $('#dataTables-example').DataTable({
+            responsive: true,
+            "bJQueryUI": false,
+            "bAutoWidth": false,
+            "search": {
+                "caseInsensitive": true
+            },
+            "oLanguage": {
+                "sSearch": "<span style='color:red;font-weight: bold'>Arama: </span> _INPUT_", //search
+                "sLengthMenu": "<span>Kaç Kayıt Gösterilsin : </span>_MENU_  ", //label
+                "sZeroRecords": "Eşleşen Kayıt Bulunmadı",
+                "sEmptyTable": "Bu Tabloda Hiç Veri Yok.",
+                "oPaginate": {"sFirst": "İlk", "sLast": "Son", "sNext": "Sonraki", "sPrevious": "Önceki"}, //pagination
+                "sLoadingRecords": "Lütfen Bekleyiniz.. Yükleniyor..",
+                "sInfo": "<span style='color:red;font-weight: bold'>Toplam _TOTAL_ adet kayıttan , (_START_ ile _END_) arası gösteriliyor.</span>"
+            },
+            ajax: {
+                url: '/orders/getOrdersByCustomerId/'+id ,
+                dataSrc: ''
+            },
+            columns: [
+                {data: 'id'},
+                {data: 'orderName'},
+                {data: 'orderDate'},
+                {data: 'deliveryDate'},
+                {data: 'amount'},
+                {data: 'price'},
+                {data: 'paid'},
+                {data: 'remainder'},
+                {data: 'orderType'},
+                {data: 'specificationsOrders'},
+                {data: 'orderStatus'},
+                {
+                    render: function (data, type, row) {
+                        return ' <a data-toggle="modal" href="#modal-order" alt="Göster" title="Göster" onclick="orderView(' + row["id"] + ')"> <i class="fa fa-eye "></i> </a>';
+                    }
+                }
+            ]
+        });
+
+    }
+
+    function orderView(id) {
+        $.ajax({
+            type: "GET",
+            url: "/orders/getOrder/" + id,
+            success: function (result) {
+                $("#modal-order-amount").text(result.amount);
+                $("#modal-order-companyTel").text(result.customer.companyPhone);
+                $("#modal-order-customer").text(result.customer.companyName);
+                $("#modal-order-deliveryDate").text(result.deliveryDate);
+                $("#modal-order-oderType").text(result.orderType);
+                $("#modal-order-orderDate").text(result.orderDate);
+                $("#modal-order-paid").text(result.paid);
+                $("#modal-order-price").text(result.price);
+                $("#modal-order-price1").text(result.price);
+                $("#modal-order-specificationsOrders").text(result.specificationsOrders);
+                $("#modal-order-orderName").text(result.orderName);
+                $("#modal-order-remainder").text(result.remainder);
+
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

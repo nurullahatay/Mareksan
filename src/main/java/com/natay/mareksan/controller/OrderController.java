@@ -48,6 +48,18 @@ public class OrderController {
         return orderService.getOrderById(Long.valueOf(orderId));
     }
 
+    @GetMapping("/getOrdersByCustomerId/{customerId}")
+    public Set<Order> getOrdersByCustomerId(@PathVariable Long customerId) {
+        Set<Order> orders= new HashSet<>();
+        for (Order order : orderService.getOrdersByCustomerId(customerId)){
+            if (order.isVisibility()){
+                orders.add(order);
+            }
+        }
+        return orders;
+    }
+
+
     @DeleteMapping("/deleteOrder/{orderId}")
     public ResponseEntity<Object> deleteById(@PathVariable Long orderId) {
         orderService.deleteById(orderId);

@@ -17,16 +17,16 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/")
+    @RequestMapping("/admin")
     public String login(Model model) {
         model.addAttribute("datetime", new Date());
         model.addAttribute("user", new User());
         model.addAttribute("errorMessage", false);
 
-        return "userLogin";
+        return "/admin/userLogin";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/admin/login")
     public String loginUser(@ModelAttribute User user, Model model) {
 
         user = userService.getUserByEmailAndPassword(user.getEmail(), user.getPassword());
@@ -34,10 +34,10 @@ public class LoginController {
             model.addAttribute("datetime", new Date());
             model.addAttribute("user", new User());
             model.addAttribute("errorMessage", true);
-            return "userLogin";
+            return "/admin/userLogin";
         }
 
         model.addAttribute("user", user);
-        return "userHome";
+        return "/admin/userHome";
     }
 }

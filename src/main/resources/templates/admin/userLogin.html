@@ -46,7 +46,7 @@
             Email yada şifre yanlış. Bilgilerinizi kontrol edip tekrar deneyin!
         </div>
 
-        <form  id="login" action="#"  th:action="@{/login}" method="post" th:object="${user}">
+        <form  id="login" action="#"  th:action="@{/admin/login}" method="post" th:object="${user}">
             <div class="form-group">
                 <label for="exampleInputEmail1">Email adresi:</label>
                 <input  th:field="*{email}" type="email" class="form-control" required id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Adresinizi Girin">

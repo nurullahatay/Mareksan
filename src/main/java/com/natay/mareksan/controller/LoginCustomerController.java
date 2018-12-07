@@ -1,7 +1,6 @@
 package com.natay.mareksan.controller;
 
 import com.natay.mareksan.model.Customer;
-import com.natay.mareksan.model.User;
 import com.natay.mareksan.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,16 +17,16 @@ public class LoginCustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @RequestMapping("/customer")
+    @RequestMapping("/")
     public String login(Model model) {
         model.addAttribute("datetime", new Date());
         model.addAttribute("customer", new Customer());
         model.addAttribute("errorMessage", false);
 
-        return "customerLogin";
+        return "/customer/customerLogin";
     }
 
-    @PostMapping("/loginCustomer")
+    @PostMapping("/customer/loginCustomer")
     public String loginCustomer(@ModelAttribute Customer customer, Model model) {
 
         customer = customerService.findCustomerByAuthorizedEMailAndPassword(customer.getAuthorizedEMail(), customer.getPassword());
@@ -36,10 +35,10 @@ public class LoginCustomerController {
             model.addAttribute("datetime", new Date());
             model.addAttribute("customer", new Customer());
             model.addAttribute("errorMessage", true);
-            return "customerLogin";
+            return "/customer/customerLogin";
         }
 
         model.addAttribute("customer", customer);
-        return "customerHome";
+        return "/customer/customerHome";
     }
 }
