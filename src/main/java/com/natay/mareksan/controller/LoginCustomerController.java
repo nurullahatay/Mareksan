@@ -26,7 +26,7 @@ public class LoginCustomerController {
         return "/customer/customerLogin";
     }
 
-    @PostMapping("/customer/loginCustomer")
+    @PostMapping("/customer/customerLogin")
     public String loginCustomer(@ModelAttribute Customer customer, Model model) {
 
         customer = customerService.findCustomerByAuthorizedEMailAndPassword(customer.getAuthorizedEMail(), customer.getPassword());

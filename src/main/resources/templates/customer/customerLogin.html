@@ -63,9 +63,9 @@
             Email yada şifre yanlış. Bilgilerinizi kontrol edip tekrar deneyin!
         </div>
 
-        <form  id="loginCustomer" action="#"  th:action="@{/customer/loginCustomer}" method="post" th:object="${customer}">
+        <form  id="loginCustomer" action="#"  th:action="@{/customer/customerLogin}" method="post" th:object="${customer}">
             <div class="form-group">
-                <label for="exampleInputEmail1">Telefon Numarası:</label>
+                <label for="exampleInputEmail1">Email Adresi:</label>
                 <input  th:field="*{authorizedEMail}" type="email" class="form-control" required id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Adresinizi Girin">
             </div>
             <div class="form-group">
