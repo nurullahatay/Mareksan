@@ -16,7 +16,7 @@ import java.util.Date;
 @Component
 public class InitialData implements ApplicationListener<ContextRefreshedEvent> {
 
-    @Autowired
+  /*  @Autowired
     private UserService userService;
 
     @Autowired
@@ -24,13 +24,13 @@ public class InitialData implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     private CustomerService customerService;
-
+*/
     // Implemente edilen ApplicationListener interface'i , spring context ayaga kalktıgında cagrılan bir arayüzdür.
     // alttaki onApplicationEvent methodunu data eklemek için kullanıyoruz.
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
 
-        User user = new User("Nurullah","Atay", "123","5355422108","nataymachine@gmail.com");
+     /*   User user = new User("Nurullah","Atay", "123","5355422108","nataymachine@gmail.com");
         User user1 = new User("Ramazan","Demir", "123","5308711257","rdemir057@gmail.com");
         userService.saveUser(user);
         userService.saveUser(user1);
@@ -64,7 +64,7 @@ public class InitialData implements ApplicationListener<ContextRefreshedEvent> {
         orderService.saveOrder(order1);
         orderService.saveOrder(order2);
         orderService.saveOrder(order3);
-
+*/
     }
 }
 
