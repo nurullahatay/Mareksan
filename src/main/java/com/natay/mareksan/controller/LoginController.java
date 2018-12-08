@@ -2,6 +2,8 @@ package com.natay.mareksan.controller;
 
 import com.natay.mareksan.model.User;
 import com.natay.mareksan.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +24,6 @@ public class LoginController {
         model.addAttribute("datetime", new Date());
         model.addAttribute("user", new User());
         model.addAttribute("errorMessage", false);
-
         return "/admin/userLogin";
     }
 

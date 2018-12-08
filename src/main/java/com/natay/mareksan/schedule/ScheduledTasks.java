@@ -12,15 +12,23 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static org.springframework.http.HttpHeaders.USER_AGENT;
+
 @Component
 public class ScheduledTasks {
 
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 5000*60*5)
     public void requestMareksan() throws IOException {
-        URL url = new URL("https://mareksan.herokuapp.com");
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
+        sendGET();
     }
+
+    private static void sendGET() throws IOException {
+        URL obj = new URL("https://mareksan.herokuapp.com");
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty("User-Agent", USER_AGENT);
+        int responseCode = con.getResponseCode();
+    }
+
+
 }

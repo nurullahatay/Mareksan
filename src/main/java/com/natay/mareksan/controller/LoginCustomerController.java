@@ -25,10 +25,10 @@ public class LoginCustomerController {
 
     @RequestMapping("/")
     public String login(Model model) {
+        log.info("--------------->request mareksan");
         model.addAttribute("datetime", new Date());
         model.addAttribute("customer", new Customer());
         model.addAttribute("errorMessage", false);
-        log.info("--------------->request mareksan");
         return "/customer/customerLogin";
     }
 
