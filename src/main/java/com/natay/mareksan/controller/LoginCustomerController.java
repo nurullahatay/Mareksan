@@ -23,7 +23,7 @@ public class LoginCustomerController {
         model.addAttribute("customer", new Customer());
         model.addAttribute("errorMessage", false);
 
-        return "/customer/customerLogin";
+        return "customer/customerLogin";
     }
 
     @PostMapping("/customer/loginCustomer")
