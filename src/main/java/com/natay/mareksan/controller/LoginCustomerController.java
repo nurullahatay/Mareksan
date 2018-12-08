@@ -1,7 +1,10 @@
 package com.natay.mareksan.controller;
 
 import com.natay.mareksan.model.Customer;
+import com.natay.mareksan.schedule.ScheduledTasks;
 import com.natay.mareksan.service.CustomerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +17,9 @@ import java.util.Date;
 @Controller
 public class LoginCustomerController {
 
+    private static final Logger log = LoggerFactory.getLogger(LoginCustomerController.class);
+
+
     @Autowired
     private CustomerService customerService;
 
@@ -22,7 +28,7 @@ public class LoginCustomerController {
         model.addAttribute("datetime", new Date());
         model.addAttribute("customer", new Customer());
         model.addAttribute("errorMessage", false);
-
+        log.info("--------------->request mareksan");
         return "/customer/customerLogin";
     }
 
