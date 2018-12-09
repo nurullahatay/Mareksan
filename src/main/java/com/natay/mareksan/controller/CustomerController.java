@@ -25,6 +25,7 @@ public class CustomerController {
 
     @PostMapping("/saveCustomer")
     public ResponseEntity<Object> saveCustomer(@Valid @RequestBody Customer customer) {
+        System.out.println(customer.getCompanyName());
         customerService.saveCustomer(customer);
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
