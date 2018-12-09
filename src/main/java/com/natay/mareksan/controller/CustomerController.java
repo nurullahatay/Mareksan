@@ -4,6 +4,8 @@ package com.natay.mareksan.controller;
 import com.natay.mareksan.model.Customer;
 import com.natay.mareksan.service.CustomerService;
 import com.natay.mareksan.service.OrderService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +25,11 @@ public class CustomerController {
     @Autowired
     private OrderService orderService;
 
+    private static final Logger log = LoggerFactory.getLogger(CustomerController.class);
+
     @PostMapping("/saveCustomer")
     public ResponseEntity<Object> saveCustomer(@Valid @RequestBody Customer customer) {
-        System.out.println(customer.getCompanyName());
+        log.info("--------------->"+customer.getCompanyName());
         customerService.saveCustomer(customer);
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
