@@ -20,7 +20,7 @@ public class LoginCustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @RequestMapping(value="/customerLogin", method = RequestMethod.GET)
+    @RequestMapping(value={"/customerLogin","/"}, method = RequestMethod.GET)
     public ModelAndView login(){
         ModelAndView modelAndView = new ModelAndView();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
