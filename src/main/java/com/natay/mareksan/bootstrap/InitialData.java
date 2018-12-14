@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class InitialData implements ApplicationListener<ContextRefreshedEvent> {
 
-    @Autowired
+   /* @Autowired
     private OrderService orderService;
 
     @Autowired
@@ -24,12 +24,12 @@ public class InitialData implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
+*/
     // Implemente edilen ApplicationListener interface'i , spring context ayaga kalktıgında cagrılan bir arayüzdür.
     // alttaki onApplicationEvent methodunu data eklemek için kullanıyoruz.
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-
+/*
       roleRepository.save(new Role(1,"ADMIN"));
       roleRepository.save(new Role(2,"CUSTOMER"));
 
@@ -59,7 +59,7 @@ public class InitialData implements ApplicationListener<ContextRefreshedEvent> {
       orderService.saveOrder(order1);
       orderService.saveOrder(order2);
       orderService.saveOrder(order3);
-
+*/
     }
 }
 
