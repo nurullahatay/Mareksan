@@ -26,11 +26,11 @@ public class LoginCustomerController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
         if (roles.contains("ADMIN")) {
-            modelAndView.setViewName("/admin/userHome");
+            modelAndView.setViewName("admin/userHome");
         }else  if (roles.contains("CUSTOMER")){
-            modelAndView.setViewName("/customer/customerHome");
+            modelAndView.setViewName("customer/customerHome");
         }else {
-            modelAndView.setViewName("/customerLogin");
+            modelAndView.setViewName("customerLogin");
         }
         return modelAndView;
     }
@@ -44,7 +44,7 @@ public class LoginCustomerController {
         Customer customer = customerService.findCustomerByAuthorizedEMail(auth.getName());
         modelAndView.addObject("userName", "Welcome " + customer.getAuthorizedName() + " " + customer.getAuthorizedPhone() + " (" + customer.getAuthorizedEMail() + ")");
         modelAndView.addObject("adminMessage","Content Available Only for Users with Customer Role");
-        modelAndView.setViewName("/customer/customerHome");
+        modelAndView.setViewName("customer/customerHome");
         return modelAndView;
     }
 
@@ -55,14 +55,14 @@ public class LoginCustomerController {
         Customer customer = customerService.findCustomerByAuthorizedEMail(auth.getName());
         modelAndView.addObject("userName", "Welcome " + customer.getAuthorizedName() + " " + customer.getAuthorizedPhone() + " (" + customer.getAuthorizedEMail() + ")");
         modelAndView.addObject("adminMessage","Content Available Only for Users with Customer Role");
-        modelAndView.setViewName("/admin/userHome");
+        modelAndView.setViewName("admin/userHome");
         return modelAndView;
     }
 
     @RequestMapping(value={"/access_denied"}, method = RequestMethod.GET)
     public ModelAndView access_denied(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/access_denied");
+        modelAndView.setViewName("access_denied");
         return modelAndView;
     }
 }
