@@ -9,8 +9,11 @@ import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -20,6 +23,7 @@ import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/orders")
+@PreAuthorize("hasAuthority('CUSTOMER') or hasAuthority('ADMIN')")
 public class OrderController {
 
     @Autowired
@@ -58,7 +62,6 @@ public class OrderController {
         }
         return orders;
     }
-
 
     @DeleteMapping("/deleteOrder/{orderId}")
     public ResponseEntity<Object> deleteById(@PathVariable Long orderId) {

@@ -10,10 +10,11 @@ import java.util.Set;
  */
 public interface CustomerService {
     void saveCustomer(Customer customer);
+    void saveAdmin(Customer customer);
     Set<Customer> getCustomers();
     Customer findByCompanyName(String companyName);
     Optional<Customer> getCustomerById(Long customerId);
-    Customer findCustomerByAuthorizedEMailAndPassword(String authorizedEMail, String password);
+    Customer findCustomerByAuthorizedEMail(String authorizedEMail);
     void deleteById(Long customerId);
     void updateCustomer(Customer customer);
 }

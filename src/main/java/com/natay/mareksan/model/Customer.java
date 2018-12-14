@@ -12,24 +12,36 @@ import java.util.Set;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="customer_id")
     private Long id;
     private String companyName;
     private String companyPhone;
     private String companyAddress;
     private String authorizedName;
     private String authorizedPhone;
+
+    @Column(name = "authorizedEMail")
     private String authorizedEMail;
     private String password;
+
+    @Column(name = "active")
+    private int active;
+
 
     @OneToMany(mappedBy = "customer")
     @JsonIgnoreProperties("customer")
     @JsonIgnore
     private Set<Order> orders = new HashSet<>();
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "customer_role", joinColumns = @JoinColumn(name = "customer_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
+
+
     public Customer() {
     }
 
-    public Customer(String companyName, String companyPhone, String companyAddress, String authorizedName, String authorizedPhone, String authorizedEMail, String password) {
+    public Customer(String companyName, String companyPhone, String companyAddress, String authorizedName, String authorizedPhone, String authorizedEMail, String password, int active) {
         this.companyName = companyName;
         this.companyPhone = companyPhone;
         this.companyAddress = companyAddress;
@@ -37,7 +49,25 @@ public class Customer {
         this.authorizedPhone = authorizedPhone;
         this.authorizedEMail = authorizedEMail;
         this.password = password;
+        this.active = active;
     }
+
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
 
     public Set<Order> getOrders() {
         return orders;

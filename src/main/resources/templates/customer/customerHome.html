@@ -81,7 +81,7 @@
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
-                    <li><a href="/"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
                 </ul>
             </li>
@@ -250,10 +250,6 @@
                     </div>
                 </div>
             </div>
-
-            <div hidden>
-                <p id="customerId" th:text="${customer.id}"/>
-            </div>
         </div>
     </div>
 </div>
@@ -334,7 +330,7 @@
     });
 
     function getOrders() {
-        var id = $("#customerId").text();
+        $.get("/username", function(data){
         $('#dataTables-example').DataTable({
             responsive: true,
             "bJQueryUI": false,
@@ -352,7 +348,7 @@
                 "sInfo": "<span style='color:red;font-weight: bold'>Toplam _TOTAL_ adet kayıttan , (_START_ ile _END_) arası gösteriliyor.</span>"
             },
             ajax: {
-                url: '/orders/getOrdersByCustomerId/'+id ,
+                url: '/orders/getOrdersByCustomerId/'+data.id ,
                 dataSrc: ''
             },
             columns: [
@@ -373,6 +369,7 @@
                     }
                 }
             ]
+        });
         });
 
     }

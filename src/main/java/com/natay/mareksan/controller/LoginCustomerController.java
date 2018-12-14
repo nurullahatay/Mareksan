@@ -1,50 +1,68 @@
 package com.natay.mareksan.controller;
 
 import com.natay.mareksan.model.Customer;
-import com.natay.mareksan.schedule.ScheduledTasks;
 import com.natay.mareksan.service.CustomerService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Date;
+import java.util.Set;
+
 
 @Controller
 public class LoginCustomerController {
 
-    private static final Logger log = LoggerFactory.getLogger(LoginCustomerController.class);
-
-
     @Autowired
     private CustomerService customerService;
 
-    @RequestMapping("/")
-    public String login(Model model) {
-        log.info("--------------->request mareksan");
-        model.addAttribute("datetime", new Date());
-        model.addAttribute("customer", new Customer());
-        model.addAttribute("errorMessage", false);
-        return "/customer/customerLogin";
+    @RequestMapping(value={"/", "/customerLogin"}, method = RequestMethod.GET)
+    public ModelAndView login(){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
+        if (roles.contains("ADMIN")) {
+            modelAndView.setViewName("/admin/userHome");
+        }else  if (roles.contains("CUSTOMER")){
+            modelAndView.setViewName("/customer/customerHome");
+        }else {
+            modelAndView.setViewName("customerLogin");
+        }
+        return modelAndView;
     }
 
-    @PostMapping("/customer/customerLogin")
-    public String loginCustomer(@ModelAttribute Customer customer, Model model) {
 
-        customer = customerService.findCustomerByAuthorizedEMailAndPassword(customer.getAuthorizedEMail(), customer.getPassword());
 
-        if (customer == null) {
-            model.addAttribute("datetime", new Date());
-            model.addAttribute("customer", new Customer());
-            model.addAttribute("errorMessage", true);
-            return "/customer/customerLogin";
-        }
+    @RequestMapping(value="/customer/customerHome", method = RequestMethod.GET)
+    public ModelAndView homeCustomer(){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Customer customer = customerService.findCustomerByAuthorizedEMail(auth.getName());
+        modelAndView.addObject("userName", "Welcome " + customer.getAuthorizedName() + " " + customer.getAuthorizedPhone() + " (" + customer.getAuthorizedEMail() + ")");
+        modelAndView.addObject("adminMessage","Content Available Only for Users with Customer Role");
+        modelAndView.setViewName("/customer/customerHome");
+        return modelAndView;
+    }
 
-        model.addAttribute("customer", customer);
-        return "/customer/customerHome";
+    @RequestMapping(value="/admin/userHome", method = RequestMethod.GET)
+    public ModelAndView homeAdmin(){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Customer customer = customerService.findCustomerByAuthorizedEMail(auth.getName());
+        modelAndView.addObject("userName", "Welcome " + customer.getAuthorizedName() + " " + customer.getAuthorizedPhone() + " (" + customer.getAuthorizedEMail() + ")");
+        modelAndView.addObject("adminMessage","Content Available Only for Users with Customer Role");
+        modelAndView.setViewName("/admin/userHome");
+        return modelAndView;
+    }
+
+    @RequestMapping(value={"/access_denied"}, method = RequestMethod.GET)
+    public ModelAndView access_denied(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/access_denied");
+        return modelAndView;
     }
 }
