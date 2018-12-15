@@ -40,4 +40,8 @@ public class CacheConfig {
     @CacheEvict(allEntries = true,value = {ORDERS})
     @Scheduled(fixedDelay = 10*60*1000,initialDelay = 500)
     public void cacheEvictEveryTenMinutes(){LOGGER.info("cacheEvictEveryTenMinutes");}
+    
+    @CacheEvict(allEntries = true,value = {ORDERTYPES,ORDERSTATUS})
+    @Scheduled(fixedDelay = 6*60*60*1000,initialDelay = 500)
+    public void cacheEvictEverySixHours(){LOGGER.info("cacheEvictEverySixHours");}
 }
