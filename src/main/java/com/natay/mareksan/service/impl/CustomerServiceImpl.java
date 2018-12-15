@@ -82,6 +82,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void updateCustomer(Customer customer) {
+        customer.setPassword(bCryptPasswordEncoder.encode(customer.getPassword()));
         customerRepository.save(customer);
     }
 }

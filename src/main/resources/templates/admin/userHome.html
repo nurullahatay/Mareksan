@@ -102,10 +102,13 @@
                         </div>
                     </li>
 
-                    <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Sipariş Yönetimi<span
-                                class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
+                    <li class="">
+                        <a href="#">
+                            <i class="fa fa-files-o "></i>
+                            <span class="nav-label">Sipariş Yönetimi</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level collapse">
                             <li>
                                 <a id="siparisler">Siparişler</a>
                             </li>
@@ -115,10 +118,12 @@
                         </ul>
                     </li>
 
+
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Müşteri Yönetimi<span
-                                class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
+                        <a href="#"><i class="fa fa-user"></i>
+                            <span class="nav-label">Müşteri Yönetimi</span>
+                            <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
                             <li>
                                 <a id="müsteri_ekle">Müşteri Ekle</a>
                             </li>
@@ -128,7 +133,9 @@
                         </ul>
                     </li>
                     <li>
-                        <a><i class="fa fa-bar-chart-o fa-fw"></i>Ayarlar<span class="fa arrow"></span></a>
+                        <a><i class="fa fa-gears "></i>
+                            <span class="nav-label">Ayarlar</span>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -1310,8 +1317,6 @@
                 $("#modal-customer-edit-authorizedName").val(result.authorizedName);
                 $("#modal-customer-edit-authorizedPhone").val(result.authorizedPhone);
                 $("#modal-customer-edit-authorizedEMail").val(result.authorizedEMail);
-                $("#modal-customer-edit-password").val(result.password);
-
             }
         });
     }

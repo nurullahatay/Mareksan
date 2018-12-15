@@ -19,6 +19,7 @@ public class SimpleAuthenticationSuccessHandler implements AuthenticationSuccess
     @Override
     public void onAuthenticationSuccess(HttpServletRequest arg0, HttpServletResponse arg1, Authentication authentication)
             throws IOException, ServletException {
+        arg0.getSession().setMaxInactiveInterval(60*30);
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
         if (roles.contains("ADMIN")) {
             arg1.sendRedirect("/admin/userHome");

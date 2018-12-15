@@ -57,13 +57,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/customer/customerHome").hasAuthority("CUSTOMER").anyRequest()
                 .authenticated()
                 .and().csrf().disable().formLogin().successHandler(successHandler)
-                .loginPage("/customerLogin").failureUrl("/customerLogin")
+                .loginPage("/customerLogin").failureUrl("/customerLogin?error=true")
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/customerLogin").and().exceptionHandling()
                 .accessDeniedPage("/access_denied");
+        http.sessionManagement()
+                .maximumSessions(10);
     }
 
     @Override

@@ -7,6 +7,7 @@ import com.natay.mareksan.repository.OrderRepository;
 import com.natay.mareksan.service.OrderService;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -129,24 +130,11 @@ public class OrderController {
 
     @GetMapping("/orderStatus")
     public Set<String> getOrderStatuses() {
-        Set<String> orderStatusSet = new HashSet<>();
-
-        // tüm degerleri tek tek değerlerini getir ve set'e ekle
-        for (OrderStatus orderStatus : OrderStatus.values()) {
-            orderStatusSet.add(orderStatus.getValue());
-        }
-
-        return orderStatusSet;
+        return orderService.getOrderStatuses();
     }
 
     @GetMapping("/orderType")
     public Set<String> getOrderTypes() {
-        Set<String> orderTypeSet = new HashSet<>();
-
-        for (OrderType orderType : OrderType.values()) {
-            orderTypeSet.add(orderType.getValue());
-        }
-
-        return orderTypeSet;
+       return orderService.getOrderTypes();
     }
 }

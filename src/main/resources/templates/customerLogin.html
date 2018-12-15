@@ -1,45 +1,67 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-
-
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Mareksan Müşteri Paneli</title>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="Mareksan">
     <meta name="author" content="Nurullah Atay">
-    <link rel="icon" href="../../favicon.ico"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
-
 <div class="container">
-    <h3 class="text-center"> MAREKSAN YÖNETİM BİLGİ SİSTEMİNE HOŞ GELDİNİZ </h3>
-    <hr>
-    <form th:action="@{/customerLogin}" method="POST" class="form-signin">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <img th:src="@{../static/dist/Logo1.png}" />
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">MAREKSAN YÖNETİM BİLGİ SİSTEMİNE HOŞ GELDİNİZ</h3>
+                </div>
+                <div class="panel-body">
+                    <form th:action="@{/customerLogin}" method="POST" class="form-signin"  id="login-form">
+                        <fieldset>
+                            <div class="form-group">
+                                <input class="form-control" id="authorizedEMail" placeholder="E-mail" name="email"
+                                       type="email" autofocus data-validation="email">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" id="password" placeholder="Şifre" name="password"
+                                       type="password" value="" data-validation="length" data-validation-length="min3" >
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                </label>
+                            </div>
+                            <div align="center" th:if="${param.error}">
+                                <p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
+                            </div>
+                            <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit"
+                                    th:text="Giriş"></button>
 
-
-        <input type="text" id="authorizedEMail" name="email"
-               class="form-control"/> <br/>
-        <input type="password"
-               id="password" name="password" class="form-control"/> <br/>
-
-        <!--/*@thymesVar id="param" type=""*/-->
-        <div align="center" th:if="${param.error}">
-            <p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit"
-                th:text="Login"></button>
-    </form>
+    </div>
 </div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+
+<script>
+    $.validate({
+        modules : 'security'
+    });
+</script>
 </body>
+
 </html>

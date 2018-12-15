@@ -3,6 +3,7 @@ package com.natay.mareksan.service.impl;
 import com.natay.mareksan.model.Customer;
 import com.natay.mareksan.model.Order;
 import com.natay.mareksan.model.OrderStatus;
+import com.natay.mareksan.model.OrderType;
 import com.natay.mareksan.repository.CustomerRepository;
 import com.natay.mareksan.repository.OrderRepository;
 import com.natay.mareksan.service.OrderService;
@@ -25,14 +26,13 @@ import java.util.Set;
 @Service
 @Transactional
 @Component
-@CacheConfig(cacheNames={"orderCache"})
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
 
     @Override
-    @CachePut(key = "#order.id")
+    @CachePut(value = "orderCache", key = "#order.id")
     public void saveOrder(Order order) {
         order.setVisibility(true);
         order.setRemainder(order.getPrice()-order.getPaid());
@@ -41,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    @Cacheable
+    @Cacheable(value = "orderCache")
     public Set<Order> getOrders() {
         Set<Order> orderSet = new HashSet<>();
         orderRepository.findAll().iterator().forEachRemaining(orderSet::add);
@@ -49,33 +49,53 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    @Cacheable(key = "#orderId")
+    @Cacheable(value = "orderCache", key = "#orderId")
     public Optional<Order> getOrderById(Long orderId) {
         return orderRepository.findById(orderId);
     }
 
     @Override
-    @CacheEvict(key = "#orderId")
+    @CacheEvict(value = "orderCache", key = "#orderId")
     public void deleteById(Long orderId) {
         orderRepository.deleteById(orderId);
     }
 
     @Override
-    @CachePut(key = "#order.id")
+    @CachePut(value = "orderCache", key = "#order.id")
     public void updateOrder(Order order) {
         orderRepository.save(order);
     }
 
     @Override
-    @CacheEvict(key = "#customerId")
+    @CacheEvict(value = "orderCache", key = "#customerId")
     public void deleteOrdersByCustomerId(Long customerId) {
         orderRepository.deleteOrdersByCustomerId(customerId);
     }
 
     @Override
-    @Cacheable
+    @Cacheable(value = "orderCache")
     public Set<Order> getOrdersByCustomerId(Long customerId) {
         return orderRepository.getOrdersByCustomerId(customerId);
     }
 
+    @Override
+    @Cacheable(value = "orderType")
+    public Set<String> getOrderTypes() {
+        Set<String> orderTypeSet = new HashSet<>();
+        for (OrderType orderType : OrderType.values()) {
+            orderTypeSet.add(orderType.getValue());
+        }
+        return orderTypeSet;
+    }
+
+    @Override
+    @Cacheable(value = "orderStatus")
+    public Set<String> getOrderStatuses() {
+        Set<String> orderStatusSet = new HashSet<>();
+        // tüm degerleri tek tek değerlerini getir ve set'e ekle
+        for (OrderStatus orderStatus : OrderStatus.values()) {
+            orderStatusSet.add(orderStatus.getValue());
+        }
+        return orderStatusSet;
+    }
 }
