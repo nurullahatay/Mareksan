@@ -58,7 +58,7 @@ public class OrderController {
 //            }
 //        }
 
-        Set<Order> orders = Collections.emptySet();
+        Set<Order> orders = new HashSet<>();
         orderService.getOrdersByCustomerId(customerId) // Order set'i getir
                 .stream()                           // islem yapabilmek icin  set üzerinden Stream'i baslat.
                 .filter(Order::isVisibility)        // sonra her bir order için is visibility'iyi cagir , eğer true ise stream'e devam et
