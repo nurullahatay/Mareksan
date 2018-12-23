@@ -1,26 +1,15 @@
 package com.natay.mareksan.controller;
 
 import com.natay.mareksan.model.Order;
-import com.natay.mareksan.model.OrderStatus;
-import com.natay.mareksan.model.OrderType;
-import com.natay.mareksan.repository.OrderRepository;
 import com.natay.mareksan.service.OrderService;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Stream;
+import java.util.*;
 
 @RestController
 @RequestMapping("/orders")
@@ -38,13 +27,20 @@ public class OrderController {
 
     @GetMapping("/all")
     public Set<Order> getOrders() {
-        Set<Order> orders= new HashSet<>();
+        Set<Order> orders = new HashSet<>();
 
-        for (Order order : orderService.getOrders()){
-            if (order.isVisibility()){
-                orders.add(order);
-            }
-        }
+        orderService.getOrders()
+                .stream()
+                .filter(Order::isVisibility)
+                .forEach(orders::add);
+
+//        for (Order order : orderService.getOrders()) {
+//            if (order.isVisibility()) {
+//                orders.add(order);
+//            }
+//        }
+
+
         return orders;
     }
 
@@ -55,12 +51,19 @@ public class OrderController {
 
     @GetMapping("/getOrdersByCustomerId/{customerId}")
     public Set<Order> getOrdersByCustomerId(@PathVariable Long customerId) {
-        Set<Order> orders= new HashSet<>();
-        for (Order order : orderService.getOrdersByCustomerId(customerId)){
-            if (order.isVisibility()){
-                orders.add(order);
-            }
-        }
+//        Set<Order> ordersByCustomerId = orderService.getOrdersByCustomerId(customerId);
+//        for (Order order : ordersByCustomerId) {
+//            if (order.isVisibility()) {
+//                orders.add(order);
+//            }
+//        }
+
+        Set<Order> orders = Collections.emptySet();
+        orderService.getOrdersByCustomerId(customerId) // Order set'i getir
+                .stream()                           // islem yapabilmek icin  set üzerinden Stream'i baslat.
+                .filter(Order::isVisibility)        // sonra her bir order için is visibility'iyi cagir , eğer true ise stream'e devam et
+                .forEach(orders::add);              // filtreden geçenleri set'e ekle.
+
         return orders;
     }
 
@@ -74,56 +77,56 @@ public class OrderController {
     public ResponseEntity<Object> updateOrder(@RequestBody Order order) {
         Optional<Order> currentOder = orderService.getOrderById(order.getId());
 
-        if (currentOder == null) {
+        if (Objects.nonNull(currentOder)) {
             return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
         }
 
-       // farkli yada null alanları sadece değiştir eklenecek
+        // farkli yada null alanları sadece değiştir eklenecek
 
-        if(!(currentOder.get().getCustomer().equals(order.getCustomer()) || order.getCustomer()==null) ){
+        if (!(currentOder.get().getCustomer().equals(order.getCustomer()) || Objects.isNull(order.getCustomer()))) {
             currentOder.get().setCustomer(order.getCustomer());
         }
-        if (!(currentOder.get().getAmount()==order.getAmount() || (order.getAmount()== 0)) ){
+        if (!(currentOder.get().getAmount() == order.getAmount() || (order.getAmount() == 0))) {
             currentOder.get().setAmount(order.getAmount());
         }
 
-        if (!(currentOder.get().getDeliveryDate().equals(order.getDeliveryDate()) || order.getDeliveryDate()==null)){
+        if (!(currentOder.get().getDeliveryDate().equals(order.getDeliveryDate()) || Objects.isNull(order.getDeliveryDate()))) {
             currentOder.get().setDeliveryDate(order.getDeliveryDate());
         }
 
-        if (!( currentOder.get().getDescription().equals(order.getDescription())|| order.getDescription()==null)){
+        if (!(currentOder.get().getDescription().equals(order.getDescription()) || Objects.isNull(order.getDescription()))) {
             currentOder.get().setDescription(order.getDescription());
         }
 
-        if (!( currentOder.get().getOrderDate().equals(order.getOrderDate())|| order.getOrderDate()==null)){
+        if (!(currentOder.get().getOrderDate().equals(order.getOrderDate()) || Objects.isNull(order.getOrderDate()))) {
             currentOder.get().setOrderDate(order.getOrderDate());
         }
 
-        if (!(currentOder.get().getOrderName().equals(order.getOrderName()) || order.getOrderName()==null)){
+        if (!(currentOder.get().getOrderName().equals(order.getOrderName()) || Objects.isNull(order.getOrderName()))) {
             currentOder.get().setOrderName(order.getOrderName());
         }
 
-        if (!(currentOder.get().getOrderStatus().equals(order.getOrderStatus()) || order.getOrderStatus()==null)){
+        if (!(currentOder.get().getOrderStatus().equals(order.getOrderStatus()) || Objects.isNull(order.getOrderStatus()))) {
             currentOder.get().setOrderStatus(order.getOrderStatus());
         }
 
-        if (!(currentOder.get().getOrderType().equals(order.getOrderType())|| order.getOrderType()==null)){
+        if (!(currentOder.get().getOrderType().equals(order.getOrderType()) || Objects.isNull(order.getOrderType()))) {
             currentOder.get().setOrderType(order.getOrderType());
         }
 
-        if (!(currentOder.get().getPaid()==order.getPaid() || order.getPaid()==0)){
+        if (!(currentOder.get().getPaid() == order.getPaid() || order.getPaid() == 0)) {
             currentOder.get().setPaid(order.getPaid());
         }
 
-        if (!(currentOder.get().getPrice()==order.getPrice() || order.getPrice()==0 )){
+        if (!(currentOder.get().getPrice() == order.getPrice() || order.getPrice() == 0)) {
             currentOder.get().setPrice(order.getPrice());
 
         }
-        if (!(currentOder.get().getSpecificationsOrders().equals(order.getSpecificationsOrders()) || order.getSpecificationsOrders()==null)){
+        if (!(currentOder.get().getSpecificationsOrders().equals(order.getSpecificationsOrders()) || Objects.isNull(order.getSpecificationsOrders()))) {
             currentOder.get().setSpecificationsOrders(order.getSpecificationsOrders());
         }
 
-        currentOder.get().setRemainder(currentOder.get().getPrice()-currentOder.get().getPaid());
+        currentOder.get().setRemainder(currentOder.get().getPrice() - currentOder.get().getPaid());
         orderService.updateOrder(currentOder.get());
         return new ResponseEntity<Object>(currentOder, HttpStatus.OK);
     }
@@ -135,6 +138,6 @@ public class OrderController {
 
     @GetMapping("/orderType")
     public Set<String> getOrderTypes() {
-       return orderService.getOrderTypes();
+        return orderService.getOrderTypes();
     }
 }
