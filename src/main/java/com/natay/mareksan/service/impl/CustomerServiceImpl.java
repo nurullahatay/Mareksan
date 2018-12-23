@@ -3,7 +3,6 @@ package com.natay.mareksan.service.impl;
 import com.natay.mareksan.model.Customer;
 import com.natay.mareksan.model.Role;
 import com.natay.mareksan.repository.CustomerRepository;
-import com.natay.mareksan.repository.OrderRepository;
 import com.natay.mareksan.repository.RoleRepository;
 import com.natay.mareksan.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
-/**
- * Created by Ramazan on 28.11.2018.
- */
 @Service
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
@@ -35,26 +28,30 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void saveCustomer(Customer customer) {
-        customer.setPassword(bCryptPasswordEncoder.encode(customer.getPassword()));
-        customer.setActive(1);
-        Role customerRole = roleRepository.findByRole("CUSTOMER");
-        customer.setRoles(new HashSet<Role>(Arrays.asList(customerRole)));
-        customerRepository.save(customer);
+        createCustomerWithRole(customer, "CUSTOMER");
     }
 
     @Override
     public void saveAdmin(Customer customer) {
+        createCustomerWithRole(customer, "ADMIN");
+    }
+
+    private void createCustomerWithRole(Customer customer, String role) {
         customer.setPassword(bCryptPasswordEncoder.encode(customer.getPassword()));
         customer.setActive(1);
-        Role customerRole = roleRepository.findByRole("ADMIN");
-        customer.setRoles(new HashSet<Role>(Arrays.asList(customerRole)));
+        Role customerRole = roleRepository.findByRole(role);
+        customer.setRoles(Collections.singleton(customerRole));
         customerRepository.save(customer);
     }
 
     @Override
     public Set<Customer> getCustomers() {
         Set<Customer> customerSet = new HashSet<>();
-        customerRepository.findAll().iterator().forEachRemaining(customerSet::add);
+        customerRepository
+                .findAll()
+                .iterator()
+                .forEachRemaining(customerSet::add);
+
         return customerSet;
     }
 
