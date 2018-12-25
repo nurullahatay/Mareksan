@@ -7,12 +7,13 @@ import com.natay.mareksan.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
 public class InitialData implements ApplicationListener<ContextRefreshedEvent> {
-
-   /* @Autowired
+/*
+    @Autowired
     private OrderService orderService;
 
     @Autowired
@@ -33,9 +34,9 @@ public class InitialData implements ApplicationListener<ContextRefreshedEvent> {
       roleRepository.save(new Role(2,"CUSTOMER"));
 
       Customer customer = new Customer("Müşteri 1","2124556655","Fatih/İstanbul",
-              "Ali","5555555","sirket@gmail.com","123456",1);
+              "Ali","5555555555","sirket@gmail.com","123456",1);
       Customer customer1 = new Customer("Müşteri Şirketi 2","2124556655","Fatih/İstanbul",
-              "Veli","5555555","sirke2t@gmail.com","123456",1);
+              "Veli","5555555555","sirke2t@gmail.com","123456",1);
       customerService.saveCustomer(customer);
       customerService.saveAdmin(customer1);
 

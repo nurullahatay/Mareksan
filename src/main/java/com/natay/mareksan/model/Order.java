@@ -3,6 +3,7 @@ package com.natay.mareksan.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 @Entity
 @Table(name = "`ORDERS`")
@@ -11,21 +12,38 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @NotEmpty
     private String orderName;
+
+    @Pattern(regexp = "^([0-2][0-9]|(3)[0-1])(\\/)(((0)[0-9])|((1)[0-2]))(\\/)\\d{4}$" ,message = "Tarih formati hatali.")
     private String orderDate;
     private String deliveryDate;
+
+    @Min(value = 1)
     private int amount;
+    @NotEmpty
     private String specificationsOrders;
+
+    @DecimalMin(value = "0.1", inclusive = true)
     private double price;
+
+    @DecimalMin(value = "0.0", inclusive = true)
     private double paid;
+
+    @DecimalMin(value = "0.0", inclusive = true)
     private double remainder;
+
+    @NotEmpty
     private String description;
     private boolean visibility;
 
     //@Enumerated(EnumType.STRING)
+    @NotEmpty
     private String orderStatus;
 
     //@Enumerated(EnumType.STRING)
+    @NotEmpty
     private String orderType;
 
     @ManyToOne
@@ -35,7 +53,6 @@ public class Order {
 
     public Order() {
     }
-
 
     public Order(String orderName, String orderDate, String deliveryDate, int amount, String specificationsOrders, double price, double paid, double remainder, String description, String orderStatus, String orderType, Customer customer , boolean visibility) {
         this.orderName = orderName;

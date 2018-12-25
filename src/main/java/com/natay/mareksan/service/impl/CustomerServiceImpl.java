@@ -46,16 +46,27 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Set<Customer> getCustomers() {
+        return getCustomerWithRole("ADMIN");
+    }
+
+    @Override
+    public Set<Customer> getAdmins() {
+        return getCustomerWithRole("CUSTOMER");
+    }
+
+
+    private Set<Customer> getCustomerWithRole(String role) {
         Set<Customer> customerSet = new HashSet<>();
         customerRepository
                 .findAll()
                 .iterator()
                 .forEachRemaining(customerSet::add);
-
+        Role customerRole = roleRepository.findByRole(role);
+        customerSet.removeIf(customer -> customer.getRoles().contains(customerRole));
         return customerSet;
     }
 
-    @Override
+        @Override
     public Customer findByCompanyName(String companyName) {
         return customerRepository.findByCompanyName(companyName);
     }

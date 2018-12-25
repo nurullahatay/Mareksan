@@ -72,20 +72,10 @@
             </li>
 
 
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+            <li class="data-toggle">
+                <a href="/logout" class="data-toggle" data-toggle="data-toggle">
+                    <i class="fa fa-sign-out fa-fw"></i>
                 </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                    </li>
-                </ul>
-                <!-- /.dropdown-user -->
             </li>
         </ul>
         <div class="navbar-default sidebar" role="navigation">
@@ -135,7 +125,16 @@
                     <li>
                         <a><i class="fa fa-gears "></i>
                             <span class="nav-label">Ayarlar</span>
+                            <span class="fa arrow"></span>
                         </a>
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a id="admin_yonetimi">Admin Yönetimi</a>
+                            </li>
+                            <li>
+                                <a id="siparis_cinsi">Sipariş Cinsi</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -486,13 +485,6 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-4 control-label">Kalan</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" placeholder="Kalan" class="form-control"
-                                                           name="remainder" id="remainder" value="" required>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
                                                 <label class="col-sm-4 control-label">Açıklama</label>
                                                 <div class="col-sm-8">
                                                     <textarea name="description" id="description"
@@ -747,6 +739,230 @@
         </div>
 
 
+        <div id="admin_ekleme" class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Admin Ekleme Formu</h1>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Müşteri Ekleme Formu
+                        </div>
+                        <div class="panel-body">
+                            <div class="wrapper wrapper-content  animated fadeInRight">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>Admin Formu</h5>
+
+                                    </div>
+                                    <div class="ibox-content">
+
+                                        <form role="form" id="addAdminForm" method="post" class="wizard-big">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group"><label>Firma Adı</label><input
+                                                            type="text"
+                                                            placeholder="Firma Adı"
+                                                            class="form-control required"
+                                                            name="companyName"
+                                                            id="companyNameAdmin"
+                                                            value="">
+                                                    </div>
+                                                    <div class="form-group"><label>Firma Tel</label><input
+                                                            type="text"
+                                                            placeholder="Firma Tel"
+                                                            class="form-control required"
+                                                            name="companyPhone"
+                                                            id="companyPhoneAdmin"
+                                                            value="">
+                                                    </div>
+                                                    <div class="form-group"><label>Firma Adres</label><textarea
+                                                            type="text" placeholder="Firma Adres"
+                                                            class="form-control required" name="companyAddress"
+                                                            id="companyAddressAdmin" value=""></textarea></div>
+
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group"><label>Yetkili Ad</label><input
+                                                            type="text"
+                                                            placeholder="Yetkili Ad"
+                                                            class="form-control"
+                                                            name="authorizedName"
+                                                            id="authorizedNameAdmin"
+                                                            value="">
+                                                    </div>
+                                                    <div class="form-group"><label>Yetkili Tel</label><input
+                                                            type="text"
+                                                            placeholder="Yetkili Tel"
+                                                            class="form-control"
+                                                            name="authorizedPhone"
+                                                            id="authorizedPhoneAdmin"
+                                                            value="">
+                                                    </div>
+                                                    <div class="form-group"><label>Yetkili E-Posta</label><input
+                                                            type="email" placeholder="Yetkili E-Posta"
+                                                            class="form-control" name="authorizedEMail"
+                                                            id="authorizedEMailAdmin" value=""></div>
+                                                    <div class="form-group"><label>Şifre</label><input
+                                                            type="text"
+                                                            placeholder="Şifre"
+                                                            class="form-control"
+                                                            name="password"
+                                                            id="passwordAdmin"
+                                                            value=""></div>
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <input type="button" class="btn btn-sm btn-primary m-t-n-xs"
+                                                           style="float:right; margin:8px;" value="Kaydet"
+                                                           onclick="addAdmin()"/>
+                                                    <input type="reset" class="btn btn-sm btn-danger m-t-n-xs"
+                                                           style="float:right; margin:8px;" value="Vazgeç"
+                                                           id="cancelAdmin" onclick="deleteAdminAddAreas()"/>
+                                                </div>                                                                         </div>
+                                            <input type="hidden" name="form" value="addCustomerForm"/>
+                                            <input type="hidden" name="customerId" value="0"/>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="admin_listeleme" class="row" style="padding-top:30px;">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Kullanıcılar
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <table width="100%" class="table table-striped table-bordered table-hover"
+                                   id="dataTables-admin">
+                                <thead>
+                                <tr>
+                                    <th>Şirket Adı</th>
+                                    <th>Şirket Telefonu</th>
+                                    <th>Yetkili</th>
+                                    <th>Yetkili Telefonu</th>
+                                    <td>Yetkili E-mail</td>
+                                    <td>Sil/Düzenle</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+                <div id="modal-admin-edit" class="modal inmodal fade" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox float-e-margins">
+                                        <div class="ibox-title">
+                                            <h5>Admin Formu</h5>
+
+                                        </div>
+                                        <div class="ibox-content">
+
+                                            <form>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group"><label>Firma Adı</label><input
+                                                                type="text"
+                                                                placeholder="Firma Adı"
+                                                                class="form-control required"
+                                                                name="companyName"
+                                                                id="modal-admin-edit-companyName"
+                                                                value="">
+                                                        </div>
+                                                        <div class="form-group"><label>Firma Tel</label><input
+                                                                type="text"
+                                                                placeholder="Firma Tel"
+                                                                class="form-control required"
+                                                                name="companyPhone"
+                                                                id="modal-admin-edit-companyPhone"
+                                                                value="">
+                                                        </div>
+                                                        <div class="form-group"><label>Firma Adres</label><textarea
+                                                                type="text" placeholder="Firma Adres"
+                                                                class="form-control required" name="companyAddress"
+                                                                id="modal-admin-edit-companyAddress" value=""></textarea>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group"><label>Yetkili Ad</label><input
+                                                                type="text"
+                                                                placeholder="Yetkili Ad"
+                                                                class="form-control"
+                                                                name="authorizedName"
+                                                                id="modal-admin-edit-authorizedName"
+                                                                value="">
+                                                        </div>
+                                                        <div class="form-group"><label>Yetkili Tel</label><input
+                                                                type="text"
+                                                                placeholder="Yetkili Tel"
+                                                                class="form-control"
+                                                                name="authorizedPhone"
+                                                                id="modal-admin-edit-authorizedPhone"
+                                                                value="">
+                                                        </div>
+                                                        <div class="form-group"><label>Yetkili E-Posta</label><input
+                                                                type="email" placeholder="Yetkili E-Posta"
+                                                                class="form-control" name="authorizedEMail"
+                                                                id="modal-admin-edit-authorizedEMail" value=""></div>
+                                                        <div class="form-group"><label>Şifre</label><input
+                                                                type="text"
+                                                                placeholder="Şifre"
+                                                                class="form-control"
+                                                                name="password"
+                                                                id="modal-admin-edit-password"
+                                                                value=""></div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <input type="button" class="btn btn-sm btn-primary m-t-n-xs"
+                                                               style="float:right; margin:8px;" value="Kaydet"
+                                                               onclick="updateAdmin()"/>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
     </div>
 
 
@@ -793,6 +1009,7 @@
     $("#siparis_listesi").hide();
     $("#siparis_formu").hide();
     $("#giris").hide();
+    $("#admin_ekleme").hide();
 
 
     function homeButtonClick() {
@@ -802,6 +1019,7 @@
             $("#siparis_formu").hide();
             $("#müsteri_listeleme").hide();
             $("#müsteri_ekleme").hide();
+            $("#admin_ekleme").hide();
         });
 
         $("#navbar-home").click(function () {
@@ -810,7 +1028,7 @@
             $("#siparis_formu").hide();
             $("#müsteri_listeleme").hide();
             $("#müsteri_ekleme").hide();
-
+            $("#admin_ekleme").hide();
         });
     }
 
@@ -822,6 +1040,7 @@
             $("#siparis_formu").hide();
             $("#müsteri_listeleme").hide();
             $("#müsteri_ekleme").show();
+            $("#admin_ekleme").hide();
         });
 
         $("#müsteri_ekle").click(function () {
@@ -830,6 +1049,7 @@
             $("#siparis_formu").hide();
             $("#müsteri_listeleme").hide();
             $("#müsteri_ekleme").show();
+            $("#admin_ekleme").hide();
         });
     }
 
@@ -890,6 +1110,7 @@
             $("#siparis_formu").show();
             $("#müsteri_listeleme").hide();
             $("#müsteri_ekleme").hide();
+            $("#admin_ekleme").hide();
         });
 
         $("#siparis_olustur").click(function () {
@@ -898,6 +1119,7 @@
             $("#siparis_formu").show();
             $("#müsteri_listeleme").hide();
             $("#müsteri_ekleme").hide();
+            $("#admin_ekleme").hide();
         });
     }
 
@@ -913,6 +1135,7 @@
             $("#siparis_formu").hide();
             $("#müsteri_listeleme").hide();
             $("#müsteri_ekleme").hide();
+            $("#admin_ekleme").hide();
         });
 
     }
@@ -924,6 +1147,19 @@
             $("#siparis_formu").hide();
             $("#müsteri_listeleme").show();
             $("#müsteri_ekleme").hide();
+            $("#admin_ekleme").hide();
+        });
+
+    }
+
+    function adminClick() {
+        $("#admin_yonetimi").click(function () {
+            $("#giris").hide();
+            $("#siparis_listesi").hide();
+            $("#siparis_formu").hide();
+            $("#müsteri_listeleme").hide();
+            $("#müsteri_ekleme").hide();
+            $("#admin_ekleme").show();
         });
 
     }
@@ -940,7 +1176,8 @@
         musterilerClick();
         getOrders();
         getCustomers();
-
+        adminClick();
+        getAdmins();
 
     });
 
@@ -1024,6 +1261,43 @@
         });
     }
 
+    function getAdmins() {
+        $('#dataTables-admin').DataTable({
+            responsive: true,
+            "bJQueryUI": false,
+            "bAutoWidth": false,
+            "search": {
+                "caseInsensitive": true
+            },
+            "oLanguage": {
+                "sSearch": "<span style='color:red;font-weight: bold'>Arama: </span> _INPUT_", //search
+                "sLengthMenu": "<span>Kaç Kayıt Gösterilsin : </span>_MENU_  ", //label
+                "sZeroRecords": "Eşleşen Kayıt Bulunmadı",
+                "sEmptyTable": "Bu Tabloda Hiç Veri Yok.",
+                "oPaginate": {"sFirst": "İlk", "sLast": "Son", "sNext": "Sonraki", "sPrevious": "Önceki"}, //pagination
+                "sLoadingRecords": "Lütfen Bekleyiniz.. Yükleniyor..",
+                "sInfo": "<span style='color:red;font-weight: bold'>Toplam _TOTAL_ adet kayıttan , (_START_ ile _END_) arası gösteriliyor.</span>"
+            },
+            ajax: {
+                url: '/customers/getAdmins',
+                dataSrc: ''
+            },
+            columns: [
+                {data: 'companyName'},
+                {data: 'companyPhone'},
+                {data: 'authorizedName'},
+                {data: 'authorizedPhone'},
+                {data: 'authorizedEMail'},
+                {
+                    render: function (data, type, row) {
+                        return '<a class="data-toggle" data-toggle="data-toggle"> <i class="fa fa-trash-o" onclick="deleteCustomer(' + row["id"] + ')"></i></a>' + '<a data-toggle="modal" href="#modal-admin-edit" alt="Düzenle" title="Düzenle" onclick="adminEdit(' + row["id"] + ')"> <i class="fa fa-edit" ></i></a>';
+                    }
+                }
+            ]
+        });
+    }
+
+
     function addOrder() {
 
         var order = {};
@@ -1035,7 +1309,6 @@
         order["specificationsOrders"] = $("#specificationsOrders").val();
         order["price"] = $("#price").val();
         order["paid"] = $("#paid").val();
-        order["remainder"] = $("#remainder").val();
         order["description"] = $("#description").val();
         order["orderDate"] = $("#orderDate").val();
         order["deliveryDate"] = $("#deliveryDate").val();
@@ -1066,7 +1339,7 @@
                     type: 'error',
                     title: 'Oops...',
                     text: 'Sipariş kaydedilmedi!',
-                    footer: e,
+                    footer: 'Gerekli alanlari istenilen sekilde doldurun.',
                 })
             }
         });
@@ -1108,7 +1381,47 @@
                     type: 'error',
                     title: 'Oops...',
                     text: 'Müşteri kaydedilmedi!',
-                    footer: e,
+                    footer: 'Gerekli alanlari istenilen sekilde doldurun.',
+                })            }
+        });
+    }
+
+    function addAdmin() {
+        var customer = {};
+        customer["companyName"] = $("#companyNameAdmin").val();
+        customer["companyPhone"] = $("#companyPhoneAdmin").val();
+        customer["companyAddress"] = $("#companyAddressAdmin").val();
+        customer["authorizedName"] = $("#authorizedNameAdmin").val();
+        customer["authorizedPhone"] = $("#authorizedPhoneAdmin").val();
+        customer["authorizedEMail"] = $("#authorizedEMailAdmin").val();
+        customer["password"] = $("#passwordAdmin").val();
+
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "/customers/saveAdmin",
+            data: JSON.stringify(customer),
+            dataType: 'json',
+            cache: false,
+            timeout: 100000,
+            success: function (data) {
+                swal({
+                    position: 'top-end',
+                    type: 'success',
+                    title: 'Admin kaydedildi.',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                deleteAdminAddAreas();
+                $('#dataTables-admin').DataTable().ajax.reload();
+
+            },
+            error: function (e) {
+                swal({
+                    type: 'error',
+                    title: 'Oops...',
+                    text: 'Admin kaydedilmedi!',
+                    footer: 'Gerekli alanlari istenilen sekilde doldurun.',
                 })            }
         });
     }
@@ -1137,6 +1450,16 @@
         $("#authorizedPhone").val("");
         $("#authorizedEMail").val("");
         $("#password").val("");
+    }
+
+    function deleteAdminAddAreas() {
+        $("#companyNameAdmin").val("");
+        $("#companyPhoneAdmin").val("");
+        $("#companyAddressAdmin").val("");
+        $("#authorizedNameAdmin").val("");
+        $("#authorizedPhoneAdmin").val("");
+        $("#authorizedEMailAdmin").val("");
+        $("#passwordAdmin").val("");
     }
 
     function deleteOrder(url_id) {
@@ -1197,6 +1520,7 @@
                 success: function (data) {
                     $('#dataTables-Customer').DataTable().ajax.reload();
                     $('#dataTables-example').DataTable().ajax.reload();
+                    $('#dataTables-admin').DataTable().ajax.reload();
                     swal(
                         'Silindi!',
                         'Sipariş silindi.',
@@ -1297,7 +1621,6 @@
                     type: 'error',
                     title: 'Oops...',
                     text: 'Sipariş kaydedilmedi!',
-                    footer: e,
                 })             }
         });
 
@@ -1357,12 +1680,71 @@
                     type: 'error',
                     title: 'Oops...',
                     text: 'Müşteri kaydedilmedi!',
-                    footer: e,
                 })             }
         });
 
 
     }
+
+    var adminEditId = -1;
+
+    function adminEdit(id) {
+        adminEditId = id;
+        $.ajax({
+            type: "GET",
+            url: "/customers/getCustomer/" + id,
+            success: function (result) {
+                $("#modal-admin-edit-companyName").val(result.companyName);
+                $("#modal-admin-edit-companyPhone").val(result.companyPhone);
+                $("#modal-admin-edit-companyAddress").val(result.companyAddress);
+                $("#modal-admin-edit-authorizedName").val(result.authorizedName);
+                $("#modal-admin-edit-authorizedPhone").val(result.authorizedPhone);
+                $("#modal-admin-edit-authorizedEMail").val(result.authorizedEMail);
+            }
+        });
+    }
+
+    function updateAdmin() {
+        var customer = {};
+        customer["id"] = adminEditId;
+        customer["companyName"] = $("#modal-admin-edit-companyName").val();
+        customer["companyPhone"] = $("#modal-admin-edit-companyPhone").val();
+        customer["companyAddress"] = $("#modal-admin-edit-companyAddress").val();
+        customer["authorizedName"] = $("#modal-admin-edit-authorizedName").val();
+        customer["authorizedPhone"] = $("#modal-admin-edit-authorizedPhone").val();
+        customer["authorizedEMail"] = $("#modal-admin-edit-authorizedEMail").val();
+        customer["password"] = $("#modal-admin-edit-password").val();
+
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "/customers/updateCustomer",
+            data: JSON.stringify(customer),
+            dataType: 'json',
+            cache: false,
+            timeout: 100000,
+            success: function (data) {
+                $('#dataTables-admin').DataTable().ajax.reload();
+                $("#modal-admin-edit").modal('hide');
+                swal({
+                    position: 'top-end',
+                    type: 'success',
+                    title: 'Müşteri kaydedildi.',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            },
+            error: function (e) {
+                swal({
+                    type: 'error',
+                    title: 'Oops...',
+                    text: 'Müşteri kaydedilmedi!',
+                })             }
+        });
+
+
+    }
+
 
 </script>
 

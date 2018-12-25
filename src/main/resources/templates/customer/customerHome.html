@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="description" content="Mareksan">
     <meta name="author" content="Nurullah Atay">
-    <link rel="icon" href="../../favicon.ico"/>
 
     <title>Mareksan Yönetim Paneli</title>
 
@@ -63,48 +62,18 @@
         <!-- /.navbar-header -->
 
         <ul class="nav navbar-top-links navbar-right">
-
             <li class="data-toggle">
-                <a class="data-toggle" data-toggle="data-toggle" id="home">
-                    <i class="fa fa-home "></i>
+                <a href="/logout">
+                    <i class="fa fa-sign-out fa-fw"></i>
                 </a>
-            </li>
-
-
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                    </li>
-                </ul>
             </li>
         </ul>
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
-                    <li class="">
-                        <a href="#">
-                            <i class="fa fa-files-o "></i>
-                            <span class="nav-label">Sipariş Yönetimi</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level collapse">
-                            <li>
-                                <a id="siparisler">Siparişler</a>
-                            </li>
-                        </ul>
-                    </li>
                     <li>
-                        <a><i class="fa fa-gears "></i>
-                            <span class="nav-label">Ayarlar</span>
-                        </a>
+                        <i class="fa fa-files-o "></i>
+                        <span class="nav-label">Siparişler</span>
                     </li>
                 </ul>
             </div>
@@ -324,46 +293,46 @@
     });
 
     function getOrders() {
-        $.get("/username", function(data){
-        $('#dataTables-example').DataTable({
-            responsive: true,
-            "bJQueryUI": false,
-            "bAutoWidth": false,
-            "search": {
-                "caseInsensitive": true
-            },
-            "oLanguage": {
-                "sSearch": "<span style='color:red;font-weight: bold'>Arama: </span> _INPUT_", //search
-                "sLengthMenu": "<span>Kaç Kayıt Gösterilsin : </span>_MENU_  ", //label
-                "sZeroRecords": "Eşleşen Kayıt Bulunmadı",
-                "sEmptyTable": "Bu Tabloda Hiç Veri Yok.",
-                "oPaginate": {"sFirst": "İlk", "sLast": "Son", "sNext": "Sonraki", "sPrevious": "Önceki"}, //pagination
-                "sLoadingRecords": "Lütfen Bekleyiniz.. Yükleniyor..",
-                "sInfo": "<span style='color:red;font-weight: bold'>Toplam _TOTAL_ adet kayıttan , (_START_ ile _END_) arası gösteriliyor.</span>"
-            },
-            ajax: {
-                url: '/orders/getOrdersByCustomerId/'+data.id ,
-                dataSrc: ''
-            },
-            columns: [
-                {data: 'id'},
-                {data: 'orderName'},
-                {data: 'orderDate'},
-                {data: 'deliveryDate'},
-                {data: 'amount'},
-                {data: 'price'},
-                {data: 'paid'},
-                {data: 'remainder'},
-                {data: 'orderType'},
-                {data: 'specificationsOrders'},
-                {data: 'orderStatus'},
-                {
-                    render: function (data, type, row) {
-                        return ' <a data-toggle="modal" href="#modal-order" alt="Göster" title="Göster" onclick="orderView(' + row["id"] + ')"> <i class="fa fa-eye "></i> </a>';
+        $.get("/username", function (data) {
+            $('#dataTables-example').DataTable({
+                responsive: true,
+                "bJQueryUI": false,
+                "bAutoWidth": false,
+                "search": {
+                    "caseInsensitive": true
+                },
+                "oLanguage": {
+                    "sSearch": "<span style='color:red;font-weight: bold'>Arama: </span> _INPUT_", //search
+                    "sLengthMenu": "<span>Kaç Kayıt Gösterilsin : </span>_MENU_  ", //label
+                    "sZeroRecords": "Eşleşen Kayıt Bulunmadı",
+                    "sEmptyTable": "Bu Tabloda Hiç Veri Yok.",
+                    "oPaginate": {"sFirst": "İlk", "sLast": "Son", "sNext": "Sonraki", "sPrevious": "Önceki"}, //pagination
+                    "sLoadingRecords": "Lütfen Bekleyiniz.. Yükleniyor..",
+                    "sInfo": "<span style='color:red;font-weight: bold'>Toplam _TOTAL_ adet kayıttan , (_START_ ile _END_) arası gösteriliyor.</span>"
+                },
+                ajax: {
+                    url: '/orders/getOrdersByCustomerId/' + data.id,
+                    dataSrc: ''
+                },
+                columns: [
+                    {data: 'id'},
+                    {data: 'orderName'},
+                    {data: 'orderDate'},
+                    {data: 'deliveryDate'},
+                    {data: 'amount'},
+                    {data: 'price'},
+                    {data: 'paid'},
+                    {data: 'remainder'},
+                    {data: 'orderType'},
+                    {data: 'specificationsOrders'},
+                    {data: 'orderStatus'},
+                    {
+                        render: function (data, type, row) {
+                            return ' <a data-toggle="modal" href="#modal-order" alt="Göster" title="Göster" onclick="orderView(' + row["id"] + ')"> <i class="fa fa-eye "></i> </a>';
+                        }
                     }
-                }
-            ]
-        });
+                ]
+            });
         });
 
     }

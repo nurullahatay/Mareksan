@@ -13,71 +13,59 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/orders")
-@PreAuthorize("hasAuthority('CUSTOMER') or hasAuthority('ADMIN')")
 public class OrderController {
 
     @Autowired
     private OrderService orderService;
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/saveOrder")
     public ResponseEntity<Object> saveOrder(@Valid @RequestBody Order order) {
         orderService.saveOrder(order);
         return new ResponseEntity<>(order, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/all")
     public Set<Order> getOrders() {
         Set<Order> orders = new HashSet<>();
-
         orderService.getOrders()
                 .stream()
                 .filter(Order::isVisibility)
                 .forEach(orders::add);
-
-//        for (Order order : orderService.getOrders()) {
-//            if (order.isVisibility()) {
-//                orders.add(order);
-//            }
-//        }
-
-
         return orders;
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/getOrder/{orderId}")
     public Optional<Order> getOrderById(@PathVariable String orderId) {
         return orderService.getOrderById(Long.valueOf(orderId));
     }
 
+    @PreAuthorize("hasAuthority('CUSTOMER') or hasAuthority('ADMIN')")
     @GetMapping("/getOrdersByCustomerId/{customerId}")
     public Set<Order> getOrdersByCustomerId(@PathVariable Long customerId) {
-//        Set<Order> ordersByCustomerId = orderService.getOrdersByCustomerId(customerId);
-//        for (Order order : ordersByCustomerId) {
-//            if (order.isVisibility()) {
-//                orders.add(order);
-//            }
-//        }
-
         Set<Order> orders = new HashSet<>();
         orderService.getOrdersByCustomerId(customerId) // Order set'i getir
                 .stream()                           // islem yapabilmek icin  set üzerinden Stream'i baslat.
                 .filter(Order::isVisibility)        // sonra her bir order için is visibility'iyi cagir , eğer true ise stream'e devam et
                 .forEach(orders::add);              // filtreden geçenleri set'e ekle.
-
         return orders;
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/deleteOrder/{orderId}")
     public ResponseEntity<Object> deleteById(@PathVariable Long orderId) {
         orderService.deleteById(orderId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/updateOrder")
     public ResponseEntity<Object> updateOrder(@RequestBody Order order) {
         Optional<Order> currentOder = orderService.getOrderById(order.getId());
 
-        if (Objects.nonNull(currentOder)) {
+        if (!Objects.nonNull(currentOder)) {
             return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
         }
 
@@ -131,11 +119,13 @@ public class OrderController {
         return new ResponseEntity<Object>(currentOder, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/orderStatus")
     public Set<String> getOrderStatuses() {
         return orderService.getOrderStatuses();
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/orderType")
     public Set<String> getOrderTypes() {
         return orderService.getOrderTypes();

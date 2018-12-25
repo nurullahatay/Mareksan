@@ -33,14 +33,24 @@ public class CustomerController {
 
     @PostMapping("/saveCustomer")
     public ResponseEntity<Object> saveCustomer(@Valid @RequestBody Customer customer) {
-        log.info("--------------->"+customer.getCompanyName());
         customerService.saveCustomer(customer);
+        return new ResponseEntity<>(customer, HttpStatus.OK);
+    }
+
+    @PostMapping("/saveAdmin")
+    public ResponseEntity<Object> saveAdmin(@Valid @RequestBody Customer customer) {
+        customerService.saveAdmin(customer);
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
     @GetMapping("/all")
     public Set<Customer> getCustomers() {
         return customerService.getCustomers();
+    }
+
+    @GetMapping("/getAdmins")
+    public Set<Customer> getAdmins() {
+        return customerService.getAdmins();
     }
 
     @GetMapping("/companyName/{companyName}")

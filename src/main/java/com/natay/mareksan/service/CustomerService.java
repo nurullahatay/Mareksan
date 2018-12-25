@@ -12,6 +12,7 @@ public interface CustomerService {
     void saveCustomer(Customer customer);
     void saveAdmin(Customer customer);
     Set<Customer> getCustomers();
+    Set<Customer> getAdmins();
     Customer findByCompanyName(String companyName);
     Optional<Customer> getCustomerById(Long customerId);
     Customer findCustomerByAuthorizedEMail(String authorizedEMail);

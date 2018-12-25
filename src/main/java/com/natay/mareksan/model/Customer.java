@@ -4,6 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,13 +18,25 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="customer_id")
     private Long id;
+
+    @NotEmpty(message = "Sirket ismi bos birakilamaz.")
     private String companyName;
+
+    @Pattern(regexp ="[0-9\\s]{10}", message = "Sirket telefonu bos birakilamaz.")
     private String companyPhone;
+
+    @NotEmpty(message = "Sirket adresi bos birakilamaz.")
     private String companyAddress;
+
+    @NotEmpty(message = "Yetkili ismi bos birakilamaz.")
     private String authorizedName;
+
+    @Pattern(regexp ="[0-9\\s]{10}" , message = "Yetkili telefonu bos birakilamaz.")
     private String authorizedPhone;
 
-    @Column(name = "authorizedEMail")
+    @NotEmpty(message = "Yetkili emaili bos birakilamaz.")
+    @Email(message = "Hatali email")
+    @Column(name = "authorizedEMail", unique = true)
     private String authorizedEMail;
     private String password;
 
