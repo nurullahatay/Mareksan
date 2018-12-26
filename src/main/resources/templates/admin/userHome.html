@@ -1418,6 +1418,8 @@
 
     function getOrderType() {
         $('#dataTables-siparisCinsi').DataTable({
+            paging: false,
+            searching: false,
             responsive: true,
             "bJQueryUI": false,
             "bAutoWidth": false,
@@ -1486,7 +1488,6 @@
                 })
                 $('#dataTables-example').DataTable().ajax.reload();
                 deleteOrderAddAreas();
-                getOrderType();
             },
             error: function (e) {
                 swal({
@@ -1600,8 +1601,9 @@
                     showConfirmButton: false,
                     timer: 1500
                 })
-                deleteOrderTypeAddAreas();
                 $('#dataTables-siparisCinsi').DataTable().ajax.reload();
+                deleteOrderTypeAddAreas();
+                getOrderType();
 
             },
             error: function (e) {
@@ -1748,9 +1750,6 @@
                 cache: false,
                 timeout: 100000,
                 success: function (data) {
-                    $('#dataTables-Customer').DataTable().ajax.reload();
-                    $('#dataTables-example').DataTable().ajax.reload();
-                    $('#dataTables-admin').DataTable().ajax.reload();
                     $('#dataTables-siparisCinsi').DataTable().ajax.reload();
                     getOrderType();
                     swal(

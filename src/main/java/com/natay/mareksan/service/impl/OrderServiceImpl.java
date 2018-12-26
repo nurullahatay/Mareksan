@@ -40,7 +40,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    @Cacheable(value = "orderCache")
+    @CachePut(value = "orderCache")
     public Set<Order> getOrders() {
         Set<Order> orderSet = new HashSet<>();
         orderRepository.findAll().iterator().forEachRemaining(orderSet::add);

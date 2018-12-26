@@ -43,7 +43,7 @@ public class Order {
     private String orderStatus;
 
     //@Enumerated(EnumType.STRING)
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "ordertype")
     @JsonIgnoreProperties("orders")
     private OrderType orderType;
