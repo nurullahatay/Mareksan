@@ -36,7 +36,7 @@ public class OrderController {
         return orders;
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('CUSTOMER') or hasAuthority('ADMIN')")
     @GetMapping("/getOrder/{orderId}")
     public Optional<Order> getOrderById(@PathVariable String orderId) {
         return orderService.getOrderById(Long.valueOf(orderId));
@@ -125,9 +125,4 @@ public class OrderController {
         return orderService.getOrderStatuses();
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/orderType")
-    public Set<String> getOrderTypes() {
-        return orderService.getOrderTypes();
-    }
 }

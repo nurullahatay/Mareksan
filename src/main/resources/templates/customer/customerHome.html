@@ -72,8 +72,10 @@
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
                     <li>
-                        <i class="fa fa-files-o "></i>
-                        <span class="nav-label">Siparişler</span>
+                        <ul>
+                            <i class="fa fa-files-o "></i>
+                            <span class="nav-label">Siparişler</span>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -323,7 +325,7 @@
                     {data: 'price'},
                     {data: 'paid'},
                     {data: 'remainder'},
-                    {data: 'orderType'},
+                    {data: 'orderType.value'},
                     {data: 'specificationsOrders'},
                     {data: 'orderStatus'},
                     {
@@ -346,7 +348,7 @@
                 $("#modal-order-companyTel").text(result.customer.companyPhone);
                 $("#modal-order-customer").text(result.customer.companyName);
                 $("#modal-order-deliveryDate").text(result.deliveryDate);
-                $("#modal-order-oderType").text(result.orderType);
+                $("#modal-order-oderType").text(result.orderType.value);
                 $("#modal-order-orderDate").text(result.orderDate);
                 $("#modal-order-paid").text(result.paid);
                 $("#modal-order-price").text(result.price);

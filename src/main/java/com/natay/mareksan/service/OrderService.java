@@ -17,6 +17,5 @@ public interface OrderService {
     void updateOrder(Order order);
     void deleteOrdersByCustomerId(Long cutomerId);
     Set<Order> getOrdersByCustomerId(Long customerId);
-    Set<String> getOrderTypes();
     Set<String> getOrderStatuses();
 }

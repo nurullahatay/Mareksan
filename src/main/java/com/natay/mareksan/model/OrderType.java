@@ -1,29 +1,27 @@
 package com.natay.mareksan.model;
 
-public enum OrderType {
-    ADDITION("Adisyon"),
-    BROCHURE("Broşür"),
-    BILL("Fatura"),
-    BUSINESS_CARD("Kartvizit"),
-    STAMP("Kaşe"),
-    CALENDAR("Takvim");
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "ORDERTYPE")
+public class OrderType {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @NotEmpty
+    @Column(unique = true)
     private String value;
 
-    OrderType(String text) {
-        this.value = text;
-    }
-
-    public String getValue() {
-        return this.value;
-    }
-
-    public static OrderType getValue(String text) {
-        for (OrderType orderType : OrderType.values()) {
-            if (orderType.value.equalsIgnoreCase(text)) {
-                return orderType;
-            }
-        }
-        return null;
-    }
 }

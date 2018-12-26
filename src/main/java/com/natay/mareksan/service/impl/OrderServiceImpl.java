@@ -37,7 +37,6 @@ public class OrderServiceImpl implements OrderService {
         order.setVisibility(true);
         order.setRemainder(order.getPrice()-order.getPaid());
         orderRepository.save(order);
-        System.out.println("ORDER SAVING");
     }
 
     @Override
@@ -78,15 +77,6 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.getOrdersByCustomerId(customerId);
     }
 
-    @Override
-    @Cacheable(value = "orderType")
-    public Set<String> getOrderTypes() {
-        Set<String> orderTypeSet = new HashSet<>();
-        for (OrderType orderType : OrderType.values()) {
-            orderTypeSet.add(orderType.getValue());
-        }
-        return orderTypeSet;
-    }
 
     @Override
     @Cacheable(value = "orderStatus")

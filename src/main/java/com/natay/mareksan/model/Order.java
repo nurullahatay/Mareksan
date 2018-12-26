@@ -43,8 +43,10 @@ public class Order {
     private String orderStatus;
 
     //@Enumerated(EnumType.STRING)
-    @NotEmpty
-    private String orderType;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ordertype")
+    @JsonIgnoreProperties("orders")
+    private OrderType orderType;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
@@ -54,7 +56,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(String orderName, String orderDate, String deliveryDate, int amount, String specificationsOrders, double price, double paid, double remainder, String description, String orderStatus, String orderType, Customer customer , boolean visibility) {
+    public Order(String orderName, String orderDate, String deliveryDate, int amount, String specificationsOrders, double price, double paid, double remainder, String description, String orderStatus, OrderType orderType, Customer customer , boolean visibility) {
         this.orderName = orderName;
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
@@ -150,11 +152,11 @@ public class Order {
         this.orderStatus = orderStatus;
     }
 
-    public String getOrderType() {
+    public OrderType getOrderType() {
         return orderType;
     }
 
-    public void setOrderType(String orderType) {
+    public void setOrderType(OrderType orderType) {
         this.orderType = orderType;
     }
 
