@@ -48,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    @Cacheable(value = "orderCache", key = "#orderId")
+    @CachePut(value = "orderCache", key = "#orderId")
     public Optional<Order> getOrderById(Long orderId) {
         return orderRepository.findById(orderId);
     }
@@ -88,4 +88,5 @@ public class OrderServiceImpl implements OrderService {
         }
         return orderStatusSet;
     }
+
 }

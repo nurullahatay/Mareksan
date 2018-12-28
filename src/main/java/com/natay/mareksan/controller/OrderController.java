@@ -1,6 +1,7 @@
 package com.natay.mareksan.controller;
 
 import com.natay.mareksan.model.Order;
+import com.natay.mareksan.model.OrderStatus;
 import com.natay.mareksan.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -123,6 +124,19 @@ public class OrderController {
     @GetMapping("/orderStatus")
     public Set<String> getOrderStatuses() {
         return orderService.getOrderStatuses();
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/finishOrder/{orderId}")
+    public ResponseEntity<Object> finishOrder(@PathVariable Long orderId){
+        Order order = orderService.getOrderById(orderId).get();
+        if (order.getOrderStatus().equals(OrderStatus.DELIVERED.getValue()) && order.getRemainder()==0){
+            order.setVisibility(false);
+            orderService.updateOrder(order);
+        }else {
+            return new ResponseEntity<Object>(order, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Object>(order, HttpStatus.OK);
     }
 
 }

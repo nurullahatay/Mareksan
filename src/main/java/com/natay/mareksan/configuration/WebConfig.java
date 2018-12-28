@@ -16,12 +16,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 "/css/**",
                 "/js/**",
                 "/vendor/**",
-                "/dist/**")
+                "/dist/**",
+                "/images/**")
                 .addResourceLocations(
                         "classpath:/static/img/",
                         "classpath:/static/css/",
                         "classpath:/static/dist/",
                         "classpath:/static/vendor/",
-                        "classpath:/static/js/");
+                        "classpath:/static/js/",
+                        "classpath:/static/images");
     }
 }
