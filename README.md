@@ -5,7 +5,7 @@
 Web Sayfası:[link](https://mareksan.herokuapp.com)
 
 
-### Kullanılan Teknolojiler ve Kütüphaneler
+## Kullanılan Teknolojiler ve Kütüphaneler
 ##### Front-end  
 - Html
 - CSS
@@ -24,7 +24,7 @@ Web Sayfası:[link](https://mareksan.herokuapp.com)
 ##### Database
 - MySql
 
-### Genel Bilgiler
+## Genel Bilgiler
 - Giriş yapan kullanıcının rolüne göre(CUSTOMER yada ADMIN) sayfalara erişim.
 - Yeni sipariş oluşturma, düzenleme, silme ve pdf dosyasını oluşturma.
 - Yeni Admin ile Customer(Müşteri) oluşturma, düzenleme ve silme.
@@ -34,7 +34,7 @@ Web Sayfası:[link](https://mareksan.herokuapp.com)
 - Yapılan işlemlerin çoğu ajax ile yapıldı.
 - Kullanıcıların girdiği bilgilerde validate işlemi yapıldı(now only back-end).
 
-### Görseller
+## Görseller
 1. Admin Giriş Sayfası 
 ![1](https://user-images.githubusercontent.com/17932770/50551445-7f79f100-0c91-11e9-82ab-054e80ac29ed.PNG)
 2. Admin Müşteri Ekleme Formu
