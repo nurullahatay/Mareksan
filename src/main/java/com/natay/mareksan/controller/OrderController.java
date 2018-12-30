@@ -1,15 +1,20 @@
 package com.natay.mareksan.controller;
 
+import com.itextpdf.text.DocumentException;
 import com.natay.mareksan.model.Order;
 import com.natay.mareksan.model.OrderStatus;
 import com.natay.mareksan.service.OrderService;
+import com.natay.mareksan.util.PDFGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
+import java.io.ByteArrayInputStream;
 import java.util.*;
 
 @RestController
@@ -67,9 +72,8 @@ public class OrderController {
         Optional<Order> currentOder = orderService.getOrderById(order.getId());
 
         if (!Objects.nonNull(currentOder)) {
-            return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
-
         // farkli yada null alanları sadece değiştir eklenecek
 
         if (!(currentOder.get().getCustomer().equals(order.getCustomer()) || Objects.isNull(order.getCustomer()))) {
@@ -139,4 +143,17 @@ public class OrderController {
         return new ResponseEntity<Object>(order, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/invoice/{orderId}",
+            produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> customersReport(@PathVariable Long orderId) throws DocumentException {
+        Optional<Order> order = orderService.getOrderById(orderId);
+        ByteArrayInputStream bis = PDFGenerator.customerPDFReport(order.get());
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=order.pdf");
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(bis));
+    }
 }

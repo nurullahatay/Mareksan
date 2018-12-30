@@ -1339,7 +1339,7 @@
                 {data: 'specificationsOrders'},
                 {
                     render: function (data, type, row) {
-                        return ' <a data-toggle="modal" href="#modal-order" alt="Göster" title="Göster" onclick="orderView(' + row["id"] + ')"> <i class="fa fa-eye "></i> </a>' + ' <a class="data-toggle" data-toggle="data-toggle"  > <i class="fa fa-trash-o" onclick="deleteOrder(' + row["id"] + ')"></i> </a>' + ' <a data-toggle="modal" href="#modal-order-edit" alt="Düzenle" title="Düzenle" onclick="orderEdit(' + row["id"] + ')"> <i class="fa fa-edit" ></i></a>';
+                        return ' <a data-toggle="modal" href="#modal-order" alt="Göster" title="Göster" onclick="orderView(' + row["id"] + ')"> <i class="fa fa-eye "></i> </a>' + ' <a href="../orders/invoice/'+row["id"]+'" alt="Sipariş Detayını PDF olarak göster" target="_blank" title="Sipariş Detayını PDF olarak göster"><i class="fa fa-file-pdf-o"></i></a>' + ' <a class="data-toggle" data-toggle="data-toggle"  > <i class="fa fa-trash-o" onclick="deleteOrder(' + row["id"] + ')"></i> </a>' + ' <a data-toggle="modal" href="#modal-order-edit" alt="Düzenle" title="Düzenle" onclick="orderEdit(' + row["id"] + ')"> <i class="fa fa-edit" ></i></a>';
                     }
                 }
             ]
