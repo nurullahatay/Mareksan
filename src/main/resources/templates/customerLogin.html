@@ -16,11 +16,11 @@
 </head>
 
 <body>
-<div class="container">
+<div class="container center_div">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <img th:src="@{../static/images/Logo1.png}" class="img-responsive center-block" width="300" height="300" alt="Logo"/>
-            <div class="login-panel panel panel-default">
+            <img th:src="@{/images/Logo1.png}" class="img-responsive center-block" width="300" height="300" alt="Logo"/>
+            <div class="login-panel panel panel-default" >
                 <div class="panel-heading">
                     <h3 class="panel-title">MAREKSAN YÖNETİM BİLGİ SİSTEMİNE HOŞ GELDİNİZ</h3>
                 </div>
@@ -35,11 +35,6 @@
                                 <input class="form-control" id="password" placeholder="Şifre" name="password"
                                        type="password" value="" data-validation="length" data-validation-length="min3" >
                             </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input name="remember" type="checkbox" value="Remember Me">Remember Me
-                                </label>
-                            </div>
                             <div align="center" th:if="${param.error}">
                                 <p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
                             </div>
@@ -53,6 +48,7 @@
         </div>
     </div>
 </div>
+</body>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
@@ -62,6 +58,4 @@
         modules : 'security'
     });
 </script>
-</body>
-
 </html>

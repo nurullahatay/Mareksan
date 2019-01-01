@@ -24,6 +24,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                         "classpath:/static/dist/",
                         "classpath:/static/vendor/",
                         "classpath:/static/js/",
-                        "classpath:/static/images");
+                        "classpath:/static/images/");
     }
 }

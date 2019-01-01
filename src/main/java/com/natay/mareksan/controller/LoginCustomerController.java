@@ -65,4 +65,11 @@ public class LoginCustomerController {
         modelAndView.setViewName("access_denied");
         return modelAndView;
     }
+
+    @RequestMapping(value = {"/error"}, method = RequestMethod.GET)
+    public ModelAndView error() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("error");
+        return modelAndView;
+    }
 }
