@@ -53,7 +53,7 @@ public class LoginCustomerController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Customer customer = customerService.findCustomerByAuthorizedEMail(auth.getName());
-        modelAndView.addObject("userName", "Welcome " + customer.getAuthorizedName() + " " + customer.getAuthorizedPhone() + " (" + customer.getAuthorizedEMail() + ")");
+        modelAndView.addObject("userName", "Welcome " + customer.getAuthorizedName() + " " + " (" + customer.getAuthorizedEMail() + ")");
         modelAndView.addObject("adminMessage", "Content Available Only for Users with Customer Role");
         modelAndView.setViewName(isHomeAdmin ? "admin/userHome" : "customer/customerHome");
         return modelAndView;

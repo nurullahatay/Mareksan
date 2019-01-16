@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,19 +24,21 @@ public class Customer {
     @Pattern(regexp ="[0-9\\s]{10}", message = "Sirket telefonu bos birakilamaz.")
     private String companyPhone;
 
-    @NotEmpty(message = "Sirket adresi bos birakilamaz.")
+    //@NotEmpty(message = "Sirket adresi bos birakilamaz.")
     private String companyAddress;
 
     @NotEmpty(message = "Yetkili ismi bos birakilamaz.")
     private String authorizedName;
 
-    @Pattern(regexp ="[0-9\\s]{10}" , message = "Yetkili telefonu bos birakilamaz.")
+    /*@Pattern(regexp ="[0-9\\s]{10}" , message = "Yetkili telefonu bos birakilamaz.")
     private String authorizedPhone;
-
+    */
     @NotEmpty(message = "Yetkili emaili bos birakilamaz.")
     @Email(message = "Hatali email")
     @Column(name = "authorizedEMail", unique = true)
     private String authorizedEMail;
+
+    @NotEmpty(message = "Şifre boş bırakılamaz.")
     private String password;
 
     @Column(name = "active")
@@ -52,20 +53,25 @@ public class Customer {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "customer_role", joinColumns = @JoinColumn(name = "customer_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
-
+    private String taxOffice;
+    private String taxNumber;
+    private String title;
 
     public Customer() {
     }
 
-    public Customer(String companyName, String companyPhone, String companyAddress, String authorizedName, String authorizedPhone, String authorizedEMail, String password, int active) {
+    public Customer(String companyName, String companyPhone, String companyAddress, String authorizedName, String authorizedEMail, String password, int active, String taxOffice, String taxNumber, String title) {
         this.companyName = companyName;
         this.companyPhone = companyPhone;
         this.companyAddress = companyAddress;
         this.authorizedName = authorizedName;
-        this.authorizedPhone = authorizedPhone;
+        //this.authorizedPhone = authorizedPhone;
         this.authorizedEMail = authorizedEMail;
         this.password = password;
         this.active = active;
+        this.taxOffice = taxOffice;
+        this.taxNumber = taxNumber;
+        this.title = title;
     }
 
     public int getActive() {
@@ -133,14 +139,14 @@ public class Customer {
         this.authorizedName = authorizedName;
     }
 
-    public String getAuthorizedPhone() {
+   /* public String getAuthorizedPhone() {
         return authorizedPhone;
     }
 
     public void setAuthorizedPhone(String authorizedPhone) {
         this.authorizedPhone = authorizedPhone;
     }
-
+*/
     public String getAuthorizedEMail() {
         return authorizedEMail;
     }
@@ -155,5 +161,29 @@ public class Customer {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getTaxOffice() {
+        return taxOffice;
+    }
+
+    public void setTaxOffice(String taxOffice) {
+        this.taxOffice = taxOffice;
+    }
+
+    public String getTaxNumber() {
+        return taxNumber;
+    }
+
+    public void setTaxNumber(String taxNumber) {
+        this.taxNumber = taxNumber;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

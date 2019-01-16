@@ -89,4 +89,17 @@ public class OrderServiceImpl implements OrderService {
         return orderStatusSet;
     }
 
+    @Override
+    public double[] getOrdersByOrderStatus(String s) {
+        Set<Order> orderSet = new HashSet<>();
+        double[] sumOfOrders = new double[3];
+        orderRepository.getOrdersByOrderStatus(s).iterator().forEachRemaining(orderSet::add);
+        for (Order order : orderSet) {
+            sumOfOrders[0]+=order.getPrice();
+            sumOfOrders[1]+=order.getPaid();
+            sumOfOrders[2]+=order.getRemainder();
+        }
+        return sumOfOrders;
+    }
+
 }

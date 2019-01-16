@@ -28,10 +28,10 @@ public class InitialData implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-*/
+
     // Implemente edilen ApplicationListener interface'i , spring context ayaga kalktıgında cagrılan bir arayüzdür.
     // alttaki onApplicationEvent methodunu data eklemek için kullanıyoruz.
-    @Override
+  */  @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
 /*
       roleRepository.save(new Role(1,"ADMIN"));
@@ -42,27 +42,27 @@ public class InitialData implements ApplicationListener<ContextRefreshedEvent> {
       orderTypeService.saveOrderType(new OrderType(3,"Tabela"));
 
       Customer customer = new Customer("Müşteri 1","2124556655","Fatih/İstanbul",
-              "Ali","5555555555","sirket@gmail.com","123456",1);
+              "Ali","sirket@gmail.com","123456",1,"ıst","123","patron");
       Customer customer1 = new Customer("Müşteri Şirketi 2","2124556655","Fatih/İstanbul",
-              "Veli","5555555555","sirke2t@gmail.com","123456",1);
+              "Veli","sirke2t@gmail.com","123456",1,"ıst","123","patron");
       customerService.saveCustomer(customer);
       customerService.saveAdmin(customer1);
 
       OrderType orderType;
 
       Order order = new Order("Sipariş 3","28/11/2018","30/11/2018",4,"acil iş",130,100,
-              50,"iş çok acil ",OrderStatus.IN_PROGRESS.getValue(),orderTypeService.getOrderTypeById((long) 1),customer,true);
+              50,"iş çok acil ",OrderStatus.IN_PROGRESS.getValue(),orderTypeService.getOrderTypeById((long) 3).get(),customer,true);
 
       Order order1 =new Order("Sipariş 3","22/11/2018","30/11/2018",12,"acil iş",350,100,
-              10,"iş iş tanımı",OrderStatus.PREPAIRING.getValue(),orderTypeService.getOrderTypeById((long) 2),customer1,true);
+              10,"iş iş tanımı",OrderStatus.PREPAIRING.getValue(),orderTypeService.getOrderTypeById((long) 4).get(),customer1,true);
 
 
       Order order2 = new Order("Sipariş 3","15/10/2018","30/11/2018",7,"acil iş",2000,100,
-              22,"iş çok acil , iş tanımı",OrderStatus.DONE.getValue(),orderTypeService.getOrderTypeById((long) 3),customer,true);
+              22,"iş çok acil , iş tanımı",OrderStatus.DONE.getValue(),orderTypeService.getOrderTypeById((long) 7).get(),customer,true);
 
 
       Order order3 = new Order("Sipariş 3","28/11/2018","30/11/2018",2,"acil iş",1350,100,
-              150,"iş çok acil , iş tanımı", OrderStatus.IN_PROGRESS.getValue(), orderTypeService.getOrderTypeById((long) 3),customer1,true);
+              150,"iş çok acil , iş tanımı", OrderStatus.IN_PROGRESS.getValue(), orderTypeService.getOrderTypeById((long) 3).get(),customer1,true);
 
 
       orderService.saveOrder(order);

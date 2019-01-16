@@ -18,4 +18,5 @@ public interface OrderService {
     void deleteOrdersByCustomerId(Long cutomerId);
     Set<Order> getOrdersByCustomerId(Long customerId);
     Set<String> getOrderStatuses();
+    double[] getOrdersByOrderStatus(String s);
 }

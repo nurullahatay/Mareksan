@@ -13,5 +13,6 @@ public interface OrderRepository extends JpaRepository<Order,Long> {
     void deleteOrdersByCustomerId(Long customerId);
     Set<Order> getOrdersByCustomerId(Long customerId);
     Set<Order> getOrdersByOrderType_Id(Long orderTypeId);
+    Set<Order> getOrdersByOrderStatus(String s);
 
 }

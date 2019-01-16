@@ -30,6 +30,10 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <script
@@ -187,7 +191,7 @@
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-order">
                             <thead>
                             <tr>
                                 <th>Şipariş No</th>
@@ -208,9 +212,39 @@
                             <tbody>
 
                             </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>Şipariş No</th>
+                                <th>Müşteri</th>
+                                <th>Şipariş Adı</th>
+                                <th>Şipariş Tarihi</th>
+                                <th>Teslim Tarihi</th>
+                                <th>Miktar</th>
+                                <th>Toplam Tutar</th>
+                                <th>Alınan Tutar</th>
+                                <th>Kalan Tutar</th>
+                                <th>Durum</th>
+                                <th>Sipariş Tipi</th>
+                                <th>Sipariş ozellikleri</th>
+                                <th>Eylemler</th>
+                            </tr>
+                            </tfoot>
                         </table>
                     </div>
-                    <!-- /.panel-body -->
+
+                    <table id="sumOfOrdersStatus">
+                        <thead>
+                            <tr>
+                                <th>Toplam Tutar</th>
+                                <th>Alınan Toplam Tutar</th>
+                                <th>Kalan Toplam Tutar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+
                 </div>
                 <!-- /.panel -->
             </div>
@@ -574,18 +608,36 @@
                                                             id="authorizedName"
                                                             value="">
                                                     </div>
-                                                    <div class="form-group"><label>Yetkili Tel</label><input
+                                                    <div class="form-group"><label>Ünvan</label><input
                                                             type="text"
-                                                            placeholder="Yetkili Tel"
+                                                            placeholder="Ünvan"
                                                             class="form-control"
-                                                            name="authorizedPhone"
-                                                            id="authorizedPhone"
+                                                            name="title"
+                                                            id="title"
                                                             value="">
                                                     </div>
                                                     <div class="form-group"><label>Yetkili E-Posta</label><input
                                                             type="email" placeholder="Yetkili E-Posta"
                                                             class="form-control" name="authorizedEMail"
                                                             id="authorizedEMail" value=""></div>
+                                                    <div class="form-group"><label>Vergi Dairesi</label><input
+                                                            type="text"
+                                                            placeholder="Vergi Dairesi"
+                                                            class="form-control"
+                                                            name="taxOffice"
+                                                            id="taxOffice"
+                                                            value="">
+                                                    </div>
+
+                                                    <div class="form-group"><label>Vergi Numarası</label><input
+                                                            type="text"
+                                                            placeholder="Vergi Numarası"
+                                                            class="form-control"
+                                                            name="taxNumber"
+                                                            id="taxNumber"
+                                                            value="">
+                                                    </div>
+
                                                     <div class="form-group"><label>Şifre</label><input
                                                             type="text"
                                                             placeholder="Şifre"
@@ -637,8 +689,9 @@
                                 <th>Şirket Adı</th>
                                 <th>Şirket Telefonu</th>
                                 <th>Yetkili</th>
-                                <th>Yetkili Telefonu</th>
-                                <td>Yetkili E-mail</td>
+                                <td>Vergi Dairesi</td>
+                                <td>Vergi Numarası</td>
+                                <td>Ünvan</td>
                                 <td>Sil/Düzenle</td>
                             </tr>
                             </thead>
@@ -700,18 +753,37 @@
                                                             id="modal-customer-edit-authorizedName"
                                                             value="">
                                                     </div>
-                                                    <div class="form-group"><label>Yetkili Tel</label><input
+                                                    <div class="form-group"><label>Ünvan</label><input
                                                             type="text"
-                                                            placeholder="Yetkili Tel"
+                                                            placeholder="Ünvan"
                                                             class="form-control"
-                                                            name="authorizedPhone"
-                                                            id="modal-customer-edit-authorizedPhone"
+                                                            name="title"
+                                                            id="modal-customer-edit-title"
                                                             value="">
                                                     </div>
+
                                                     <div class="form-group"><label>Yetkili E-Posta</label><input
                                                             type="email" placeholder="Yetkili E-Posta"
                                                             class="form-control" name="authorizedEMail"
                                                             id="modal-customer-edit-authorizedEMail" value=""></div>
+                                                    <div class="form-group"><label>Vergi Dairesi</label><input
+                                                            type="text"
+                                                            placeholder="Vergi Dairesi"
+                                                            class="form-control"
+                                                            name="taxOffice"
+                                                            id="modal-customer-edit-taxOffice"
+                                                            value="">
+                                                    </div>
+
+                                                    <div class="form-group"><label>Vergi Numarası</label><input
+                                                            type="text"
+                                                            placeholder="Vergi Numarası"
+                                                            class="form-control"
+                                                            name="taxNumber"
+                                                            id="modal-customer-edit-taxNumber"
+                                                            value="">
+                                                    </div>
+
                                                     <div class="form-group"><label>Şifre</label><input
                                                             type="text"
                                                             placeholder="Şifre"
@@ -796,14 +868,6 @@
                                                             id="authorizedNameAdmin"
                                                             value="">
                                                     </div>
-                                                    <div class="form-group"><label>Yetkili Tel</label><input
-                                                            type="text"
-                                                            placeholder="Yetkili Tel"
-                                                            class="form-control"
-                                                            name="authorizedPhone"
-                                                            id="authorizedPhoneAdmin"
-                                                            value="">
-                                                    </div>
                                                     <div class="form-group"><label>Yetkili E-Posta</label><input
                                                             type="email" placeholder="Yetkili E-Posta"
                                                             class="form-control" name="authorizedEMail"
@@ -855,8 +919,6 @@
                                     <th>Şirket Adı</th>
                                     <th>Şirket Telefonu</th>
                                     <th>Yetkili</th>
-                                    <th>Yetkili Telefonu</th>
-                                    <td>Yetkili E-mail</td>
                                     <td>Sil/Düzenle</td>
                                 </tr>
                                 </thead>
@@ -916,14 +978,6 @@
                                                                 class="form-control"
                                                                 name="authorizedName"
                                                                 id="modal-admin-edit-authorizedName"
-                                                                value="">
-                                                        </div>
-                                                        <div class="form-group"><label>Yetkili Tel</label><input
-                                                                type="text"
-                                                                placeholder="Yetkili Tel"
-                                                                class="form-control"
-                                                                name="authorizedPhone"
-                                                                id="modal-admin-edit-authorizedPhone"
                                                                 value="">
                                                         </div>
                                                         <div class="form-group"><label>Yetkili E-Posta</label><input
@@ -1040,6 +1094,13 @@
                                                 <tbody>
 
                                                 </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <th>Sipariş Cinsi No</th>
+                                                    <th>Sipariş Cinsi</th>
+                                                    <th>Sil / Düzenle</th>
+                                                </tr>
+                                                </tfoot>
                                             </table>
 
                                         </div>
@@ -1304,7 +1365,7 @@
     });
 
     function getOrders() {
-        $('#dataTables-example').DataTable({
+        $('#dataTables-order').DataTable({
             responsive: true,
             "bJQueryUI": false,
             "bAutoWidth": false,
@@ -1342,11 +1403,85 @@
                         return ' <a data-toggle="modal" href="#modal-order" alt="Göster" title="Göster" onclick="orderView(' + row["id"] + ')"> <i class="fa fa-eye "></i> </a>' + ' <a href="../orders/invoice/'+row["id"]+'" alt="Sipariş Detayını PDF olarak göster" target="_blank" title="Sipariş Detayını PDF olarak göster"><i class="fa fa-file-pdf-o"></i></a>' + ' <a class="data-toggle" data-toggle="data-toggle"  > <i class="fa fa-trash-o" onclick="deleteOrder(' + row["id"] + ')"></i> </a>' + ' <a data-toggle="modal" href="#modal-order-edit" alt="Düzenle" title="Düzenle" onclick="orderEdit(' + row["id"] + ')"> <i class="fa fa-edit" ></i></a>';
                     }
                 }
-            ]
+            ],
+            initComplete: function () {
+                this.api().columns([7,8,9]).every( function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo( $(column.footer()).empty() )
+                        .on( 'change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+                            if(column.index()==9){
+                                getOrdersByOrderStatus(val);
+                            }
+                            column.search( val ? '^'+val+'$' : '', true, false ).draw();
+                        } );
+
+                    //if(column.index()==9){
+                        column.data().unique().sort().each( function ( d, j ) {
+                            select.append( '<option value="'+d+'">'+d+'</option>' );
+                        } );
+                    //}
+                   /* if(column.index()==8){
+                        select.append( '<option value="'+0+'">'+0+'</option>' );
+                        select.append( '<option value="'+1+'">'+1+'</option>' );
+
+                    }
+                    if(column.index()==7){
+                        select.append( '<option value="'+0+'">'+0+'</option>' );
+                        select.append( '<option value="'+1+'">'+1+'</option>' );
+                    }
+*/
+
+                } );
+            }
         });
 
     }
+    
+    function getOrdersByOrderStatus(orderStatus) {
 
+        if(orderStatus!=""){
+            $.ajax({
+                type: "GET",
+                url: "/orders/getOrdersByOrderStatus/"+orderStatus,
+                cache: false,
+                timeout: 100000,
+                success: function (data) {
+                    var tableRef = document.getElementById('sumOfOrdersStatus').getElementsByTagName('tbody')[0];
+
+                    var newRow   = tableRef.insertRow(tableRef.rows.length);
+
+// Insert a cell in the row at index 0
+                    var newCell  = newRow.insertCell(0);
+                    var newCell1  = newRow.insertCell(1);
+                    var newCell2  = newRow.insertCell(2);
+
+// Append a text node to the cell
+                    var newText  = document.createTextNode(data[0]);
+                    var newText1  = document.createTextNode(data[1]);
+                    var newText2  = document.createTextNode(data[2]);
+
+                    newCell.appendChild(newText);
+                    newCell1.appendChild(newText1);
+                    newCell2.appendChild(newText2);
+
+                },
+                error: function (e) {
+                    swal({
+                        type: 'error',
+                        title: 'Oops...',
+                    })
+                }
+            });
+        }else {
+            document.getElementById("sumOfOrdersStatus").deleteRow(1);
+        }
+
+    }
+    
     function getCustomers() {
         $('#dataTables-Customer').DataTable({
             responsive: true,
@@ -1372,8 +1507,11 @@
                 {data: 'companyName'},
                 {data: 'companyPhone'},
                 {data: 'authorizedName'},
-                {data: 'authorizedPhone'},
                 {data: 'authorizedEMail'},
+                {data: 'taxOffice'},
+                {data: 'taxNumber'},
+                {data: 'title'},
+
                 {
                     render: function (data, type, row) {
                         return '<a class="data-toggle" data-toggle="data-toggle"> <i class="fa fa-trash-o" onclick="deleteCustomer(' + row["id"] + ')"></i></a>' + '<a data-toggle="modal" href="#modal-customer-edit" alt="Düzenle" title="Düzenle" onclick="customerEdit(' + row["id"] + ')"> <i class="fa fa-edit" ></i></a>';
@@ -1408,7 +1546,6 @@
                 {data: 'companyName'},
                 {data: 'companyPhone'},
                 {data: 'authorizedName'},
-                {data: 'authorizedPhone'},
                 {data: 'authorizedEMail'},
                 {
                     render: function (data, type, row) {
@@ -1487,7 +1624,7 @@
                     showConfirmButton: false,
                     timer: 1500
                 })
-                $('#dataTables-example').DataTable().ajax.reload();
+                $('#dataTables-order').DataTable().ajax.reload();
                 deleteOrderAddAreas();
             },
             error: function (e) {
@@ -1510,6 +1647,10 @@
         customer["authorizedPhone"] = $("#authorizedPhone").val();
         customer["authorizedEMail"] = $("#authorizedEMail").val();
         customer["password"] = $("#password").val();
+        customer["title"] = $("#title").val();
+        customer["taxOffice"] = $("#taxOffice").val();
+        customer["taxNumber"] = $("#taxNumber").val();
+
 
         $.ajax({
             type: "POST",
@@ -1548,7 +1689,6 @@
         customer["companyPhone"] = $("#companyPhoneAdmin").val();
         customer["companyAddress"] = $("#companyAddressAdmin").val();
         customer["authorizedName"] = $("#authorizedNameAdmin").val();
-        customer["authorizedPhone"] = $("#authorizedPhoneAdmin").val();
         customer["authorizedEMail"] = $("#authorizedEMailAdmin").val();
         customer["password"] = $("#passwordAdmin").val();
 
@@ -1672,7 +1812,7 @@
                 cache: false,
                 timeout: 100000,
                 success: function (data) {
-                    $('#dataTables-example').DataTable().ajax.reload();
+                    $('#dataTables-order').DataTable().ajax.reload();
                     swal(
                         'Silindi!',
                         'Sipariş silindi.',
@@ -1712,7 +1852,7 @@
                 timeout: 100000,
                 success: function (data) {
                     $('#dataTables-Customer').DataTable().ajax.reload();
-                    $('#dataTables-example').DataTable().ajax.reload();
+                    $('#dataTables-order').DataTable().ajax.reload();
                     $('#dataTables-admin').DataTable().ajax.reload();
                     swal(
                         'Silindi!',
@@ -1835,7 +1975,7 @@
             cache: false,
             timeout: 100000,
             success: function (data) {
-                $('#dataTables-example').DataTable().ajax.reload();
+                $('#dataTables-order').DataTable().ajax.reload();
                 $("#modal-order-edit").modal('hide');
                 swal({
                     position: 'top-end',
@@ -1867,8 +2007,10 @@
                 $("#modal-customer-edit-companyPhone").val(result.companyPhone);
                 $("#modal-customer-edit-companyAddress").val(result.companyAddress);
                 $("#modal-customer-edit-authorizedName").val(result.authorizedName);
-                $("#modal-customer-edit-authorizedPhone").val(result.authorizedPhone);
                 $("#modal-customer-edit-authorizedEMail").val(result.authorizedEMail);
+                $("#modal-customer-edit-title").val(result.title);
+                $("#modal-customer-edit-taxNumber").val(result.taxOffice);
+                $("#modal-customer-edit-taxNumber").val(result.taxNumber);
             }
         });
     }
@@ -1883,6 +2025,9 @@
         customer["authorizedPhone"] = $("#modal-customer-edit-authorizedPhone").val();
         customer["authorizedEMail"] = $("#modal-customer-edit-authorizedEMail").val();
         customer["password"] = $("#modal-customer-edit-password").val();
+        customer["title"]=$("#modal-customer-edit-title").val();
+        customer["taxOffice"]=$("#modal-customer-edit-taxOffice").val();
+        customer["taxNumber"]=$("#modal-customer-edit-taxNumber").val();
 
         $.ajax({
             type: "POST",
@@ -1894,7 +2039,7 @@
             timeout: 100000,
             success: function (data) {
                 $('#dataTables-Customer').DataTable().ajax.reload();
-                $('#dataTables-example').DataTable().ajax.reload();
+                $('#dataTables-order').DataTable().ajax.reload();
                 $("#modal-customer-edit").modal('hide');
                 swal({
                     position: 'top-end',
@@ -1927,7 +2072,6 @@
                 $("#modal-admin-edit-companyPhone").val(result.companyPhone);
                 $("#modal-admin-edit-companyAddress").val(result.companyAddress);
                 $("#modal-admin-edit-authorizedName").val(result.authorizedName);
-                $("#modal-admin-edit-authorizedPhone").val(result.authorizedPhone);
                 $("#modal-admin-edit-authorizedEMail").val(result.authorizedEMail);
             }
         });
@@ -1940,7 +2084,6 @@
         customer["companyPhone"] = $("#modal-admin-edit-companyPhone").val();
         customer["companyAddress"] = $("#modal-admin-edit-companyAddress").val();
         customer["authorizedName"] = $("#modal-admin-edit-authorizedName").val();
-        customer["authorizedPhone"] = $("#modal-admin-edit-authorizedPhone").val();
         customer["authorizedEMail"] = $("#modal-admin-edit-authorizedEMail").val();
         customer["password"] = $("#modal-admin-edit-password").val();
 
@@ -1983,7 +2126,7 @@
             cache: false,
             timeout: 100000,
             success: function (data) {
-                $('#dataTables-example').DataTable().ajax.reload();
+                $('#dataTables-order').DataTable().ajax.reload();
                 $("#modal-order-edit").modal('hide');
                 swal({
                     position: 'top-end',

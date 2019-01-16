@@ -81,8 +81,11 @@ public class CustomerController {
         currentCustomer.get().setCompanyAddress(customer.getCompanyAddress());
         currentCustomer.get().setAuthorizedName(customer.getAuthorizedName());
         currentCustomer.get().setAuthorizedEMail(customer.getAuthorizedEMail());
-        currentCustomer.get().setAuthorizedPhone(customer.getAuthorizedPhone());
+        currentCustomer.get().setTitle(customer.getTitle());
         currentCustomer.get().setPassword(customer.getPassword());
+        currentCustomer.get().setTaxNumber(customer.getTaxNumber());
+        currentCustomer.get().setTaxOffice(customer.getTaxOffice());
+
 
         customerService.updateCustomer(currentCustomer.get());
         return new ResponseEntity<Object>(currentCustomer, HttpStatus.OK);

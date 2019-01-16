@@ -156,4 +156,10 @@ public class OrderController {
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(new InputStreamResource(bis));
     }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/getOrdersByOrderStatus/{orderStatus}")
+    public double[]  getOrdersByOrderStatus(@PathVariable String orderStatus){
+        return orderService.getOrdersByOrderStatus(orderStatus);
+    }
 }
