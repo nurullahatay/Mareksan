@@ -1,9 +1,9 @@
 package com.natay.mareksan.model;
 
 public enum OrderStatus {
-    PREPAIRING("Hazırlanıyor"),
-    IN_PROGRESS("İşlem Görüyor"),
-    DONE("Tamamlandı"),
+    PREPAIRING("Hazirlaniyor"),
+    IN_PROGRESS("İslem Goruyor"),
+    DONE("Tamamlandi"),
     DELIVERED("Teslim Edildi");
 
     private String value;
