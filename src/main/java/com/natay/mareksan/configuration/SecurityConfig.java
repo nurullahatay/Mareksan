@@ -19,16 +19,16 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
-    private DataSource dataSource;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final DataSource dataSource;
+    private final SimpleAuthenticationSuccessHandler successHandler;
 
-    @Autowired
-    private SimpleAuthenticationSuccessHandler successHandler;
-
-
+    public  SecurityConfig(BCryptPasswordEncoder bCryptPasswordEncoder, DataSource dataSource, SimpleAuthenticationSuccessHandler successHandler){
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.dataSource = dataSource;
+        this.successHandler = successHandler;
+    }
 
     @Value("${spring.queries.users-query-customer}")
     private String customersQuery;

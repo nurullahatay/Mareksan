@@ -22,9 +22,11 @@ import java.util.Set;
 @Component
 public class OrderTypeServiceImpl implements OrderTypeService {
 
-    @Autowired
-    private OrderTypeRepository orderTypeRepository;
+    private final OrderTypeRepository orderTypeRepository;
 
+    public OrderTypeServiceImpl(OrderTypeRepository orderTypeRepository) {
+        this.orderTypeRepository = orderTypeRepository;
+    }
 
     @Override
     @CachePut(value = "orderType", key = "#orderType.id")

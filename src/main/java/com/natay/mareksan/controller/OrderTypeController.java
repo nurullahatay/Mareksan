@@ -18,12 +18,13 @@ import java.util.Set;
 @RequestMapping("/orderTypes")
 public class OrderTypeController {
 
-    @Autowired
-    private OrderTypeService orderTypeService;
+    private final OrderTypeService orderTypeService;
+    private final OrderService orderService;
 
-
-    @Autowired
-    private OrderService orderService;
+    public OrderTypeController(OrderTypeService orderTypeService, OrderService orderService) {
+        this.orderTypeService = orderTypeService;
+        this.orderService = orderService;
+    }
 
     @PostMapping("/saveOrderType")
     public ResponseEntity<Object> saveOrderType(@Valid @RequestBody OrderType orderType) {

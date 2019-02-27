@@ -21,8 +21,11 @@ import java.util.*;
 @RequestMapping("/orders")
 public class OrderController {
 
-    @Autowired
-    private OrderService orderService;
+    private final OrderService orderService;
+
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
+    }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/saveOrder")

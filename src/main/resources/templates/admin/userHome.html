@@ -1470,7 +1470,7 @@
 
                 },
                 error: function (e) {
-                    swal({
+                    swal.fire({
                         type: 'error',
                         title: 'Oops...',
                     })
@@ -1617,7 +1617,7 @@
             cache: false,
             timeout: 100000,
             success: function (data) {
-                swal({
+                Swal.fire({
                     position: 'top-end',
                     type: 'success',
                     title: 'Sipariş kaydedildi.',
@@ -1628,7 +1628,7 @@
                 deleteOrderAddAreas();
             },
             error: function (e) {
-                swal({
+                Swal.fire({
                     type: 'error',
                     title: 'Oops...',
                     text: 'Sipariş kaydedilmedi!',
@@ -1661,7 +1661,7 @@
             cache: false,
             timeout: 100000,
             success: function (data) {
-                swal({
+                Swal.fire({
                     position: 'top-end',
                     type: 'success',
                     title: 'Müşteri kaydedildi.',
@@ -1674,7 +1674,7 @@
 
             },
             error: function (e) {
-                swal({
+                Swal.fire({
                     type: 'error',
                     title: 'Oops...',
                     text: 'Müşteri kaydedilmedi!',
@@ -1701,7 +1701,7 @@
             cache: false,
             timeout: 100000,
             success: function (data) {
-                swal({
+                Swal.fire({
                     position: 'top-end',
                     type: 'success',
                     title: 'Admin kaydedildi.',
@@ -1713,7 +1713,7 @@
 
             },
             error: function (e) {
-                swal({
+                Swal.fire({
                     type: 'error',
                     title: 'Oops...',
                     text: 'Admin kaydedilmedi!',
@@ -1735,7 +1735,7 @@
             cache: false,
             timeout: 100000,
             success: function (data) {
-                swal({
+                Swal.fire({
                     position: 'top-end',
                     type: 'success',
                     title: 'Siparis cinsi kaydedildi.',
@@ -1746,7 +1746,7 @@
                 deleteOrderTypeAddAreas();
             },
             error: function (e) {
-                swal({
+                Swal.fire({
                     type: 'error',
                     title: 'Oops...',
                     text: 'Siparis cinsi kaydedilmedi!',
@@ -1796,7 +1796,7 @@
     }
 
     function deleteOrder(url_id) {
-        swal({
+        Swal.fire({
             title: 'Siparişi silmek istediğinizden emin misiniz?',
             text: "Bunu geri alamayacaksınız!",
             type: 'warning',
@@ -1813,14 +1813,14 @@
                 timeout: 100000,
                 success: function (data) {
                     $('#dataTables-order').DataTable().ajax.reload();
-                    swal(
+                    Swal.fire(
                         'Silindi!',
                         'Sipariş silindi.',
                         'success'
                     )
                 },
                 error: function (e) {
-                    swal({
+                    Swal.fire({
                         type: 'error',
                         title: 'Oops...',
                         text: 'Sipariş silinemedi!'
@@ -1835,7 +1835,7 @@
 
     function deleteCustomer(url_id) {
 
-        swal({
+        Swal.fire({
             title: 'Siparişi silmek istediğinizden emin misiniz?',
             text: "Bunu geri alamayacaksınız!",
             type: 'warning',
@@ -1854,14 +1854,14 @@
                     $('#dataTables-Customer').DataTable().ajax.reload();
                     $('#dataTables-order').DataTable().ajax.reload();
                     $('#dataTables-admin').DataTable().ajax.reload();
-                    swal(
+                    Swal.fire(
                         'Silindi!',
                         'Sipariş silindi.',
                         'success'
                     )
                 },
                 error: function (e) {
-                    swal({
+                    Swal.fire({
                         type: 'error',
                         title: 'Oops...',
                         text: 'Müşteri silinmedi!'
@@ -1873,7 +1873,7 @@
 
     function deleteOrderType(url_id) {
 
-        swal({
+        Swal.fire({
             title: 'Sipariş cinsini silmek istediğinizden emin misiniz?',
             text: "Bunu geri alamayacaksınız!",
             type: 'warning',
@@ -1890,14 +1890,14 @@
                 timeout: 100000,
                 success: function (data) {
                     $('#dataTables-ordertype').DataTable().ajax.reload();
-                    swal(
+                    Swal.fire(
                         'Silindi!',
                         'Sipariş cinsi silindi.',
                         'success'
                     )
                 },
                 error: function (e) {
-                    swal({
+                    Swal.fire({
                         type: 'error',
                         title: 'Oops...',
                         text: 'Siparis cinsi silinmedi!'
@@ -1977,7 +1977,7 @@
             success: function (data) {
                 $('#dataTables-order').DataTable().ajax.reload();
                 $("#modal-order-edit").modal('hide');
-                swal({
+                Swal.fire({
                     position: 'top-end',
                     type: 'success',
                     title: 'Sipariş kaydedildi.',
@@ -1986,7 +1986,7 @@
                 })
             },
             error: function (e) {
-                swal({
+                Swal.fire({
                     type: 'error',
                     title: 'Oops...',
                     text: 'Sipariş kaydedilmedi!',
@@ -2041,7 +2041,7 @@
                 $('#dataTables-Customer').DataTable().ajax.reload();
                 $('#dataTables-order').DataTable().ajax.reload();
                 $("#modal-customer-edit").modal('hide');
-                swal({
+                Swal.fire({
                     position: 'top-end',
                     type: 'success',
                     title: 'Müşteri kaydedildi.',
@@ -2050,7 +2050,7 @@
                 })
             },
             error: function (e) {
-                swal({
+                Swal.fire({
                     type: 'error',
                     title: 'Oops...',
                     text: 'Müşteri kaydedilmedi!',
@@ -2098,7 +2098,7 @@
             success: function (data) {
                 $('#dataTables-admin').DataTable().ajax.reload();
                 $("#modal-admin-edit").modal('hide');
-                swal({
+                Swal.fire({
                     position: 'top-end',
                     type: 'success',
                     title: 'Müşteri kaydedildi.',
@@ -2107,7 +2107,7 @@
                 })
             },
             error: function (e) {
-                swal({
+                Swal.fire({
                     type: 'error',
                     title: 'Oops...',
                     text: 'Müşteri kaydedilmedi!',
@@ -2128,7 +2128,7 @@
             success: function (data) {
                 $('#dataTables-order').DataTable().ajax.reload();
                 $("#modal-order-edit").modal('hide');
-                swal({
+                Swal.fire({
                     position: 'top-end',
                     type: 'success',
                     title: 'Sipariş Bitirildi.',
@@ -2137,7 +2137,7 @@
                 })
             },
             error: function (e) {
-                swal({
+                Swal.fire({
                     type: 'error',
                     title: 'Oops...',
                     text: 'Sipariş Bitirilemedi!',

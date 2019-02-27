@@ -28,8 +28,11 @@ import java.util.Set;
 @Component
 public class OrderServiceImpl implements OrderService {
 
-    @Autowired
-    private OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
+
+    public OrderServiceImpl(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
 
     @Override
     @CachePut(value = "orderCache", key = "#order.id")

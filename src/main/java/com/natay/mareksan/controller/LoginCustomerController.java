@@ -17,8 +17,11 @@ import java.util.Set;
 @Controller
 public class LoginCustomerController {
 
-    @Autowired
-    private CustomerService customerService;
+    private final CustomerService customerService;
+
+    public LoginCustomerController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
 
     @RequestMapping(value = {"/customerLogin", "/"}, method = RequestMethod.GET)
     public ModelAndView login() {

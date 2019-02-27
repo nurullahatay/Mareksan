@@ -23,11 +23,14 @@ import java.util.Set;
 @PreAuthorize("hasAuthority('ADMIN')")
 public class CustomerController {
 
-    @Autowired
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
-    @Autowired
-    private OrderService orderService;
+    private final OrderService orderService;
+
+    public CustomerController(CustomerService customerService, OrderService orderService) {
+        this.customerService = customerService;
+        this.orderService = orderService;
+    }
 
     private static final Logger log = LoggerFactory.getLogger(CustomerController.class);
 

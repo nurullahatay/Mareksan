@@ -16,8 +16,11 @@ import java.security.Principal;
 @Controller
 public class AuthenticatedUser {
 
-    @Autowired
-    private CustomerService customerService;
+    private final CustomerService customerService;
+
+    public AuthenticatedUser(CustomerService customerService) {
+        this.customerService = customerService;
+    }
 
     @RequestMapping(value = "/username", method = RequestMethod.GET)
     @ResponseBody
